@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/tx 
+    		http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	
+	
+	<!-- 包扫描，排除controller -->
+	<context:component-scan base-package="com.sc.crm">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- 引入数据库连接信息 -->
+	<context:property-placeholder location="classpath:db.properties" ignore-unresolvable="false"/>
+	
+	<!-- 数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName" value="${driver}" ></property>
+		<property name="url" value="${url}" ></property>
+		<property name="username" value="${user}" ></property>
+		<property name="password" value="${pwd}" ></property>
+	</bean>
+	
+	<!-- sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations" value="classpath:com/sc/crm/mapper/*.xml"></property>
+		
+		<property name="configuration"><!-- 开启驼峰命名法 -->
+			<bean class="org.apache.ibatis.session.Configuration">
+				<property name="mapUnderscoreToCamelCase" value="true" />
+			</bean>
+		</property>
+		
+		<property name="plugins"><!-- 分页配置 -->
+        	<array>
+        	<bean class="com.github.pagehelper.PageInterceptor" >
+        		<property name="properties" value="helperDialect=mysql" ></property>
+        	</bean>
+        	</array>
+        </property>
+	</bean>
+	
+	<!-- 注入模板对象 -->
+	<bean id="st" class="org.mybatis.spring.SqlSessionTemplate">
+		<!-- 用构造方法注入组件， property是用get set 方法注入组件 -->
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>	
+	</bean>
+	
+	<!-- 配置事务管理器，因为mybatis没有写事务类， 直接注入数据源 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<tx:advice id="tx" transaction-manager="txManager" >
+		<tx:attributes>
+			<tx:method name="query*" read-only="true"  />
+			<tx:method name="get*" read-only="true"  />
+			<tx:method name="select*" read-only="true"  />
+			<tx:method name="cha*" read-only="true"  />
+			<tx:method name="*" read-only="false" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* com.sc.crm.service.*.*Impl(..))" id="cut"/>
+		<aop:advisor advice-ref="tx" pointcut-ref="cut" />
+	</aop:config>
+</beans>

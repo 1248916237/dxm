@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 算法匹配器，credentials:证书，algorithm:算法 -->
+	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="md5"></property>
+		<property name="hashIterations" value="1"></property>
+	</bean>
+	
+	<!-- 自定义域 -->
+	<bean id="myrealm" class="com.sc.crm.realm.Myrealm">
+		<property name="credentialsMatcher" ref="credentialsMatcher"></property>
+	</bean>
+	
+	<!-- 缓存:当认证成功后在内存中存储用户信息，类似session。缓存只是存储的，配合session管理：什么时候存储存储多久，什么 删除信息-->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager"></bean>
+
+	<!-- seission,管理内存已认证用户信息 -->
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<property name="globalSessionTimeout" value="1800000"></property>
+		<property name="deleteInvalidSessions" value="true"></property>
+	</bean>
+		
+	<!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realms" ref="myrealm"></property>
+		<property name="sessionManager" ref="sessionManager"></property>
+		<property name="cacheManager" ref="cacheManager"></property>
+	</bean>
+	
+	<!-- 登入设置，表单认证器 -->
+	<bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+		<property name="usernameParam" value="userWorkId"></property>
+		<property name="passwordParam" value="userPass"></property>
+		<property name="loginUrl" value="/login"></property>
+	</bean>
+	
+	<!-- 登出设置 -->
+	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+		<property name="redirectUrl" value="/login.jsp"></property>
+	
+	</bean>	
+	<!-- 过滤器工厂类，配置好后在web.xml引用会根据这里的配置自动生成过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- ①注入安全管理器 -->
+		<property name="securityManager" ref="securityManager"></property>
+		<!-- ②配置登陆页面 -->
+		<property name="loginUrl" value="/login.jsp"></property>
+		<!-- ③配置登录成功之后的页面 -->
+		<property name="successUrl" value="/main.jsp"></property>
+		<!-- ④配置登入和登出 -->	
+		<property name="filters">
+			<map>
+				<entry key="authc" value-ref="formAuthenticationFilter"></entry>
+				<entry key="logout" value-ref="logoutFilter"></entry>
+			</map>
+		</property>
+		<!-- ⑤配置权限页面 -->
+		<property name="unauthorizedUrl" value="/unauthorized.jsp"></property>
+		<!-- ⑥请求拦截设置 -->
+		<property name="filterChainDefinitions">
+			<value>
+				
+				/js/**=anon
+				/css/**=anon
+				/images/**=anon
+				/main=anon
+				/login.jsp=anon
+				/logout=logout
+				/**=authc
+			</value>
+		</property>
+	</bean>
+</beans>    		
+    		
