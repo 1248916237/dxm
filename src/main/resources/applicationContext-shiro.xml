@@ -53,7 +53,7 @@
 		<!-- ②配置登陆页面 -->
 		<property name="loginUrl" value="/login.jsp"></property>
 		<!-- ③配置登录成功之后的页面 -->
-		<property name="successUrl" value="/main.jsp"></property>
+		<property name="successUrl" value="/aa.jsp"></property>
 		<!-- ④配置登入和登出 -->	
 		<property name="filters">
 			<map>
