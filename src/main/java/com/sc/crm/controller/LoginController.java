@@ -14,6 +14,7 @@ public class LoginController {
 	public String logins(HttpServletRequest req)
 	{
 		String msg=(String)req.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+		System.out.println("登陆失败了哈哈");
 		int state = 0;
 		if(msg == null)
 		{state = 4;System.out.println( "msg:" + msg);
@@ -37,8 +38,8 @@ public class LoginController {
 		return "redirect:/main.jsp";
 	}
 	
-	@RequestMapping("/adds")
-	@RequiresPermissions(value= {"paper:all","user:del"})
+	@RequestMapping("/quanxian")
+	@RequiresPermissions(value= {"客户管理"})
 	//@RequiresRoles(value={"ssa","sasx"})
 	public String adds()
 	{

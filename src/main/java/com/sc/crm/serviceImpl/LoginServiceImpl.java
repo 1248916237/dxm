@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
+import com.sc.crm.bean.Permission;
 import com.sc.crm.bean.Role;
 import com.sc.crm.bean.User;
+import com.sc.crm.dao.PermissionMapper;
 import com.sc.crm.dao.UserMapper;
 import com.sc.crm.service.LoginService;
 
@@ -19,9 +21,9 @@ public class LoginServiceImpl implements LoginService{
 	private SqlSessionTemplate st;
 
 	@Override
-	public User chaUserByName(String userWorkId) {
+	public User chaUserById(String userId) {
 		UserMapper mapper = st.getMapper(UserMapper.class);
-		User user = mapper.chaUserByName(userWorkId);
+		User user = mapper.chaUserById(userId);
 		return user;
 	}
 
@@ -30,6 +32,13 @@ public class LoginServiceImpl implements LoginService{
 		UserMapper mapper = st.getMapper(UserMapper.class);
 		List<Role> roleList = mapper.chaRoleList(id);
 		return roleList;
+	}
+
+	@Override
+	public List<Permission> perListPer(Integer userId) {
+		UserMapper mapper = st.getMapper(UserMapper.class);
+		List<Permission> perListPer = mapper.perListPer(userId);
+		return perListPer;
 	}
 
 }

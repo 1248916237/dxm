@@ -60,6 +60,13 @@
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="useActualColumnNames" value="false" />
 		</table>
+			<!-- 配置表信息 -->
+		<table schema="crm" tableName="sys_permission"
+			domainObjectName="Permission" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="false" />
+		</table>
 
  
 	</context>

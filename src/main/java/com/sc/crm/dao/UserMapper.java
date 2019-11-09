@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.sc.crm.bean.Permission;
 import com.sc.crm.bean.Role;
 import com.sc.crm.bean.User;
 
@@ -20,8 +21,11 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     
-    User chaUserByName(@Param("userWorkId")String userName);
-    
-    List<Role> chaRoleList(@Param("userId")Integer userId);
-    
+
+	User chaUserById(@Param("userId")String userId);
+	
+	List<Role> chaRoleList(@Param("userId")Integer userId);
+	
+    List<Permission> perListPer(@Param("userId")Integer userId);
+	
 }
