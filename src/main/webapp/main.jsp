@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %>
+
 <%
     String path = request.getContextPath();
     String basepath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -6,448 +9,138 @@
 <html>
 <head>
 	<base href="<%=basepath %>" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <title>后台登录-X-admin2.2</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-	<title>主页</title>
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/xadmin.css">
+    <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
-	<script type="text/javascript" src="./js/xadmin.js"></script>      
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        // 是否开启刷新记忆tab功能
+        // var is_remember = false;
+    </script>
 </head>
-<body>
-	<!-- ie过低提示升级 -->
-	<!--[if lt IE 9]>
-		<style>
-			.upgrade{text-align:center;line-height: 40px; position:fixed; width:100%; height:100%; background:#fff; z-index:9999;}
-			.upgrade h2{margin:100px 0 50px 0;}
-		</style>
-		<div class="upgrade">
-			<h2>天啦！你的浏览器版本好低，看不到T_T，请升级浏览器再浏览吧^_^Y！</h2>
-			<h3>
-				<p>360浏览器下载：<a target="_blank" href="http://se.360.cn/">http://se.360.cn/</a></p>
-				<p>谷歌浏览器下载：<a target="_blank" href="https://www.google.cn/chrome/">https://www.google.cn/chrome/</a></p>
-				<p>IE浏览器下载：<a target="_blank" href="https://support.microsoft.com/zh-cn/help/17621/internet-explorer-downloads">https://support.microsoft.com/zh-cn/help/17621/internet-explorer-downloads</a></p>
-			</h3>
-		</div>
-	<![endif]-->
-	<div class="bg_box" style="background: url(images/bg_default.jpg) no-repeat center center; background-size: cover;"></div>
-	<div class="container">
-		<div class="top_box">
-	        <div class="logo">
-	        	<img src="images/logo_touming.gif">
-	        	<span></span>
-	        	<b><img src="images/word.png" /></b>
-	        </div>
-	        <div class="top_icon">
-	        	<a href="#"><img src="images/top_home.png"></a>
-	        	<a href="#"><img src="images/top_person.png"></a>
-	        	<a href="#"><img src="images/top_exit.png"></a>
-	        </div>
-	    </div>
-	    <div class="content_box">
-	    	<div class="left_box">
-	    		<div class="head">
-	    			<i><img src="images/head.jpg" /></i><!-- 注释去间隔
-	    	     --><dl>
-	    				<dd><b>姓名：</b>关晓彤</dd>
-	    				<dd><b>部门：</b>技术部</dd>
-	    				<dd><b>职务：</b>设计师</dd>
-	    				<dd><b>工号：</b>1688900</dd>
-	    			</dl>
-	    		</div>
-	    		<div class="menu" id="style-3">
-	    			<ul>
-	    				<li>
-	    					<h2>
-		    					<img src="images/sm_icon01.png">
-		    					<a>营销菜单</a>
-		    					<em><img src="images/jt_left.png"></em>
-		    				</h2>
-	    					<dl>
-	    						<dd><a href="child.html">日用资料</a></dd>
-	    						<dd><a href="child.html">营销战况</a></dd>
-	    						<dd><a href="child.html">渠道战况</a></dd>
-	    						<dd><a href="child.html">碰单保护</a></dd>
-	    						<dd><a href="child.html">拜访记录</a></dd>
-	    						<dd><a href="child.html">客户维护</a></dd>
-	    						<dd><a href="child.html">尾款催收</a></dd>
-	    					</dl>
-	    				</li>
-	    				<li>
-	    					<h2>
-		    					<img src="images/sm_icon02.png">
-		    					<a href="child.html">大数据库</a>
-		    				</h2>
-	    				</li>
-	    				<li>
-	    					<h2>
-		    					<img src="images/sm_icon03.png">
-		    					<a href="child.html">立项系统</a>
-		    				</h2>
-	    				</li>
-	    				<li>
-	    					<h2>
-		    					<img src="images/sm_icon04.png">
-		    					<a>备案查询</a>
-		    					<em><img src="images/jt_left.png"></em>
-		    				</h2>
-	    					<dl>
-	    						<dd><a href="child.html">备案查询</a></dd>
-	    						<dd><a href="child.html">备案查询</a></dd>
-	    					</dl>
-	    				</li>
-	    				<li>
-	    					<h2>
-		    					<img src="images/sm_icon05.png">
-		    					<a>企业相关</a>
-		    					<em><img src="images/jt_left.png"></em>
-		    				</h2>
-	    					<dl>
-	    						<dd><a href="child.html">企业相关</a></dd>
-	    						<dd><a href="child.html">企业相关</a></dd>
-	    					</dl>
-	    				</li>
-	    				<li>
-	    					<h2>
-		    					<img src="images/sm_icon06.png">
-		    					<a>个人设置</a>
-		    					<em><img src="images/jt_left.png"></em>
-		    				</h2>
-	    					<dl>
-	    						<dd><a href="child.html">IP锁定</a></dd>
-	    						<dd><a href="child.html">登录记录</a></dd>
-	    						<dd><a href="child.html">密码修改</a></dd>
-	    						<dd><a href="child.html">背景设置</a></dd>
-	    					</dl>
-	    				</li>
-	    			</ul>
-	    			<script type="text/javascript">
-	    				$(function(){
-	    					var n=0;
-	    					$(".left_box .menu ul li").mouseover(
-	    						function(){
-	    							n=$(this).index();
-	    						}
-	    					)
-	    					$(".left_box .menu ul li h2").click(
-	    						function(){
-	    							$(".left_box .menu ul li").eq(n).find("dl").slideToggle();	
-	    							$(".left_box .menu ul li").eq(n).siblings().find("dl").slideUp() 
+<body class="index">
+        <!-- 顶部开始 -->
+        <div class="container">
+            <div class="logo">
+                <a href="quanxian">CRM客户系统</a></div>
+            <div class="left_open">
+                <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
+            </div>
+            <ul class="layui-nav left fast-add" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">+新增</a>
+                    <dl class="layui-nav-child">
+                        <!-- 二级菜单 -->
+                        <dd>
+                            <a onclick="xadmin.open('最大化','http://www.baidu.com','','',true)">
+                                <i class="iconfont">&#xe6a2;</i>弹出最大化</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('弹出自动宽高','http://www.baidu.com')">
+                                <i class="iconfont">&#xe6a8;</i>弹出自动宽高</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('弹出指定宽高','http://www.baidu.com',500,300)">
+                                <i class="iconfont">&#xe6a8;</i>弹出指定宽高</a></dd>
+                        <dd>
+                            <a onclick="xadmin.add_tab('在tab打开','member-list.html')">
+                                <i class="iconfont">&#xe6b8;</i>在tab打开</a></dd>
+                        <dd>
+                            <a onclick="xadmin.add_tab('在tab打开刷新','member-del.html',true)">
+                                <i class="iconfont">&#xe6b8;</i>在tab打开刷新</a></dd>
+                    </dl>
+                </li>
+            </ul>
+            <ul class="layui-nav right" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:;"> <shiro:principal property="userId"></shiro:principal> </a>
+                    <dl class="layui-nav-child">
+                        <!-- 二级菜单 -->
+                        <dd>
+                            <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+                        <dd>
+                            <a href="./logout">退出</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item to-index">
+                    <a href="/"></a></li>
+            </ul>
+        </div>
+        <!-- 顶部结束 -->
+        <!-- 中部开始 -->
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+            <div id="side-nav">
+            		<shiro:hasPermission name="客户管理">
+			 		</shiro:hasPermission>
+			 		<%-- <shiro:lacksPermission name="客户管理">
+			 		</shiro:lacksPermission> --%>
+            
+                <ul id="nav">
+                	<c:forEach items="${listPer }" var="rl" begin="0">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
+                            <cite>${rl.permissionName }</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <c:forEach items="${rl.perList}" var="pl">
+	                            <li>
+	                                <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+	                                    <i class="iconfont">&#xe6a7;</i>
+	                                    <cite>${pl.perName }</cite></a>
+	                            </li>
+							</c:forEach>
+                        </ul>
+                    </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="x-slide_left"></div> -->
+        <!-- 左侧菜单结束 -->
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+            <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+                <ul class="layui-tab-title">
+                    <li class="home">
+                        <i class="layui-icon">&#xe68e;</i>我的桌面</li></ul>
+                <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                    <dl>
+                        <dd data-type="this">关闭当前</dd>
+                        <dd data-type="other">关闭其它</dd>
+                        <dd data-type="all">关闭全部</dd></dl>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                    </div>
+                </div>
+                <div id="tab_show"></div>
+            </div>
+        </div>
+        <div class="page-content-bg"></div>
+        <style id="theme_style"></style>
+        <!-- 右侧主体结束 -->
+        <!-- 中部结束 -->
+        <script>//百度统计可去掉
+            var _hmt = _hmt || []; (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();</script>
+    </body>
 
-	    							if ($(this).find("em").hasClass("xz")) {
-										$(this).find("em").removeClass("xz")
-										$(this).find("em").addClass("xz01")
-									}else{
-										$(this).find("em").addClass("xz")
-										$(this).find("em").removeClass("xz01")
-									}
-									if ($(".left_box .menu ul li").eq(n).siblings().find("em").hasClass("xz")) {	
-										$(".left_box .menu ul li").eq(n).siblings().find("em").removeClass("xz")	
-									} 	
-	    						}
-	    					)
-	    				})
-	    			</script>
-	    		</div>
-	    	</div>
-	    	<div class="right_box">
-	    		<div class="icon_box">
-	    			<ul class="boxList">
-	    				<li class="list">
-	    					<i>
-	    						<img src="images/icon_01.png">
-	    						<b></b>
-	    					</i>
-		    				<a href="index.html" target="blank">
-		    					<span>通讯录</span>
-		    				</a>
-		    			</li>
-		    			<li class="list">
-	    					<i>
-	    						<img src="images/icon_02.png">
-	    						<b></b>
-	    					</i>
-		    				<a href="index.html" target="blank">
-		    					<span>尾款催收</span>
-		    				</a>
-		    			</li>
-		    			<li class="list">
-	    					<i>
-	    						<img src="images/icon_03.png">
-	    						<b></b>
-	    					</i>
-		    				<a href="index.html" target="blank">
-		    					<span>拜访记录</span>
-		    				</a>
-		    			</li>
-		    			<li class="list">
-	    					<i>
-	    						<img src="images/icon_04.png">
-	    						<b></b>
-	    					</i>
-		    				<a href="index.html" target="blank">
-		    					<span>企业邮箱</span>
-		    				</a>
-		    			</li>
-		    			<li class="list">
-	    					<i>
-	    						<img src="images/icon_05.png">
-	    						<b></b>
-	    					</i>
-	    					<a href="index.html" target="blank">
-		    					<span>通知公告</span>
-		    				</a>
-		    			</li>
-		    			<li class="list">
-	    					<i>
-	    						<img src="images/icon_06.png">
-	    						<b></b>
-	    					</i>
-	    					<a href="index.html" target="blank">
-		    					<span>行政人事</span>
-		    				</a>
-		    			</li>
-	    			</ul>
-	    			<a href="#">
-	    				<i>
-    						<img src="images/icon_add.png">
-    						<b></b>
-    					</i>
-    					<span>添加快捷方式</span>
-	    			</a>
-	    			<script>
-						jQuery(function(){						    
-						    //第九个例子的拖拽
-						    $(".list").Tdrag({
-						        scope:".boxList",
-						        pos:true,
-						        dragChange:true,
-						        changeMode:"sort",
-						        moveClass:"abc"
-						    });
-						})
-					</script>
-	    		</div>
-	    		<!-- iconbox end -->
-	    		<div class="info_box">
-	    			<div class="box battle">
-	    				<div class="tit">
-	    					<a class="on">营销战况</a><a>渠道战况</a><!-- 注释去间隔
-	    	   注释去间隔 --><div class="scrollnews">
-	    	   					<span>WangID提醒您：</span>
-	    	   					<ul>
-	    	   						<li title="最新战报，章泽天 关晓彤 签名榜一个！2018-08-10 15:41:58">
-	    	   							最新战报，<b>章泽天 关晓彤</b> 签名榜一个！<i>2018-08-10 15:41:58</i>
-	    	   						</li>
-	    	   						<li title="最新战报，章泽天 签名榜一个！2018-08-10 15:41:58">
-	    	   							最新战报，<b>章泽天</b> 签名榜一个！<i>2018-08-10 15:41:58</i>
-	    	   						</li>
-	    	   						<li title="最新战报，秋名山 签名榜一个！2018-08-10 15:41:58">
-	    	   							最新战报，<b>秋名山</b> 签名榜一个！<i>2018-08-10 15:41:58</i>
-	    	   						</li>
-	    	   					</ul>
-	    	   					<script type="text/javascript">
-	    	   						$(document).ready(function(){
-					                    //滚动文字
-					                    function runtxt(){
-					                        $(".scrollnews ul").animate({marginTop:"-54px"},300,
-					                            function(){
-					                                $(".scrollnews ul li:last").after($(".scrollnews ul li:first"))
-					                                $(".scrollnews ul").css("margin-top",0)
-					                            }
-					                        )
-					                    }   
-					                    $(".scrollnews ul li a").mouseenter(
-					                        function(){
-					                            clearInterval(timer)
-					                        }
-					                    )
-					                    $(".scrollnews ul li a").mouseleave(
-					                        function(){
-					                            timer=setInterval(runtxt,4000)
-					                        }
-					                    )
-					                    timer=setInterval(runtxt,4000)
-					                })
-	    	   					</script>
-	    	   				</div>
-	    				</div>
-	    				<div class="conbox">
-	    					<div class="con">
-	    						<h1>营销部各大区本月新增业绩PK实时展示图</h1>
-	    						<div class="countbox">
-	    							<div class="count">
-	    								<span class="x"><img src="images/X.png"> x/营销分区</span>
-	    								<span class="y"><img src="images/Y.png"> y/营销业绩</span>
-	    								<ul>
-	    									<li class="y1" style="height: calc(2% * 2); background: #ff4e00;"></li>
-	    									<li class="y2" style="height: calc(3% * 2); background: #ffa200;"></li>
-	    									<li class="y3" style="height: calc(7% * 2); background: #fffc00;"></li>
-	    									<li class="y6" style="height: calc(5% * 2); background: #00ff55;"></li>
-	    									<li class="y8" style="height: calc(3% * 2); background: #00ffd5;"></li>
-	    									<li class="y10" style="height: calc(8% * 2); background: #00c0ff;"></li>
-	    									<li class="y11" style="height: calc(4% * 2); background: #0078ff;"></li>
-	    									<li class="y12" style="height: calc(6% * 2); background: #4200ff;"></li>
-	    									<li class="y13" style="height: calc(14% * 2); background: #fc00ff;"></li>
-	    									<li class="y16" style="height: calc(8% * 2); background: #ff007e;"></li>
-	    									<li class="y18 on" style="height: calc(40% * 2); background: #ff0000;">
-	    								 		<img src="images/flag.png" />
-	    								 	</li>
-	    								 <!-- 计算出每个大区所占百分比 以两倍高度展示，所占比超过百分之五十的，超出百分百以外的隐藏 -->
-	    								</ul>
-	    							</div>
-	    							<div class="num">
-	    								<a>1区</a>
-	    								<a>2区</a>
-	    								<a>3区</a>
-	    								<a>6区</a>
-	    								<a>8区</a>
-	    								<a>10区</a>
-	    								<a>11区</a>
-	    								<a>12区</a>
-	    								<a>13区</a>
-	    								<a>16区</a>
-	    								<a>18区</a>
-	    							</div>
-	    						</div>
-	    					</div>
-	    					<div class="con">
-	    						<h1>渠道部各部门本月新增业绩PK实时展示图</h1>
-	    						<div class="countbox">
-	    							<div class="count">
-	    								<span class="x"><img src="images/X.png"> x/渠道部门</span>
-	    								<span class="y"><img src="images/Y.png"> y/渠道业绩</span>
-	    								<ul>
-	    									<li class="y1" style="height: calc(40% * 2); background: #ff4e00;"></li>
-	    									<li class="y2 on" style="height: calc(60% * 2); background: #ffa200;">
-	    								 		<img src="images/flag.png" />
-	    								 	</li>
-	    								 <!-- 计算出每个大区所占百分比 以两倍高度展示，所占比超过百分之五十的，超出百分百以外的隐藏 -->
-	    								</ul>
-	    							</div>
-	    							<div class="num">
-	    								<a>6部</a>
-	    								<a>8部</a>
-	    							</div>
-	    						</div>
-	    					</div>
-	    				</div>
-    					<script type="text/javascript">
-    						$(function(){
-    							var n=0;
-    							$(".right_box .info_box .battle .tit a").mouseover(
-    								function(){
-    									n=$(this).index();
-    									$(this).addClass("on")
-    									$(this).siblings().removeClass("on")
-    									$(".right_box .info_box .battle .con").hide().eq(n).fadeIn()
-    								}
-    							)
-    						})
-    					</script>
-	    			</div>
-	    			<div class="box honor">
-	    				<div class="tit">
-	    					<a class="on">营销业绩排行榜</a><a>渠道业绩排行榜</a><!-- 注释去间隔
-	    				 --><div></div>
-	    				</div>
-	    				<div class="conbox">
-	    					<div class="con">
-	    						<div>
-		    						<ul>
-		    							<li>
-		    								<i><img src="images/head.jpg"></i>
-		    								<dl>
-		    									<dt>章泽天</dt>
-		    									<dd>所属分区：营销1区</dd>
-		    								</dl>
-		    								<b><img src="images/honor_1.png"></b>
-		    							</li>
-		    							<li>
-		    								<i><img src="images/head.jpg"></i>
-		    								<dl>
-		    									<dt>鹿晗</dt>
-		    									<dd>所属分区：营销11区</dd>
-		    								</dl>
-		    								<b><img src="images/honor_2.png"></b>
-		    							</li>
-		    							<li>
-		    								<i><img src="images/head.jpg"></i>
-		    								<dl>
-		    									<dt>关晓彤</dt>
-		    									<dd>所属分区：营销3区</dd>
-		    								</dl>
-		    								<b><img src="images/honor_3.png"></b>
-		    							</li>
-		    						</ul>
-		    						<dl>
-		    							<dt>上月前三名</dt>
-		    							<dd>鹿晗</dd>
-		    							<dd>关晓彤</dd>
-		    							<dd>张娜拉</dd>
-		    						</dl>
-		    					</div>
-		    					<p>干的不错，小伙伴们继续加油哦！ 更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
-	    					</div>
-	    					<div class="con">
-	    						<div>
-		    						<ul>
-		    							<li>
-		    								<i><img src="images/head.jpg"></i>
-		    								<dl>
-		    									<dt>章泽天</dt>
-		    									<dd>所属分区：渠道6部</dd>
-		    								</dl>
-		    								<b><img src="images/honor_1.png"></b>
-		    							</li>
-		    							<li>
-		    								<i><img src="images/head.jpg"></i>
-		    								<dl>
-		    									<dt>鹿晗</dt>
-		    									<dd>所属分区：渠道8部</dd>
-		    								</dl>
-		    								<b><img src="images/honor_2.png"></b>
-		    							</li>
-		    							<li>
-		    								<i><img src="images/head.jpg"></i>
-		    								<dl>
-		    									<dt>关晓彤</dt>
-		    									<dd>所属分区：渠道8部</dd>
-		    								</dl>
-		    								<b><img src="images/honor_3.png"></b>
-		    							</li>
-		    						</ul>
-		    						<dl>
-		    							<dt>上月前三名</dt>
-		    							<dd>鹿晗</dd>
-		    							<dd>关晓彤</dd>
-		    							<dd>张娜拉</dd>
-		    						</dl>
-		    					</div>
-		    					<p>渠道部的同学们很给力，加油！</p>
-	    					</div>
-	    				</div>
-	    				<script type="text/javascript">
-    						$(function(){
-    							var n=0;
-    							$(".right_box .info_box .honor .tit a").mouseover(
-    								function(){
-    									n=$(this).index();
-    									$(this).addClass("on")
-    									$(this).siblings().removeClass("on")
-    									$(".right_box .info_box .honor .con").hide().eq(n).fadeIn()
-    								}
-    							)
-    						})
-    					</script>
-	    			</div>
-	    		</div>
-	    	</div>
-	    </div>
-    </div>
-
-</body>
 </html>
