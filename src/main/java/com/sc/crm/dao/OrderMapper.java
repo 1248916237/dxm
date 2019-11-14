@@ -19,5 +19,5 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
     
-    List<Order> getOrderByClientId(@Param("clientId")Integer clientId);
+    List<Order> getOrderByClientId(@Param("clientId")String clientId);
 }

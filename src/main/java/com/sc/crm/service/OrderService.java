@@ -6,6 +6,6 @@ import com.sc.crm.bean.Order;
 
 public interface OrderService {
 	
-	List<Order> getOrderByClientId(Integer clientId);
+	List<Order> getOrderByClientId(String clientId);
  
 }

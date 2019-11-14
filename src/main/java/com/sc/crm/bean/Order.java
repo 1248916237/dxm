@@ -1,6 +1,7 @@
 package com.sc.crm.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private String orderId;
@@ -20,8 +21,25 @@ public class Order {
     private Long orderAllPrice;
 
     private Date payDate;
+    
+    private List<OrderProduct> opList;
 
-    public String getOrderId() {
+    @Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", orderDate=" + orderDate + ", userId=" + userId + ", orderWay="
+				+ orderWay + ", clientId=" + clientId + ", orderPayment=" + orderPayment + ", orderState=" + orderState
+				+ ", orderAllPrice=" + orderAllPrice + ", payDate=" + payDate + "]";
+	}
+
+	public List<OrderProduct> getOpList() {
+		return opList;
+	}
+
+	public void setOpList(List<OrderProduct> opList) {
+		this.opList = opList;
+	}
+
+	public String getOrderId() {
         return orderId;
     }
 

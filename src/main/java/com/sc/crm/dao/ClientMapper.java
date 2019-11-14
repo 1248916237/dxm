@@ -19,9 +19,11 @@ public interface ClientMapper {
 
     int updateByPrimaryKey(Client record);
     
-    List<Client> getClientList();
+    List<Client> getClientList(@Param("clientName")String cilentName);
     
-    int delClient(@Param("clientId")Integer clientId);
+    int delClientById(@Param("clientId")Integer clientId);
+    
+    List<Client> getClientListByLike(@Param("str")String str);
     
     
 }

@@ -18,7 +18,7 @@ public class OrderServiceImpl implements OrderService{
 	private SqlSessionTemplate st;
 	
 	@Override
-	public List<Order> getOrderByClientId(Integer clientId) {
+	public List<Order> getOrderByClientId(String clientId) {
 		OrderMapper mapper = st.getMapper(OrderMapper.class);
 		List<Order> list = mapper.getOrderByClientId(clientId);
 		return list;

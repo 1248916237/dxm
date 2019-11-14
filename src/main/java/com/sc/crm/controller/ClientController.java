@@ -31,11 +31,23 @@ public class ClientController {
 	@RequestMapping("/client_list")
 	public String clientList(
 			@RequestParam(defaultValue="1")int pn,@RequestParam(defaultValue="5")int size,
+			String cilentName,
 			Map<String, Object> data)
 	{
-		PageInfo<Client> pageInfo = clientService.getClientList(pn, size);
+		System.out.println(cilentName);
+		PageInfo<Client> pageInfo = clientService.getClientList(pn, size,cilentName);
 		data.put("clientList", pageInfo);
 		return "forward:/client.jsp";
+	}
+	
+	@RequestMapping("/client_add")
+	@ResponseBody
+	public ResultBean addClient(Client client)
+	{
+		clientService.addClient(client);
+		ResultBean resultBean = new ResultBean();
+		resultBean.setResultState(1);
+		return resultBean;
 	}
 	
 	
@@ -59,14 +71,52 @@ public class ClientController {
 		return resultBean;
 	}
 	
+	@RequestMapping("/del_client")
+	@ResponseBody
+	public ResultBean delClientById(HttpServletRequest res,Client client)
+	{
+		String ss = res.getParameter("clientId");
+		Integer id = client.getClientId();
+		System.out.println(ss+"---  "+id);
+		clientService.delClientById(id);
+		ResultBean resultBean = new ResultBean();
+		resultBean.setResultState(1);
+		return resultBean;
+	}
+	
+	
+	
 	@RequestMapping("/client_order")
 	public String chaOrderByClientId(HttpServletRequest res,Map<String, Object> data)
 	{
 		String clientId = res.getParameter("clientId");
-		System.out.println(clientId);
-		List<Order> list = orderService.getOrderByClientId(Integer.valueOf(clientId));
-		data.put("orderList", list);
-		return "forward:/aa.jsp";
+		List<Order> list = orderService.getOrderByClientId(clientId);
+		System.out.println(list.size()+"----"+clientId);
+		
+		if (list.size()==0) {
+			data.put("orderList", null);
+		}
+		else {
+			data.put("orderList", list);
+		}
+		Client client = clientService.getClientById(Integer.valueOf(clientId));
+		data.put("client", client);
+		
+		return "forward:/client_order.jsp";
 	}
 
+	/*@RequestMapping("/like_client")
+	@ResponseBody
+	public ResultBean getClientListByLike(HttpServletRequest res)
+	{
+		String ss = res.getParameter("str");
+		System.out.println("传过来的参数是"+ss);
+		
+		List<Client> listByLike = clientService.getClientListByLike(ss);
+		
+		ResultBean resultBean = new ResultBean();
+		resultBean.setResultState(1);
+		return resultBean;
+	}*/
+	
 }

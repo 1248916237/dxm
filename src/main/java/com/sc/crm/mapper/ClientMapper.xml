@@ -14,10 +14,17 @@
     <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
   </resultMap>
   
-  <select id="getClientList" resultMap="BaseResultMap">
-  	select * from client where client_state=1
+  <select id="getClientListByLike" resultMap="BaseResultMap">
+  	SELECT * from client WHERE client_name LIKE concat('%',#{str},'%')
   </select>
-  <update id="delClient" >
+  
+  <select id="getClientList" resultMap="BaseResultMap">
+  	select * from client where client_state=1 
+  	<if test="clientName != null">
+  		AND client_name LIKE concat('%',#{clientName},'%')
+  	</if>
+  </select>
+  <update id="delClientById" >
   	update client set client_state=0 where client_id=#{clientId}
   </update>
   

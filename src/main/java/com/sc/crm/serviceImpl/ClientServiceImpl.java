@@ -21,11 +21,11 @@ public class ClientServiceImpl implements ClientService{
 	private SqlSessionTemplate st;
 
 	@Override
-	public PageInfo<Client> getClientList(Integer pn, Integer size) {
+	public PageInfo<Client> getClientList(Integer pn, Integer size,String cilentName) {
 		PageHelper.startPage(pn, size);
 		
 		ClientMapper mapper = st.getMapper(ClientMapper.class);
-		List<Client> list = mapper.getClientList();
+		List<Client> list = mapper.getClientList(cilentName);
 		
 		PageInfo<Client> info = new PageInfo<>(list);
 		return info;
@@ -42,6 +42,26 @@ public class ClientServiceImpl implements ClientService{
 	public void updateByPrimaryKey(Client client) {
 		ClientMapper mapper = st.getMapper(ClientMapper.class);
 		mapper.updateByPrimaryKey(client);
+	}
+
+	@Override
+	public int delClientById(Integer id) {
+		ClientMapper mapper = st.getMapper(ClientMapper.class);
+		int i = mapper.delClientById(id);
+		return i;
+	}
+
+	@Override
+	public int addClient(Client client) {
+		ClientMapper mapper = st.getMapper(ClientMapper.class);
+		int i = mapper.insert(client);
+		return i;
+	}
+
+	@Override
+	public List<Client> getClientListByLike(String str) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

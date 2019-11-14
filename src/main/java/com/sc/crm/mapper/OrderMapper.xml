@@ -12,13 +12,46 @@
     <result column="order_all_price" property="orderAllPrice" jdbcType="DECIMAL" />
     <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+  <resultMap id="orpMap" type="com.sc.crm.bean.Order" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_way" property="orderWay" jdbcType="VARCHAR" />
+    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="order_payment" property="orderPayment" jdbcType="INTEGER" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="order_all_price" property="orderAllPrice" jdbcType="DECIMAL" />
+    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+    <collection property="opList" column="order_id" ofType="com.sc.crm.bean.OrderProduct">
+  	    <id column="order_product_id" property="orderProductId" jdbcType="INTEGER" />
+	    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+	    <result column="product_id" property="productId" jdbcType="INTEGER" />
+	    <result column="product_num" property="productNum" jdbcType="INTEGER" />
+	    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+	    <association property="proDuc" column="product_id" javaType="com.sc.crm.bean.Product">
+		    <id column="product_id" property="productId" jdbcType="INTEGER" />
+		    <result column="product_number" property="productNumber" jdbcType="VARCHAR" />
+		    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+		    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+		    <result column="product_state" property="productState" jdbcType="INTEGER" />
+		    <result column="product_intro" property="productIntro" jdbcType="VARCHAR" />
+		    <result column="house_id" property="houseId" jdbcType="INTEGER" />
+	    </association>
+    </collection>
+  </resultMap>
+  
   <sql id="Base_Column_List" >
     order_id, order_date, user_id, order_way, client_id, order_payment, order_state, 
     order_all_price, pay_date
   </sql>
   
-  <select id="getOrderByClientId" resultMap="BaseResultMap">
-  		select * from `order` where client_id=#{clientId}
+  <select id="getOrderByClientId" resultMap="orpMap">
+	select * from `order` ore INNER JOIN order_product opr
+	ON ore.order_id =opr.order_id
+	INNER JOIN product prt 
+	on prt.product_id=opr.product_id
+	where client_id=#{clientId}
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
