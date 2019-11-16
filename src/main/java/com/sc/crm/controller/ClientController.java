@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.sc.crm.bean.Client;
+import com.sc.crm.bean.ClientLoss;
 import com.sc.crm.bean.Order;
 import com.sc.crm.bean.ResultBean;
 import com.sc.crm.service.ClientService;
@@ -60,6 +61,33 @@ public class ClientController {
 		return "forward:/client_update.jsp";
 	}
 	
+	@RequestMapping("/loss_update")
+	public String getClientLossById(Client client,Map<String, Object> data)
+	{
+		Integer id = client.getClientId();
+		Client clientById = clientService.getClientById(id);
+		data.put("clientById", clientById);
+		return "forward:/loss_update.jsp";
+	}
+	
+	@RequestMapping("/loss_agin")
+	@ResponseBody
+	public ResultBean setLossWay(ClientLoss clientLoss)
+	{
+		System.out.println("进入controller");
+		Integer clientId = clientLoss.getClientId();
+		Client client = clientService.getClientById(clientId);
+		client.setClientState(1);
+		
+		clientService.updateByPrimaryKey(client);
+		clientService.setClientLossWay(clientLoss);
+		   
+		ResultBean resultBean = new ResultBean();
+		resultBean.setResultState(1);
+		return resultBean;
+	}
+	
+	
 	@RequestMapping("/update_agin")
 	@ResponseBody
 	public ResultBean updateByPrimaryKey(Client client)
@@ -105,18 +133,17 @@ public class ClientController {
 		return "forward:/client_order.jsp";
 	}
 
-	/*@RequestMapping("/like_client")
-	@ResponseBody
-	public ResultBean getClientListByLike(HttpServletRequest res)
+	@RequestMapping("/client_loss")
+	public String clientLossList(
+			@RequestParam(defaultValue="1")int pn,@RequestParam(defaultValue="5")int size,
+			String cilentName,
+			Map<String, Object> data)
 	{
-		String ss = res.getParameter("str");
-		System.out.println("传过来的参数是"+ss);
-		
-		List<Client> listByLike = clientService.getClientListByLike(ss);
-		
-		ResultBean resultBean = new ResultBean();
-		resultBean.setResultState(1);
-		return resultBean;
-	}*/
+		System.out.println(cilentName);
+		PageInfo<Client> pageInfo = clientService.getClientLossList(pn, size,cilentName);
+		data.put("clientList", pageInfo);
+		return "forward:/clientLoss.jsp";
+	}
+	
 	
 }

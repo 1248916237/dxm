@@ -20,8 +20,18 @@ public class Client {
     private String clientCard;
 
     private String cardKind;
+    
+    private ClientLoss lossC;
 
-    public Integer getClientId() {
+    public ClientLoss getLossC() {
+		return lossC;
+	}
+
+	public void setLossC(ClientLoss lossC) {
+		this.lossC = lossC;
+	}
+
+	public Integer getClientId() {
         return clientId;
     }
 

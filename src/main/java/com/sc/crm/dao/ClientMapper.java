@@ -23,7 +23,6 @@ public interface ClientMapper {
     
     int delClientById(@Param("clientId")Integer clientId);
     
-    List<Client> getClientListByLike(@Param("str")String str);
-    
+    List<Client> getClientLossList(@Param("clientName")String cilentName);
     
 }

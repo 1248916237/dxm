@@ -14,10 +14,34 @@
     <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
   </resultMap>
   
-  <select id="getClientListByLike" resultMap="BaseResultMap">
-  	SELECT * from client WHERE client_name LIKE concat('%',#{str},'%')
-  </select>
-  
+    <resultMap id="lossMap" type="com.sc.crm.bean.Client" >
+    <id column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+    <result column="client_sex" property="clientSex" jdbcType="VARCHAR" />
+    <result column="client_age" property="clientAge" jdbcType="VARCHAR" />
+    <result column="client_phone" property="clientPhone" jdbcType="VARCHAR" />
+    <result column="client_address" property="clientAddress" jdbcType="VARCHAR" />
+    <result column="client_state" property="clientState" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="client_card" property="clientCard" jdbcType="VARCHAR" />
+    <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
+    <association property="lossC" column="client_id" javaType="com.sc.crm.bean.ClientLoss">
+	    <id column="loss_id" property="lossId" jdbcType="INTEGER" />
+	    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+	    <result column="loss_reason" property="lossReason" jdbcType="VARCHAR" />
+	    <result column="loss_remedy" property="lossRemedy" jdbcType="VARCHAR" />
+	    <result column="loss_result" property="lossResult" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+ 
+  <select id="getClientLossList" resultMap="BaseResultMap">
+  	SELECT * FROM client  WHERE client_state=0
+  	<if test="clientName != null">
+  		AND client_name LIKE concat('%',#{clientName},'%')
+  	</if>
+  </select> 
+ 
+
   <select id="getClientList" resultMap="BaseResultMap">
   	select * from client where client_state=1 
   	<if test="clientName != null">

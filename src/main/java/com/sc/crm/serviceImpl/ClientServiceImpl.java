@@ -11,6 +11,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.crm.bean.Client;
+import com.sc.crm.bean.ClientLoss;
+import com.sc.crm.dao.ClientLossMapper;
 import com.sc.crm.dao.ClientMapper;
 import com.sc.crm.service.ClientService;
 
@@ -59,9 +61,21 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public List<Client> getClientListByLike(String str) {
-		// TODO Auto-generated method stub
-		return null;
+	public PageInfo<Client> getClientLossList(Integer pn, Integer size, String cilentName) {
+		PageHelper.startPage(pn, size);
+		
+		ClientMapper mapper = st.getMapper(ClientMapper.class);
+		List<Client> list = mapper.getClientLossList(cilentName);
+		
+		PageInfo<Client> info = new PageInfo<>(list);
+		return info;
+	}
+
+	@Override
+	public int setClientLossWay(ClientLoss clientLoss) {
+		ClientLossMapper mapper = st.getMapper(ClientLossMapper.class);
+		int i = mapper.insert(clientLoss);
+		return i;
 	}
 	
 
