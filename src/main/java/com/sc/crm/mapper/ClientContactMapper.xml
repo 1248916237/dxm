@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crm.dao.ClientContactMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.crm.bean.ClientContact" >
+    <id column="contact_id" property="contactId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="contact_content" property="contactContent" jdbcType="VARCHAR" />
+    <result column="contact_date" property="contactDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    contact_id, user_id, client_id, contact_content, contact_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from client_contact
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from client_contact
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sc.crm.bean.ClientContact" >
+    insert into client_contact (contact_id, user_id, client_id, 
+      contact_content, contact_date)
+    values (#{contactId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{clientId,jdbcType=INTEGER}, 
+      #{contactContent,jdbcType=VARCHAR}, #{contactDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.ClientContact" >
+    insert into client_contact
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contactId != null" >
+        contact_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="clientId != null" >
+        client_id,
+      </if>
+      <if test="contactContent != null" >
+        contact_content,
+      </if>
+      <if test="contactDate != null" >
+        contact_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contactId != null" >
+        #{contactId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="contactContent != null" >
+        #{contactContent,jdbcType=VARCHAR},
+      </if>
+      <if test="contactDate != null" >
+        #{contactDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.crm.bean.ClientContact" >
+    update client_contact
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null" >
+        client_id = #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="contactContent != null" >
+        contact_content = #{contactContent,jdbcType=VARCHAR},
+      </if>
+      <if test="contactDate != null" >
+        contact_date = #{contactDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.crm.bean.ClientContact" >
+    update client_contact
+    set user_id = #{userId,jdbcType=INTEGER},
+      client_id = #{clientId,jdbcType=INTEGER},
+      contact_content = #{contactContent,jdbcType=VARCHAR},
+      contact_date = #{contactDate,jdbcType=TIMESTAMP}
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </update>
+</mapper>

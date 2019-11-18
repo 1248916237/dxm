@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crm.dao.ClientMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.crm.bean.Client" >
+    <id column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+    <result column="client_sex" property="clientSex" jdbcType="VARCHAR" />
+    <result column="client_age" property="clientAge" jdbcType="VARCHAR" />
+    <result column="client_phone" property="clientPhone" jdbcType="VARCHAR" />
+    <result column="client_address" property="clientAddress" jdbcType="VARCHAR" />
+    <result column="client_state" property="clientState" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="client_card" property="clientCard" jdbcType="VARCHAR" />
+    <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
+  </resultMap>
+  
+    <resultMap id="lossMap" type="com.sc.crm.bean.Client" >
+    <id column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+    <result column="client_sex" property="clientSex" jdbcType="VARCHAR" />
+    <result column="client_age" property="clientAge" jdbcType="VARCHAR" />
+    <result column="client_phone" property="clientPhone" jdbcType="VARCHAR" />
+    <result column="client_address" property="clientAddress" jdbcType="VARCHAR" />
+    <result column="client_state" property="clientState" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="client_card" property="clientCard" jdbcType="VARCHAR" />
+    <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
+    <association property="lossC" column="client_id" javaType="com.sc.crm.bean.ClientLoss">
+	    <id column="loss_id" property="lossId" jdbcType="INTEGER" />
+	    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+	    <result column="loss_reason" property="lossReason" jdbcType="VARCHAR" />
+	    <result column="loss_remedy" property="lossRemedy" jdbcType="VARCHAR" />
+	    <result column="loss_result" property="lossResult" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+ 
+  <select id="getClientLossList" resultMap="BaseResultMap">
+  	SELECT * FROM client  WHERE client_state=0
+  	<if test="clientName != null">
+  		AND client_name LIKE concat('%',#{clientName},'%')
+  	</if>
+  </select> 
+ 
+
+  <select id="getClientList" resultMap="BaseResultMap">
+  	select * from client where client_state=1 
+  	<if test="clientName != null">
+  		AND client_name LIKE concat('%',#{clientName},'%')
+  	</if>
+  </select>
+  <update id="delClientById" >
+  	update client set client_state=0 where client_id=#{clientId}
+  </update>
+  
+  <sql id="Base_Column_List" >
+    client_id, client_name, client_sex, client_age, client_phone, client_address, client_state, 
+    user_id, client_card, card_kind
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from client
+    where client_id = #{clientId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from client
+    where client_id = #{clientId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sc.crm.bean.Client" >
+    insert into client (client_id, client_name, client_sex, 
+      client_age, client_phone, client_address, 
+      client_state, user_id, client_card, 
+      card_kind)
+    values (#{clientId,jdbcType=INTEGER}, #{clientName,jdbcType=VARCHAR}, #{clientSex,jdbcType=VARCHAR}, 
+      #{clientAge,jdbcType=VARCHAR}, #{clientPhone,jdbcType=VARCHAR}, #{clientAddress,jdbcType=VARCHAR}, 
+      #{clientState,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{clientCard,jdbcType=VARCHAR}, 
+      #{cardKind,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.Client" >
+    insert into client
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clientId != null" >
+        client_id,
+      </if>
+      <if test="clientName != null" >
+        client_name,
+      </if>
+      <if test="clientSex != null" >
+        client_sex,
+      </if>
+      <if test="clientAge != null" >
+        client_age,
+      </if>
+      <if test="clientPhone != null" >
+        client_phone,
+      </if>
+      <if test="clientAddress != null" >
+        client_address,
+      </if>
+      <if test="clientState != null" >
+        client_state,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="clientCard != null" >
+        client_card,
+      </if>
+      <if test="cardKind != null" >
+        card_kind,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clientId != null" >
+        #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="clientName != null" >
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientSex != null" >
+        #{clientSex,jdbcType=VARCHAR},
+      </if>
+      <if test="clientAge != null" >
+        #{clientAge,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPhone != null" >
+        #{clientPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="clientAddress != null" >
+        #{clientAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="clientState != null" >
+        #{clientState,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="clientCard != null" >
+        #{clientCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardKind != null" >
+        #{cardKind,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.crm.bean.Client" >
+    update client
+    <set >
+      <if test="clientName != null" >
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientSex != null" >
+        client_sex = #{clientSex,jdbcType=VARCHAR},
+      </if>
+      <if test="clientAge != null" >
+        client_age = #{clientAge,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPhone != null" >
+        client_phone = #{clientPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="clientAddress != null" >
+        client_address = #{clientAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="clientState != null" >
+        client_state = #{clientState,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="clientCard != null" >
+        client_card = #{clientCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardKind != null" >
+        card_kind = #{cardKind,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where client_id = #{clientId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.crm.bean.Client" >
+    update client
+    set client_name = #{clientName,jdbcType=VARCHAR},
+      client_sex = #{clientSex,jdbcType=VARCHAR},
+      client_age = #{clientAge,jdbcType=VARCHAR},
+      client_phone = #{clientPhone,jdbcType=VARCHAR},
+      client_address = #{clientAddress,jdbcType=VARCHAR},
+      client_state = #{clientState,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      client_card = #{clientCard,jdbcType=VARCHAR},
+      card_kind = #{cardKind,jdbcType=VARCHAR}
+    where client_id = #{clientId,jdbcType=INTEGER}
+  </update>
+</mapper>

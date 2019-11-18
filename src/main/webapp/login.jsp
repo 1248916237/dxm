@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 30px;">
-                        <label for="upass" class="col-lg-1 control-label">密 &nbsp;&nbsp; 码</label>
+                        <label for="upass" class="col-lg-1 control-label" style="min-width:85px">密 &nbsp;&nbsp; 码</label>
                         <div class="col-lg-3">
                             <input type="password" class="form-control" id="upass" name="userPass" placeholder="请输入您的密码">
                         </div>

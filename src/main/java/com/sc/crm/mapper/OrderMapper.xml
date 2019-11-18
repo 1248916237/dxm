@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crm.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.crm.bean.Order" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_way" property="orderWay" jdbcType="VARCHAR" />
+    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="order_payment" property="orderPayment" jdbcType="INTEGER" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="order_all_price" property="orderAllPrice" jdbcType="DECIMAL" />
+    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="clientOrdMap" type="com.sc.crm.bean.Order" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_way" property="orderWay" jdbcType="VARCHAR" />
+    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="order_payment" property="orderPayment" jdbcType="INTEGER" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="order_all_price" property="orderAllPrice" jdbcType="DECIMAL" />
+    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+    <association property="client" column="client_id" javaType="com.sc.crm.bean.Client">
+   	    <id column="client_id" property="clientId" jdbcType="INTEGER" />
+	    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+	    <result column="client_sex" property="clientSex" jdbcType="VARCHAR" />
+	    <result column="client_age" property="clientAge" jdbcType="VARCHAR" />
+	    <result column="client_phone" property="clientPhone" jdbcType="VARCHAR" />
+	    <result column="client_address" property="clientAddress" jdbcType="VARCHAR" />
+	    <result column="client_state" property="clientState" jdbcType="INTEGER" />
+	    <result column="user_id" property="userId" jdbcType="INTEGER" />
+	    <result column="client_card" property="clientCard" jdbcType="VARCHAR" />
+	    <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <resultMap id="orpMap" type="com.sc.crm.bean.Order" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_way" property="orderWay" jdbcType="VARCHAR" />
+    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="order_payment" property="orderPayment" jdbcType="INTEGER" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="order_all_price" property="orderAllPrice" jdbcType="DECIMAL" />
+    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+    <association property="client" column="client_id" javaType="com.sc.crm.bean.Client">
+   	    <id column="client_id" property="clientId" jdbcType="INTEGER" />
+	    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+	    <result column="client_sex" property="clientSex" jdbcType="VARCHAR" />
+	    <result column="client_age" property="clientAge" jdbcType="VARCHAR" />
+	    <result column="client_phone" property="clientPhone" jdbcType="VARCHAR" />
+	    <result column="client_address" property="clientAddress" jdbcType="VARCHAR" />
+	    <result column="client_state" property="clientState" jdbcType="INTEGER" />
+	    <result column="user_id" property="userId" jdbcType="INTEGER" />
+	    <result column="client_card" property="clientCard" jdbcType="VARCHAR" />
+	    <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
+    </association>
+    <collection property="opList" column="order_id" ofType="com.sc.crm.bean.OrderProduct">
+  	    <id column="order_product_id" property="orderProductId" jdbcType="INTEGER" />
+	    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+	    <result column="product_id" property="productId" jdbcType="INTEGER" />
+	    <result column="product_num" property="productNum" jdbcType="INTEGER" />
+	    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+	    <association property="proDuc" column="product_id" javaType="com.sc.crm.bean.Product">
+		    <id column="product_id" property="productId" jdbcType="INTEGER" />
+		    <result column="product_number" property="productNumber" jdbcType="VARCHAR" />
+		    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+		    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+		    <result column="product_state" property="productState" jdbcType="INTEGER" />
+		    <result column="product_intro" property="productIntro" jdbcType="VARCHAR" />
+		    <result column="house_id" property="houseId" jdbcType="INTEGER" />
+	    </association>
+    </collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    order_id, order_date, user_id, order_way, client_id, order_payment, order_state, 
+    order_all_price, pay_date
+  </sql>
+  
+  <select id="getOrderByClientId" resultMap="orpMap">
+	select * from `order` ore INNER JOIN order_product opr
+	ON ore.order_id =opr.order_id
+	INNER JOIN product prt 
+	on prt.product_id=opr.product_id
+	where 1=1
+	<if test="clientId != null">
+		AND client_id=#{clientId}
+	</if>
+	<if test="orderId != null">
+		AND opr.order_id=#{orderId}
+	</if>
+  </select>
+  
+ <select id="getOrderList" resultMap="clientOrdMap">
+	SELECT * from `order` INNER JOIN client
+	ON `order`.client_id=client.client_id 
+	where 1=1
+	<if test="clientId != null">
+		AND client_id=#{clientId}
+	</if>
+  </select>
+  
+  <select id="" ></select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from `order`
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from `order`
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sc.crm.bean.Order" >
+    insert into `order` (order_id, order_date, user_id, 
+      order_way, client_id, order_payment, 
+      order_state, order_all_price, pay_date
+      )
+    values (#{orderId,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
+      #{orderWay,jdbcType=VARCHAR}, #{clientId,jdbcType=INTEGER}, #{orderPayment,jdbcType=INTEGER}, 
+      #{orderState,jdbcType=INTEGER}, #{orderAllPrice,jdbcType=DECIMAL}, #{payDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.Order" >
+    insert into `order`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderDate != null" >
+        order_date,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="orderWay != null" >
+        order_way,
+      </if>
+      <if test="clientId != null" >
+        client_id,
+      </if>
+      <if test="orderPayment != null" >
+        order_payment,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="orderAllPrice != null" >
+        order_all_price,
+      </if>
+      <if test="payDate != null" >
+        pay_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderWay != null" >
+        #{orderWay,jdbcType=VARCHAR},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="orderPayment != null" >
+        #{orderPayment,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="orderAllPrice != null" >
+        #{orderAllPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payDate != null" >
+        #{payDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.crm.bean.Order" >
+    update `order`
+    <set >
+      <if test="orderDate != null" >
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderWay != null" >
+        order_way = #{orderWay,jdbcType=VARCHAR},
+      </if>
+      <if test="clientId != null" >
+        client_id = #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="orderPayment != null" >
+        order_payment = #{orderPayment,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="orderAllPrice != null" >
+        order_all_price = #{orderAllPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payDate != null" >
+        pay_date = #{payDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.crm.bean.Order" >
+    update `order`
+    set order_date = #{orderDate,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      order_way = #{orderWay,jdbcType=VARCHAR},
+      client_id = #{clientId,jdbcType=INTEGER},
+      order_payment = #{orderPayment,jdbcType=INTEGER},
+      order_state = #{orderState,jdbcType=INTEGER},
+      order_all_price = #{orderAllPrice,jdbcType=DECIMAL},
+      pay_date = #{payDate,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+</mapper>
