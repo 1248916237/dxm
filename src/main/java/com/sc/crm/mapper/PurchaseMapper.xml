@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crm.dao.PurchaseMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.crm.bean.Purchase" >
+    <id column="purchase_id" property="purchaseId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="purchase_date" property="purchaseDate" jdbcType="TIMESTAMP" />
+    <result column="purchase_state" property="purchaseState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    purchase_id, user_id, purchase_date, purchase_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchase
+    where purchase_id = #{purchaseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchase
+    where purchase_id = #{purchaseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sc.crm.bean.Purchase" >
+    insert into purchase (purchase_id, user_id, purchase_date, 
+      purchase_state)
+    values (#{purchaseId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{purchaseDate,jdbcType=TIMESTAMP}, 
+      #{purchaseState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.Purchase" >
+    insert into purchase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseId != null" >
+        purchase_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date,
+      </if>
+      <if test="purchaseState != null" >
+        purchase_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseId != null" >
+        #{purchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseDate != null" >
+        #{purchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseState != null" >
+        #{purchaseState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.crm.bean.Purchase" >
+    update purchase
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date = #{purchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseState != null" >
+        purchase_state = #{purchaseState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where purchase_id = #{purchaseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.crm.bean.Purchase" >
+    update purchase
+    set user_id = #{userId,jdbcType=INTEGER},
+      purchase_date = #{purchaseDate,jdbcType=TIMESTAMP},
+      purchase_state = #{purchaseState,jdbcType=INTEGER}
+    where purchase_id = #{purchaseId,jdbcType=INTEGER}
+  </update>
+  
+  	<!-- SELECT p.*,m.* FROM purchase p 
+		INNER JOIN purchase_material pm
+		ON p.purchase_id = pm.purchase_id
+		INNER JOIN material m
+		ON pm.material_id = m.material_id
+		WHERE  p.purchase_state = 1 -->
+		
+	<select id="selectPurchase" resultMap="BaseResultMap">
+	SELECT * FROM purchase
+   	WHERE purchase_state =1
+	</select>
+		
+  <select id="selectMaterialById" resultMap="PurchaseMap">
+	SELECT * FROM material m
+	INNER JOIN purchase_material pm
+	ON pm.material_id = m.material_id
+	WHERE pm.purchase_id = #{id}
+			
+  </select>  
+  
+  <select id="waitPurchase" resultMap="BaseResultMap">
+   SELECT * FROM purchase
+   	WHERE purchase_state =0
+  </select>
+  
+  <resultMap type="com.sc.crm.bean.Material" id="PurchaseMap">
+  		<id column="material_id" property="materialId" jdbcType="INTEGER" />
+	    <result column="material_name" property="materialName" jdbcType="VARCHAR" />
+	    <result column="material_intro" property="materialIntro" jdbcType="VARCHAR" />
+	    <result column="material_num" property="materialNum" jdbcType="INTEGER" />
+	    <result column="material_price" property="materialPrice" jdbcType="DECIMAL" />
+	    <result column="house_id" property="houseId" jdbcType="INTEGER" />
+  </resultMap>
+     
+  
+   <!-- <resultMap type="com.sc.crm.bean.Purchase" id="WaitPurchaseMap">
+    <id column="purchase_id" property="purchaseId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="purchase_date" property="purchaseDate" jdbcType="TIMESTAMP" />
+    <result column="purchase_state" property="purchaseState" jdbcType="INTEGER" />
+    <collection property="materialList" column="material_id" ofType="com.sc.crm.bean.Material">
+     	<id column="material_id" property="materialId" jdbcType="INTEGER" />
+	    <result column="material_name" property="materialName" jdbcType="VARCHAR" />
+	    <result column="material_intro" property="materialIntro" jdbcType="VARCHAR" />
+	    <result column="material_num" property="materialNum" jdbcType="INTEGER" />
+	    <result column="material_price" property="materialPrice" jdbcType="DECIMAL" />
+	    <result column="house_id" property="houseId" jdbcType="INTEGER" />
+    </collection>
+  </resultMap -->
+</mapper>
