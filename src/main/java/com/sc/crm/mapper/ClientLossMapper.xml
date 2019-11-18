@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crm.dao.ClientLossMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.crm.bean.ClientLoss" >
+    <id column="loss_id" property="lossId" jdbcType="INTEGER" />
+    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="loss_reason" property="lossReason" jdbcType="VARCHAR" />
+    <result column="loss_remedy" property="lossRemedy" jdbcType="VARCHAR" />
+    <result column="loss_result" property="lossResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    loss_id, client_id, loss_reason, loss_remedy, loss_result
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from client_loss
+    where loss_id = #{lossId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from client_loss
+    where loss_id = #{lossId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sc.crm.bean.ClientLoss" >
+    insert into client_loss (loss_id, client_id, loss_reason, 
+      loss_remedy, loss_result)
+    values (#{lossId,jdbcType=INTEGER}, #{clientId,jdbcType=INTEGER}, #{lossReason,jdbcType=VARCHAR}, 
+      #{lossRemedy,jdbcType=VARCHAR}, #{lossResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.ClientLoss" >
+    insert into client_loss
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lossId != null" >
+        loss_id,
+      </if>
+      <if test="clientId != null" >
+        client_id,
+      </if>
+      <if test="lossReason != null" >
+        loss_reason,
+      </if>
+      <if test="lossRemedy != null" >
+        loss_remedy,
+      </if>
+      <if test="lossResult != null" >
+        loss_result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lossId != null" >
+        #{lossId,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="lossReason != null" >
+        #{lossReason,jdbcType=VARCHAR},
+      </if>
+      <if test="lossRemedy != null" >
+        #{lossRemedy,jdbcType=VARCHAR},
+      </if>
+      <if test="lossResult != null" >
+        #{lossResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.crm.bean.ClientLoss" >
+    update client_loss
+    <set >
+      <if test="clientId != null" >
+        client_id = #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="lossReason != null" >
+        loss_reason = #{lossReason,jdbcType=VARCHAR},
+      </if>
+      <if test="lossRemedy != null" >
+        loss_remedy = #{lossRemedy,jdbcType=VARCHAR},
+      </if>
+      <if test="lossResult != null" >
+        loss_result = #{lossResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where loss_id = #{lossId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.crm.bean.ClientLoss" >
+    update client_loss
+    set client_id = #{clientId,jdbcType=INTEGER},
+      loss_reason = #{lossReason,jdbcType=VARCHAR},
+      loss_remedy = #{lossRemedy,jdbcType=VARCHAR},
+      loss_result = #{lossResult,jdbcType=VARCHAR}
+    where loss_id = #{lossId,jdbcType=INTEGER}
+  </update>
+</mapper>
