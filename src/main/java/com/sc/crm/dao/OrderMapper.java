@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.sc.crm.bean.Order;
+import com.sc.crm.bean.OrderProduct;
 
 public interface OrderMapper {
     int deleteByPrimaryKey(String orderId);
@@ -19,5 +20,9 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
     
-    List<Order> getOrderByClientId(@Param("clientId")String clientId);
+    List<Order> getOrderByClientId(@Param("clientId")String clientId,@Param("orderId")String orderId); 
+    
+    List<Order> getOrderList(@Param("clientId")String clientId);
+    
+    
 }

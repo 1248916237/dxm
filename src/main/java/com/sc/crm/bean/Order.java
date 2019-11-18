@@ -22,7 +22,17 @@ public class Order {
 
     private Date payDate;
     
-    private List<OrderProduct> opList;
+    private Client client;
+    
+    public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	private List<OrderProduct> opList;
 
     @Override
 	public String toString() {

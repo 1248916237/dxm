@@ -13,6 +13,30 @@
     <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
   </resultMap>
   
+  <resultMap id="clientOrdMap" type="com.sc.crm.bean.Order" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_way" property="orderWay" jdbcType="VARCHAR" />
+    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="order_payment" property="orderPayment" jdbcType="INTEGER" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="order_all_price" property="orderAllPrice" jdbcType="DECIMAL" />
+    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+    <association property="client" column="client_id" javaType="com.sc.crm.bean.Client">
+   	    <id column="client_id" property="clientId" jdbcType="INTEGER" />
+	    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+	    <result column="client_sex" property="clientSex" jdbcType="VARCHAR" />
+	    <result column="client_age" property="clientAge" jdbcType="VARCHAR" />
+	    <result column="client_phone" property="clientPhone" jdbcType="VARCHAR" />
+	    <result column="client_address" property="clientAddress" jdbcType="VARCHAR" />
+	    <result column="client_state" property="clientState" jdbcType="INTEGER" />
+	    <result column="user_id" property="userId" jdbcType="INTEGER" />
+	    <result column="client_card" property="clientCard" jdbcType="VARCHAR" />
+	    <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
   <resultMap id="orpMap" type="com.sc.crm.bean.Order" >
     <id column="order_id" property="orderId" jdbcType="VARCHAR" />
     <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
@@ -23,6 +47,18 @@
     <result column="order_state" property="orderState" jdbcType="INTEGER" />
     <result column="order_all_price" property="orderAllPrice" jdbcType="DECIMAL" />
     <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+    <association property="client" column="client_id" javaType="com.sc.crm.bean.Client">
+   	    <id column="client_id" property="clientId" jdbcType="INTEGER" />
+	    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+	    <result column="client_sex" property="clientSex" jdbcType="VARCHAR" />
+	    <result column="client_age" property="clientAge" jdbcType="VARCHAR" />
+	    <result column="client_phone" property="clientPhone" jdbcType="VARCHAR" />
+	    <result column="client_address" property="clientAddress" jdbcType="VARCHAR" />
+	    <result column="client_state" property="clientState" jdbcType="INTEGER" />
+	    <result column="user_id" property="userId" jdbcType="INTEGER" />
+	    <result column="client_card" property="clientCard" jdbcType="VARCHAR" />
+	    <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
+    </association>
     <collection property="opList" column="order_id" ofType="com.sc.crm.bean.OrderProduct">
   	    <id column="order_product_id" property="orderProductId" jdbcType="INTEGER" />
 	    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
@@ -51,8 +87,26 @@
 	ON ore.order_id =opr.order_id
 	INNER JOIN product prt 
 	on prt.product_id=opr.product_id
-	where client_id=#{clientId}
+	where 1=1
+	<if test="clientId != null">
+		AND client_id=#{clientId}
+	</if>
+	<if test="orderId != null">
+		AND opr.order_id=#{orderId}
+	</if>
   </select>
+  
+ <select id="getOrderList" resultMap="clientOrdMap">
+	SELECT * from `order` INNER JOIN client
+	ON `order`.client_id=client.client_id 
+	where 1=1
+	<if test="clientId != null">
+		AND client_id=#{clientId}
+	</if>
+  </select>
+  
+  <select id="" ></select>
+  
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 

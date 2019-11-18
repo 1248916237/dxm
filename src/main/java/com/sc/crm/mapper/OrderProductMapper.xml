@@ -11,6 +11,11 @@
   <sql id="Base_Column_List" >
     order_product_id, order_id, product_id, product_num, product_price
   </sql>
+  
+  <select id="getOrderProductById" resultMap="BaseResultMap">
+  	SELECT *  from order_product WHERE order_id=#{orderId}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
