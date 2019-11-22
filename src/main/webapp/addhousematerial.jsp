@@ -9,6 +9,7 @@
     <head>
         <meta charset="UTF-8">
         <title>欢迎页面-X-admin2.2</title>
+         <base href="<%=basepath %>" >
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -29,9 +30,9 @@
                     
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>产品编号</label>
+                            <span class="x-red">*</span>原材料编号</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="productId" name="productId" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="materialId" name="materialId" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
@@ -41,15 +42,15 @@
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>产品数量</label>
+                            <span class="x-red">*</span>原材料数量</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="productNum" name="productNum" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="materialNumber" name="materialNumber" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>仓库产品状态</label>
+                            <span class="x-red">*</span>仓库原材料状态</label>
                         <div class="layui-input-inline">
-                            <select id="houseProductState" name="houseProductState" class="valid">
+                            <select id="materialState" name="materialState" class="valid">
                                 <option value="0">正常</option>
                                 <option value="1">缺货</option></select>
                         </div>
@@ -77,7 +78,7 @@
 		                    $.ajax
 		                    ({
 		                        type: "POST",
-		                        url: "addhouseproduct",
+		                        url: "addHouseMaterial",
 		                        data: data.field,
 		                        dataType: "json",
 		                        success: function (response)

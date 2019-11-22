@@ -7,21 +7,9 @@ public class Material {
 
     private String materialIntro;
 
-    private Integer materialNum;
-
-    private Long materialPrice;
-
     private Integer houseId;
-    
 
-    @Override
-	public String toString() {
-		return "Material [materialId=" + materialId + ", materialName=" + materialName + ", materialIntro="
-				+ materialIntro + ", materialNum=" + materialNum + ", materialPrice=" + materialPrice + ", houseId="
-				+ houseId + "]";
-	}
-
-	public Integer getMaterialId() {
+    public Integer getMaterialId() {
         return materialId;
     }
 
@@ -43,22 +31,6 @@ public class Material {
 
     public void setMaterialIntro(String materialIntro) {
         this.materialIntro = materialIntro == null ? null : materialIntro.trim();
-    }
-
-    public Integer getMaterialNum() {
-        return materialNum;
-    }
-
-    public void setMaterialNum(Integer materialNum) {
-        this.materialNum = materialNum;
-    }
-
-    public Long getMaterialPrice() {
-        return materialPrice;
-    }
-
-    public void setMaterialPrice(Long materialPrice) {
-        this.materialPrice = materialPrice;
     }
 
     public Integer getHouseId() {

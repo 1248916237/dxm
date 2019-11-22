@@ -36,11 +36,11 @@
                     <div class="layui-card">
                     
                         <div class="layui-card-body ">
-                            <form action="selHouseProduct" class="layui-form layui-col-space5">
+                            <form action="selHouseMaterial" class="layui-form layui-col-space5">
                             
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <select name="houseProductState">
-                                        <option value="">仓库产品状态</option>
+                                    <select name="materialState">
+                                        <option value="">仓库原材料状态</option>
                                         <option value="0">正常</option>
                                         <option value="1">缺货</option>
                                         </select>
@@ -56,19 +56,19 @@
                                 
                                 
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="productName" placeholder="请输入产品名" autocomplete="off" class="layui-input"></div>
+                                    <input type="text" name="materialName" placeholder="请输入原材料名" autocomplete="off" class="layui-input"></div>
                                 
                                 
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="houseProductId" placeholder="请输入仓库产品号" autocomplete="off" class="layui-input"></div>
+                                    <input type="text" name="houseMaterialId" placeholder="请输入仓库原材料号" autocomplete="off" class="layui-input"></div>
                                
                                 
                                  <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="productId" placeholder="请输入产品编号" autocomplete="off" class="layui-input"></div>
+                                    <input type="text" name="materialId" placeholder="请输入原材料编号" autocomplete="off" class="layui-input"></div>
                                 
                                 
                                  <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="productNum" placeholder="请输入产品数量" autocomplete="off" class="layui-input"></div>
+                                    <input type="text" name="materialNumber" placeholder="请输入原材料数量" autocomplete="off" class="layui-input"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
                                     	<input type="submit" class="layui-btn" value="搜索" lay-filter="sreach">
                                         
@@ -80,40 +80,40 @@
                         
                         <div class="layui-card-header">
                             
-                            <button class="layui-btn" onclick="xadmin.open('添加仓库产品','./addhouseproduct.jsp',700,500)">
+                            <button class="layui-btn" onclick="xadmin.open('添加仓库原材料','./addhousematerial.jsp',700,500)">
                                 <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
-                                        <th>仓库产品编号</th>
-                                        <th>产品编号</th>
-                                        <th>产品名</th>
+                                        <th>仓库原材料编号</th>
+                                        <th>原材料编号</th>
+                                        <th>原材料名</th>
                                         <th>仓库名</th>
-                                        <th>仓库产品数量</th>
-                                        <th>仓库产品状态</th>
+                                        <th>仓库原材料数量</th>
+                                        <th>仓库原材料状态</th>
                                         <th>操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 	<c:forEach items="${pageinfo.list }" var="p">
                                 		<tr>
-                                			<td>${p.houseProductId}</td>
-                                			<td>${p.productId}</td>
-                                			<td>${p.product.productName}</td>
+                                			<td>${p.houseMaterialId}</td>
+                                			<td>${p.materialId}</td>
+                                			<td>${p.material.materialName}</td>
                                 			<td>
                                 				<c:if test="${p.houseId ==1}">一号库</c:if>
                                                 <c:if test="${p.houseId ==2}">二号库</c:if>
                                 			</td>
-                                			<td>${p.productNum}</td>
+                                			<td>${p.materialNumber}</td>
                                 			<td class="td-status">
-                                			     <c:if test="${p.houseProductState ==1}">缺货</c:if>
-                                                 <c:if test="${p.houseProductState ==0}">正常</c:if>
+                                			     <c:if test="${p.materialState ==1}">缺货</c:if>
+                                                 <c:if test="${p.materialState ==0}">正常</c:if>
                                             </td>
                                 			<td class="td-manage">
-                                            <a title="修改" onclick="xadmin.open('修改','/dxm/updateHouseProduct?houseProductId=${p.houseProductId}')" href="javascript:;">
+                                            <a title="修改" onclick="xadmin.open('修改','/dxm/updateHouseMaterial?houseMaterialId=${p.houseMaterialId}')" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>
-                                            <a title="删除" onclick="member_del(this,'${p.houseProductId }')" href="javascript:;">
+                                            <a title="删除" onclick="member_del(this,'${p.houseMaterialId }')" href="javascript:;">
                                                 <i class="layui-icon">&#xe640;</i></a> 
                                             </td>	
                                 		</tr>
@@ -204,8 +204,8 @@
    	                //$(obj).parents("tr").remove();
 	   	            $.ajax({
 	                     type: "post",
-	                     url: "delHouseProduct",
-	                     data: {"houseProductId":id},
+	                     url: "delHouseMaterial",
+	                     data: {"houseMaterialId":id},
 	                     dataType: "json",
 	                     success: function (response) 
 	                     {
