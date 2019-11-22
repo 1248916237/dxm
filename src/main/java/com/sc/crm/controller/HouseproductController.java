@@ -75,9 +75,7 @@ public class HouseproductController {
 	@ResponseBody
 	public ResultBean updHouseProduct(HouseProduct houseproduct){
 		
-		System.out.println("进入修改方法");
 		houseproductService.updateByPrimaryKeySelective(houseproduct);
-		System.out.println("修改方法执行陈宫=");
 		ResultBean bean = new ResultBean();
 		bean.setResultState(1);
 		return bean;

@@ -50,8 +50,12 @@
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
                             <span class="x-red">*</span>仓库名</label>
-                        <div class="layui-input-inline">
-                            <input type="text" id="houseId" name="houseId" value="${list.houseId }" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                   			<div class="layui-input-inline">
+                            <select id="houseId" name="houseId" class="valid">
+                            	<option value="1" ${list.houseId  ==1 ?'selected':''} > 一号库</option>
+                            	<option value="2"  ${list.houseId  ==2 ?'selected':''} >二号库</option>
+                             </select>   
+                        </div>
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
@@ -64,9 +68,8 @@
                             <span class="x-red">*</span>仓库产品状态</label>
                         <div class="layui-input-inline">
                             <select id="houseProductState" name="houseProductState" class="valid">
-                            	<option value="${list.houseProductState  ==1 ?'selected':''}"  > 缺货</option>
-                            	<option value="${list.houseProductState  ==0 ?'selected':''}"  >正常</option>
-                            
+                            	<option value="1" ${list.houseProductState  ==1 ?'selected':''} > 缺货</option>
+                            	<option value="0"  ${list.houseProductState  ==0 ?'selected':''} >正常</option>
                              </select>   
                         </div>
                     </div>

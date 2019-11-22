@@ -5,8 +5,9 @@
 <generatorConfiguration>
 	<!-- 制度MySQL驱动包的路径，别放在中文路径 -->
 	<classPathEntry
-		location="E:\mavenRepo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar"/>
+		location="D:\local\repo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar"/>
 		<!-- E:\local\repo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar -->
+		
 	<context id="context1">
 		<commentGenerator>
 			<!--是否取消注销 -->
@@ -47,13 +48,13 @@
  
  
 		<!-- 配置表信息 -->
-		<table schema="crm" tableName="order_product"
-			domainObjectName="OrderProduct" enableCountByExample="false"
+		<table schema="crm" tableName="house_material"
+			domainObjectName="HouseMaterial" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="useActualColumnNames" value="false" />
 		</table>
-
+		
  
 	</context>
 </generatorConfiguration>

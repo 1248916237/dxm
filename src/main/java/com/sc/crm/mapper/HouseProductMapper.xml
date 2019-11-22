@@ -119,10 +119,14 @@
         house_product_id = #{houseproduct.houseProductId}
       </if>
    	  <if test="houseproduct.productId != null" >
+<<<<<<< HEAD
         and p.product_id = #{houseproduct.productId}
+=======
+        and hy.product_id = #{houseproduct.productId}
+>>>>>>> branch 'master' of https://github.com/1248916237/dxm.git
       </if>
       <if test="houseproduct.houseId != null" >
-        and house_id = #{houseproduct.houseId}
+        and hy.house_id = #{houseproduct.houseId}
       </if>
       <if test="houseproduct.productNum != null" >
         and product_num = #{houseproduct.productNum}
@@ -136,3 +140,5 @@
   </where>
   </select>
 </mapper>
+
+ 
