@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./css/xadmin.css">
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
 </head>
     <body>
         <div class="layui-fluid">
@@ -23,15 +24,21 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form action="client_list" class="layui-form layui-col-space5" style="display: inline;">
+                            <form action="order_list" class="layui-form layui-col-space5" style="display: inline;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="cilentName" id="uname" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                                    <!-- <input type="text" name="cilentName" id="uname" placeholder="请输入用户名" autocomplete="off" class="layui-input"> -->
+                                    <select id="select" name="clientId" class="layui-input" style="display: inline;width: 200px">
+                                    	<option value=000 selected="selected" style="color: #80868B">按客户姓名查找</option>
+                                    	<c:forEach items="${clientList.list }" var="cli">
+                                    		<option value="${cli.clientId }">${cli.clientName }</option>
+                                    	</c:forEach>
+                                    </select>
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                                    <button type="submit" class="layui-btn" id="cha"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
                             </form>
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','/dxm/client_add.jsp')"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加订单','/dxm/orderPro')"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
@@ -41,9 +48,9 @@
                                 <tbody>
                                     <c:forEach items="${pageInfo.list }" var="order">
                                     <tr>
-                                    	<td><a onclick="xadmin.open('订单详情','/dxm/order_info?orderId=${order.orderId}')">${order.orderId }</a></td>
+                                    	<td><a onclick="xadmin.open('订单详情','/dxm/order_info?orderId=${order.orderId}')" style="color: blue;cursor: pointer;">${order.orderId }</a></td>
                                     	<td> <fmt:formatDate value="${order.orderDate }" pattern="yyyy-MM-dd HH:mm"/></td>
-                                    	<td><a title="编辑" onclick="xadmin.open('修改页面','/dxm/client_info?clientId=${order.clientId}')">
+                                    	<td><a title="客户详情" onclick="xadmin.open('客户详情','/dxm/client_info?clientId=${order.clientId}')" style="color: blue;cursor: pointer;">
 	                                        	${order.client.clientName }</a>
                                     	</td>
                                     	<td>${order.orderWay }</td>
@@ -52,20 +59,25 @@
                                     		<c:if test="${order.orderPayment==1 }">已付款</c:if>
                                     	</td>
                                     	<td>
-                                    		<c:if test="${order.orderState==1 }">已完成</c:if>
-                                    		<c:if test="${order.orderState==0 }">待付款</c:if>
-                                    		<c:if test="${order.orderState==2 }"><span style="color: red">待发货</span> </c:if>
+                                    		<c:if test="${order.orderState==2 }">已完成</c:if>
+                                    		<c:if test="${order.orderState==1 }"><span style="color: aqua">待付款</span></c:if>
+                                    		<c:if test="${order.orderState==0 }"><span style="color: red">待发货</span> </c:if>
                                     	
                                     	</td>
                                     	<td> <fmt:formatDate value="${order.payDate }" pattern="yyyy-MM-dd HH:mm"/></td>
                                     	<td>￥${order.orderAllPrice }.00</td>
                                     	<td class="td-manage">
-										   <a title="编辑" onclick="xadmin.open('修改订单','/dxm/order_update?orderId=${order.orderId }')">
-	                                       	 <i class="layui-icon">&#xe642;</i>
-	                                       </a>&nbsp;&nbsp;&nbsp;&nbsp;
-	                                      <a title="删除"  onclick="member_del(this,'${order.orderId }')">
-	                                        <i class="layui-icon">&#xe640;</i>
-	                                      </a>
+										   <c:if test="${order.orderPayment==0 }">
+											   <a title="尾款支付" onclick="xadmin.open('修改订单','/dxm/order_update?orderId=${order.orderId }')">
+		                                       	 <i class="layui-icon">&#xe642;</i>
+		                                       </a>
+										   </c:if>
+										   &nbsp;&nbsp;&nbsp;&nbsp;
+										   <c:if test="${order.orderState==0 }">
+										   		<button class="layui-btn" style="height:24px;line-height: 24px " onclick="member_del(this,'${order.orderId }')">
+										   			 发货
+										   		</button>
+										   </c:if>
 	                                    </td>
 	                                   </tr>
                                     </c:forEach>
@@ -81,14 +93,14 @@
                                   <c:if test="${pageInfo.pageNum <=1 }">
                                   	<a class="prev">第一页</a>
                                   </c:if>
-                                  <a class="num" href="#">共${pageInfo.size }条记录</a>
-                                  <a class="num" href="#">共${pageInfo.pages }页</a>
-                                  <c:if test="${pageInfo.pageNum < clientList.pages}">
+                                  <a class="num">共${pageInfo.size }条记录</a>
+                                  <a class="num" >共${pageInfo.pages }页</a>
+                                  <c:if test="${pageInfo.pageNum < pageInfo.pages}">
                                   	<a class="prev" href="order_list?pn=${pageInfo.nextPage }">&gt;&gt;</a>
                                   </c:if>
                                   <c:if test="${pageInfo.pageNum == pageInfo.pages }">
                                   	<a class="prev">尾页</a>
-                                 </c:if>
+                                  </c:if>
                                 </div>
                             </div>
                         </div>
@@ -98,23 +110,45 @@
         </div> 
     </body>
     
+    <script>
+    $(document).ready(function () {
+        $('#cha').click(function (e) { 
+  			var clientId = $('#select').val();
+  			console.log(clientId);
+            $.ajax({
+                type: "POST",
+                url: "order_list",
+                data: {"clientId":clientId},
+                dataType: "json",
+                success: function (response) {
+                	console.log(response.size);
+                }
+              });
+            
+        }); 
+    	
+    	
+    });
+    </script>
+    
   <script>
+
       /*用户-删除*/
       function member_del(obj,id){
-/*           layer.confirm('确认要删除吗？',function(index){
+           layer.confirm('确认要发货吗？',function(index){
               //发异步删除数据
               $.ajax({
                 type: "get",
-                url: "del_client",
-                data: "clientId="+id,
+                url: "order_state",
+                data: "orderId="+id,
                 dataType: "json",
                 success: function (response) {
                 	
                 }
-              }); */
+              });
               
               $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+              layer.msg('已发货!',{icon:1,time:1000});
           });
       }
       

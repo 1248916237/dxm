@@ -44,16 +44,16 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5">
+                            <form class="layui-form layui-col-space5" action="selectMaterial" method="post">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
+                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="time1" id="start">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
+                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="time2" id="end">
                                 </div>
-                                <div class="layui-inline layui-show-xs-block">
+                               <!--  <div class="layui-inline layui-show-xs-block">
                                     <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                                </div>
+                                </div> -->
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
@@ -90,7 +90,7 @@
                                    <td><span><fmt:formatDate value="${sm.purchaseDate }" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
                                    
                                     <td>
-                                   <button type="button" role="document"  onclick="btn(${sm.purchaseId })" class="check">点击查看订单详情</button>
+                                   <button type="button" role="document"  onclick="btn(${sm.purchaseId })" class="check">点击查看采购单详情</button>
                                       
                                 <div class="modal fade" id="myModal${sm.purchaseId }" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-top: 120px;">
                                         <div class="modal-dialog" role="document">

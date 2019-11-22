@@ -1,6 +1,11 @@
 package com.sc.crm.dao;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.xml.crypto.Data;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.sc.crm.bean.Material;
 import com.sc.crm.bean.Purchase;
@@ -19,9 +24,10 @@ public interface PurchaseMapper {
 
     int updateByPrimaryKey(Purchase record);
     
-    List<Purchase> selectPurchase();
+    List<Purchase> selectPurchase(@Param("time1")Date time1,@Param("time2")Date time2);
     
     List<Material> selectMaterialById(Integer id);
     
     List<Purchase> waitPurchase();
+    
 }

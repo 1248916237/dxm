@@ -30,22 +30,23 @@
  <div class="wrap">
  <c:forEach items="${ordProList }" var="ol">
   <div class="page-title">
-    <span class="modular fl"><i class="order"></i><em>${ol.orderId }</em></span>
+    <span class="modular fl"><i class="order"></i><em id="orderId">${ol.orderId }</em></span>
   </div>
   <dl class="orderDetail">
    <dd>
     <ul>
      <li><span class="h-cont h-right">订单状态：</span>
       <span class="h-cont h-left"> 
-      <c:if test="${ol.orderState == 1}">完成</c:if>
-      <c:if test="${ol.orderState == 2}">未完成，已付定金</c:if>
+         <c:if test="${ol.orderState==2 }">已完成</c:if>
+         <c:if test="${ol.orderState==1 }"><span style="color: aqua">待付款</span></c:if>
+         <c:if test="${ol.orderState==0 }"><span style="color: red">待发货</span> </c:if>
       </span></li>
 
      <li><span class="h-cont h-right">下单时间：</span>
       <span class="h-cont h-left"><fmt:formatDate value="${ol.orderDate }" pattern="yyyy-MM-dd HH:mm"/></span></li>
 	
 	
-	<c:if test="${ol.orderState == 2}">
+	<c:if test="${ol.orderPayment == 0}">
 	  <li style="padding-left: 38px;width: 525px;display: inline;"><span class="h-cont h-right">尾款支付时间：</span>
      	<form class="layui-form layui-col-space5" style="display: inline;">
 	       <div class="layui-inline layui-show-xs-block">
@@ -53,19 +54,8 @@
 	       </div>
 	    </form>
      </li></c:if>
-	
-	<li style="width: 550px;float: right"><span class="h-cont h-right">修改产品数量</span>
-      <span class="h-cont h-left">&nbsp; &nbsp;&nbsp;&nbsp;
-      <button class="layui-btn"><i class="layui-icon">&#xe654;</i> </button>
-      </span></li>
-
     </ul>
    </dd>
-   <dd>
-   		
-   
-   </dd>
-   
    <dd>
     <table class="list-style">
      <tr>
@@ -78,8 +68,7 @@
      	<tr>
      		<td class="center">${olp.proDuc.productName }</td>
      		<td class="center"><span><i>￥</i><em>${olp.productPrice }.00</em></span></td>
-     		<td class="center">
-     			<input class="layui-input" name="start" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"  readonly="readonly"  id="productNum" value="${olp.productNum }"  ></td>
+     		<td class="center">${olp.productNum }</td>
      		<td class="center"><i>￥</i>${olp.productNum * olp.productPrice }.00</td>
      	</tr>
      </c:forEach>
@@ -96,9 +85,8 @@
      </tr>
     </table>
    </dd>
-	<div style="text-align: center;margin-top: 30px">
-		<button  class="layui-btn" style="width: 120px;height: 50px" id="tijiao" >修改</button>
-	</div>
+	<button  class="layui-btn" style="width: 120px;height: 50px" id="tijiao" >修改</button>
+
   </dl>
   <div>
   	
@@ -107,15 +95,6 @@
  </div>
 </body>
     <script>
-    	
-	    $('#productNum').dblclick(function (e) { 
-	    	$('#productNum').removeAttr("readonly")
-	    });
-	    
-	    $('tijiao').click(function(e){
-	    	var payDate = $('#start').val();
-
-
 
       layui.use(['laydate','form'], function(){
         var laydate = layui.laydate;
@@ -126,13 +105,24 @@
           elem: '#start' //指定元素
         });
 
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
+        $('#tijiao').click(function(){
+        	var payDate = $('#start').val();
+        	var orderId = $('#orderId').html();
+        	console.log(payDate);
+        	$.ajax({
+                type: "POST",
+                url: "order_paydate",
+                data: {"payDate":payDate,"orderId":orderId},
+                dataType: "json",
+                success: function (response) {
+                	confirm("修改成功");
+                 	xadmin.father_reload();
+                }
+            });
         });
-
 
       });
 
+ 
     </script>
 </html>

@@ -19,7 +19,6 @@
 </head>
     <body>
         <div class="layui-fluid">
-        	<div style="font-size:18px;color:red;margin:20 auto;">修改客户信息</div>
             <div class="layui-row">
                 <form class="layui-form" >
                     <div class="layui-form-item">

@@ -31,9 +31,10 @@
    <dd>
     <ul>
      <li><span class="h-cont h-right">订单状态：</span>
-      <span class="h-cont h-left"> 
-      <c:if test="${ol.orderState == 1}">完成</c:if>
-      <c:if test="${ol.orderState == 2}">未完成，已付定金</c:if>
+      <span class="h-cont h-left">
+      <c:if test="${ol.orderState == 0}">待发货</c:if>
+      <c:if test="${ol.orderState == 1}">待付全款</c:if>
+      <c:if test="${ol.orderState == 2}">已完成</c:if>
       </span></li>
 
      <li><span class="h-cont h-right">下单时间：</span>

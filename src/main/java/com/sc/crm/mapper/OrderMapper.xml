@@ -88,8 +88,8 @@
 	INNER JOIN product prt 
 	on prt.product_id=opr.product_id
 	where 1=1
-	<if test="clientId != null">
-		AND client_id=#{clientId}
+	<if test="clientId != null ">
+		AND ore.client_id=#{clientId}
 	</if>
 	<if test="orderId != null">
 		AND opr.order_id=#{orderId}
@@ -101,12 +101,10 @@
 	ON `order`.client_id=client.client_id 
 	where 1=1
 	<if test="clientId != null">
-		AND client_id=#{clientId}
+		AND `order`.client_id=#{clientId}
 	</if>
+	ORDER BY order_state
   </select>
-  
-  <select id="" ></select>
-  
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
