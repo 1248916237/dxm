@@ -70,11 +70,7 @@
                                  <div class="layui-input-inline layui-show-xs-block">
                                     <input type="text" name="productNum" placeholder="请输入产品数量" autocomplete="off" class="layui-input"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
-<<<<<<< HEAD
-                                    	<input class="layui-btn" type="submit" value="搜索" lay-filter="sreach">
-=======
                                     	<input type="submit" class="layui-btn" value="搜索" lay-filter="sreach">
->>>>>>> branch 'master' of https://github.com/1248916237/dxm.git
                                         
                                 </div>
                                 
@@ -105,13 +101,9 @@
                                 			<td>${p.houseProductId}</td>
                                 			<td>${p.productId}</td>
                                 			<td>${p.product.productName}</td>
-<<<<<<< HEAD
-                                			<td><c:if test="${p.houseId==1}">1号库</c:if><c:if test="${p.houseId==2}">2号库</c:if>
-=======
                                 			<td>
                                 				<c:if test="${p.houseId ==1}">一号库</c:if>
                                                 <c:if test="${p.houseId ==2}">二号库</c:if>
->>>>>>> branch 'master' of https://github.com/1248916237/dxm.git
                                 			</td>
                                 			<td>${p.productNum}</td>
                                 			<td class="td-status">

@@ -1,5 +1,7 @@
 package com.sc.crm.bean;
 
+import java.util.List;
+
 public class Product {
     private Integer productId;
 
