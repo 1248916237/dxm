@@ -14,6 +14,11 @@
     product_id, product_number, product_name, product_price, product_state, product_intro, 
     house_id
   </sql>
+  
+  <select id="getProList" resultMap="BaseResultMap">
+  	select * from product
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

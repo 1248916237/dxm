@@ -5,12 +5,10 @@
     <id column="material_id" property="materialId" jdbcType="INTEGER" />
     <result column="material_name" property="materialName" jdbcType="VARCHAR" />
     <result column="material_intro" property="materialIntro" jdbcType="VARCHAR" />
-    <result column="material_num" property="materialNum" jdbcType="INTEGER" />
-    <result column="material_price" property="materialPrice" jdbcType="DECIMAL" />
     <result column="house_id" property="houseId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    material_id, material_name, material_intro, material_num, material_price, house_id
+    material_id, material_name, material_intro, house_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,11 +22,9 @@
   </delete>
   <insert id="insert" parameterType="com.sc.crm.bean.Material" >
     insert into material (material_id, material_name, material_intro, 
-      material_num, material_price, house_id
-      )
+      house_id)
     values (#{materialId,jdbcType=INTEGER}, #{materialName,jdbcType=VARCHAR}, #{materialIntro,jdbcType=VARCHAR}, 
-      #{materialNum,jdbcType=INTEGER}, #{materialPrice,jdbcType=DECIMAL}, #{houseId,jdbcType=INTEGER}
-      )
+      #{houseId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.sc.crm.bean.Material" >
     insert into material
@@ -41,12 +37,6 @@
       </if>
       <if test="materialIntro != null" >
         material_intro,
-      </if>
-      <if test="materialNum != null" >
-        material_num,
-      </if>
-      <if test="materialPrice != null" >
-        material_price,
       </if>
       <if test="houseId != null" >
         house_id,
@@ -62,12 +52,6 @@
       <if test="materialIntro != null" >
         #{materialIntro,jdbcType=VARCHAR},
       </if>
-      <if test="materialNum != null" >
-        #{materialNum,jdbcType=INTEGER},
-      </if>
-      <if test="materialPrice != null" >
-        #{materialPrice,jdbcType=DECIMAL},
-      </if>
       <if test="houseId != null" >
         #{houseId,jdbcType=INTEGER},
       </if>
@@ -82,12 +66,6 @@
       <if test="materialIntro != null" >
         material_intro = #{materialIntro,jdbcType=VARCHAR},
       </if>
-      <if test="materialNum != null" >
-        material_num = #{materialNum,jdbcType=INTEGER},
-      </if>
-      <if test="materialPrice != null" >
-        material_price = #{materialPrice,jdbcType=DECIMAL},
-      </if>
       <if test="houseId != null" >
         house_id = #{houseId,jdbcType=INTEGER},
       </if>
@@ -98,8 +76,6 @@
     update material
     set material_name = #{materialName,jdbcType=VARCHAR},
       material_intro = #{materialIntro,jdbcType=VARCHAR},
-      material_num = #{materialNum,jdbcType=INTEGER},
-      material_price = #{materialPrice,jdbcType=DECIMAL},
       house_id = #{houseId,jdbcType=INTEGER}
     where material_id = #{materialId,jdbcType=INTEGER}
   </update>

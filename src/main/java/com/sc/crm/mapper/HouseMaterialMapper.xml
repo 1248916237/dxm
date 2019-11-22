@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crm.dao.HouseMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.crm.bean.HouseMaterial" >
+    <id column="house_material_id" property="houseMaterialId" jdbcType="INTEGER" />
+    <result column="material_id" property="materialId" jdbcType="INTEGER" />
+    <result column="material_number" property="materialNumber" jdbcType="INTEGER" />
+    <result column="material_state" property="materialState" jdbcType="VARCHAR" />
+    <result column="house_id" property="houseId" jdbcType="INTEGER" /> 
+    <association property="material" column="material_id" javaType="com.sc.crm.bean.Material">
+    	<id column="material_id" property="materialId"/>	
+    	<result column="material_name" property="materialName"/>
+    	<result column="material_intro" property="materialIntro"/>   	
+    	<result column="house_id" property="houseId"/>   	
+    </association>
+    
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    house_material_id, material_id, material_number, material_state, house_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from house_material hm JOIN material m ON hm.material_id = m.material_id
+    where house_material_id = #{houseMaterialId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from house_material
+    where house_material_id = #{houseMaterialId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sc.crm.bean.HouseMaterial" >
+    insert into house_material (house_material_id, material_id, material_number, 
+      material_state, house_id)
+    values (#{houseMaterialId,jdbcType=INTEGER}, #{materialId,jdbcType=INTEGER}, #{materialNumber,jdbcType=INTEGER}, 
+      #{materialState,jdbcType=VARCHAR}, #{houseId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.HouseMaterial" >
+    insert into house_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="houseMaterialId != null" >
+        house_material_id,
+      </if>
+      <if test="materialId != null" >
+        material_id,
+      </if>
+      <if test="materialNumber != null" >
+        material_number,
+      </if>
+      <if test="materialState != null" >
+        material_state,
+      </if>
+      <if test="houseId != null" >
+        house_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="houseMaterialId != null" >
+        #{houseMaterialId,jdbcType=INTEGER},
+      </if>
+      <if test="materialId != null" >
+        #{materialId,jdbcType=INTEGER},
+      </if>
+      <if test="materialNumber != null" >
+        #{materialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="materialState != null" >
+        #{materialState,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null" >
+        #{houseId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.crm.bean.HouseMaterial" >
+    update house_material
+    <set >
+      <if test="materialId != null" >
+        material_id = #{materialId,jdbcType=INTEGER},
+      </if>
+      <if test="materialNumber != null" >
+        material_number = #{materialNumber,jdbcType=INTEGER},
+      </if>
+      <if test="materialState != null" >
+        material_state = #{materialState,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null" >
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where house_material_id = #{houseMaterialId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.crm.bean.HouseMaterial" >
+    update house_material
+    set material_id = #{materialId,jdbcType=INTEGER},
+      material_number = #{materialNumber,jdbcType=INTEGER},
+      material_state = #{materialState,jdbcType=VARCHAR},
+      house_id = #{houseId,jdbcType=INTEGER}
+    where house_material_id = #{houseMaterialId,jdbcType=INTEGER}
+  </update>
+  
+    <select id="getHouseMaterialList" resultMap="BaseResultMap">
+  	SELECT * FROM house_material hm JOIN material m ON hm.material_id = m.material_id
+  </select>
+  
+  <select id="selHouseMaterialList" resultMap="BaseResultMap">
+  SELECT * FROM house_material hm JOIN material m ON hm.material_id = m.material_id
+ 
+  <where>
+  	<if test="housematerial.houseMaterialId != null">
+  		hm.house_material_id = #{housematerial.houseMaterialId,jdbcType=INTEGER}
+  	</if>
+  	<if test="housematerial.houseMaterialId != null">
+  		and hm.material_id = #{housematerial.materialId,jdbcType=INTEGER}
+  	</if>
+ 	<if test="housematerial.houseMaterialId != null">
+  		and hm.material_number = #{housematerial.materialNumber}
+  	</if>
+  	<if test="housematerial.houseMaterialId != null">
+  		 and hm.house_id = #{housematerial.houseId}
+  	</if>
+  	<if test="housematerial.houseMaterialId != null">
+  		and hm.material_state = #{housematerial.materialState}
+  	</if>
+   <if test="materialName != ''">
+  		and m.material_name = #{materialName}
+  	</if> 
+  </where>
+  </select>
+</mapper>

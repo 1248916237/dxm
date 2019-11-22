@@ -14,7 +14,7 @@ public class LoginController {
 	public String logins(HttpServletRequest req)
 	{
 		String msg=(String)req.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-		System.out.println("µÇÂ½Ê§°ÜÁË¹þ¹þ");
+		System.out.println(msg);
 		int state = 0;
 		if(msg == null)
 		{state = 4;System.out.println( "msg:" + msg);

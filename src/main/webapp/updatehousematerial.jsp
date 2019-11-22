@@ -9,6 +9,7 @@
     <head>
         <meta charset="UTF-8">
         <title>欢迎页面-X-admin2.2</title>
+        <base href="<%=basepath %>" >
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -26,38 +27,56 @@
         <div class="layui-fluid">
             <div class="layui-row">
                 <form class="layui-form">
+                	
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label">
+                            
+                        <div class="layui-input-inline">
+                            <input type="hidden" id="houseMaterialId" name="houseMaterialId" value="${sel.houseMaterialId }" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>
                     
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>产品编号</label>
+                            <span class="x-red">*</span>原材料编号</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="productId" name="productId" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="materialId" name="materialId" value="${sel.materialId }" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label">
+                            <span class="x-red">*</span>原材料名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="username" disabled="disabled" name="username" value="${sel.material.materialName }" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
                             <span class="x-red">*</span>仓库名</label>
-                        <div class="layui-input-inline">
-                            <input type="text" id="houseId" name="houseId" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                   			<div class="layui-input-inline">
+                            <select id="houseId" name="houseId" class="valid">
+                            	<option value="1" ${sel.houseId  ==1 ?'selected':''} > 一号库</option>
+                            	<option value="2"  ${sel.houseId  ==2 ?'selected':''} >二号库</option>
+                             </select>   
+                        </div>
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>产品数量</label>
+                            <span class="x-red">*</span>原材料数量</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="productNum" name="productNum" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="materialNumber" name="materialNumber" value="${sel.materialNumber }" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>仓库产品状态</label>
+                            <span class="x-red">*</span>仓库原材料状态</label>
                         <div class="layui-input-inline">
-                            <select id="houseProductState" name="houseProductState" class="valid">
-                                <option value="0">正常</option>
-                                <option value="1">缺货</option></select>
+                            <select id="materialState" name="materialState" class="valid">
+                            	<option value="1" ${sel.materialState  ==1 ?'selected':''} > 缺货</option>
+                            	<option value="0"  ${sel.materialState  ==0 ?'selected':''} >正常</option>
+                             </select>   
                         </div>
                     </div>
                    
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label"></label>
-            <button class="layui-btn" lay-filter="add" lay-submit="">增加</button></div>
+            <button class="layui-btn" lay-filter="add" lay-submit="">修改</button></div>
         </form>
         </div>
         </div>
@@ -73,31 +92,32 @@
 		                'submit(add)',
 		                function(data)
 		                {
-		                    
+		                	
+		                	console.log('---');
 		                    $.ajax
 		                    ({
 		                        type: "POST",
-		                        url: "addhouseproduct",
+		                        url: "updatehm",
 		                        data: data.field,
 		                        dataType: "json",
 		                        success: function (response)
 		                        {
 		                        	layer.alert(
-			                        			"增加成功", 
-			                        			{icon: 6 },
-			                            		function()
-			                            			{
-						                                //关闭当前frame
-						                                xadmin.close();
-						
-						                                // 可以对父窗口进行刷新 
-						                                xadmin.father_reload();
-					                                }
-		                        			); 
+	                        			"修改成功", 
+	                        			{icon: 6 },
+	                            		function()
+	                            			{
+				                                //关闭当前frame
+				                                xadmin.close();
+				
+				                                // 可以对父窗口进行刷新 
+				                                xadmin.father_reload();
+			                                }
+	                       			); 
 		                         }
 		                     }); 
 		               		 return false;
-		                }
+	                }
                 );
 
                 

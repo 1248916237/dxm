@@ -1,5 +1,7 @@
 package com.sc.crm.dao;
 
+import java.util.List;
+
 import com.sc.crm.bean.Product;
 
 public interface ProductMapper {
@@ -14,4 +16,6 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+    
+    List<Product> getProList();
 }

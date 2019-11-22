@@ -1,11 +1,6 @@
 package com.sc.crm.realm;
 
-import java.security.Security;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
 import javax.annotation.Resource;
 
 import org.apache.shiro.SecurityUtils;
@@ -43,7 +38,7 @@ public class Myrealm extends AuthorizingRealm{
 			List<Pee> perList = permission.getPerList();
 			for (Pee pee : perList) {
 				String perName = pee.getPerName();
-				//System.out.println("---" + pee.getPerId()+"-" + perName);
+				System.out.println("---" + pee.getPerId()+"-" + perName);
 			}
 		}
 		
@@ -66,16 +61,22 @@ public class Myrealm extends AuthorizingRealm{
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		String principal = (String)token.getPrincipal();
-		User user = loginService.chaUserById(principal);
-		if (user == null) {
-			return null;
+		try {
+			String principal = (String)token.getPrincipal();
+			User user = loginService.chaUserById(principal);
+			if (user == null) {
+				return null;
+			}
+			else {
+				SimpleAuthenticationInfo info = 
+						new SimpleAuthenticationInfo(user, user.getUserPass(), ByteSource.Util.bytes(user.getUserSalt()), "myrealm");
+				return info;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else {
-			SimpleAuthenticationInfo info = 
-					new SimpleAuthenticationInfo(user, user.getUserPass(), ByteSource.Util.bytes(user.getUserSalt()), "myrealm");
-			return info;
-		}
+		return null;
 		
 	}
 
