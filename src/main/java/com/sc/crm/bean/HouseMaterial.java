@@ -12,6 +12,8 @@ public class HouseMaterial {
     private Integer houseId;
     
     private Material material;
+    
+    private String materialName;
 
     /**
 	 * @return the material
@@ -66,6 +68,23 @@ public class HouseMaterial {
     public void setHouseId(Integer houseId) {
         this.houseId = houseId;
     }
+    
+    
+    
+
+	/**
+	 * @return the materialName
+	 */
+	public String getMaterialName() {
+		return materialName;
+	}
+
+	/**
+	 * @param materialName the materialName to set
+	 */
+	public void setMaterialName(String materialName) {
+		this.materialName = materialName;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
