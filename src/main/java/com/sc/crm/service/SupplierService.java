@@ -9,11 +9,12 @@ public interface SupplierService {
 
     boolean addSupplier(Supplier supplier);
     
-    PageInfo<Supplier> selSupplier(int pn,int size);
+    PageInfo<Supplier> selSupplier(String supplierName,int pn,int size);
     
     boolean delSupplier(Integer supplierId);
     
     Supplier selSupplierById(Integer supplierId);
     
     boolean updateSupplier(Supplier supplier);
+    
 }

@@ -34,10 +34,11 @@ public class SupplierController {
 	@RequestMapping("/selSupplier")
 	public String selSupplier(Map<String, Object> data,
 			@RequestParam(name="pn",defaultValue="1")Integer pn,
-			@RequestParam(name="size",defaultValue="3")Integer size
+			@RequestParam(name="size",defaultValue="3")Integer size,
+			String supplierName
 			)
 	{
-		 PageInfo<Supplier> selSupplier = supplierService.selSupplier(pn,size);
+		 PageInfo<Supplier> selSupplier = supplierService.selSupplier(supplierName,pn,size);
 		data.put("selSupplier", selSupplier);
 		return "forward:/supplier-list.jsp";
 		
@@ -69,4 +70,5 @@ public class SupplierController {
 		return updateSupplier;
 		
 	}
+	
 }

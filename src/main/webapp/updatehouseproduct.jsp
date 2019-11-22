@@ -64,8 +64,8 @@
                             <span class="x-red">*</span>仓库产品状态</label>
                         <div class="layui-input-inline">
                             <select id="houseProductState" name="houseProductState" class="valid">
-                            	<option value="${list.houseProductState  ==1 ?'selected':''}"  > 缺货</option>
-                            	<option value="${list.houseProductState  ==0 ?'selected':''}"  >正常</option>
+                            	<option value="1" ${list.houseProductState  ==1 ?'selected':''} > 缺货</option>
+                            	<option value="0" ${list.houseProductState  ==0 ?'selected':''} >正常</option>
                             
                              </select>   
                         </div>

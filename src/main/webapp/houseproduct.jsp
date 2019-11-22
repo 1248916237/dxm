@@ -61,8 +61,8 @@
                                  <div class="layui-input-inline layui-show-xs-block">
                                     <input type="text" name="productNum" placeholder="请输入产品数量" autocomplete="off" class="layui-input"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    	<input type="submit" value="搜索" lay-filter="sreach">
-                                        <i class="layui-icon">&#xe615;</i>
+                                    	<button value="搜索" lay-filter="sreach" class="layui-btn">
+                                        <i class="layui-icon">&#xe615;</i></button>
                                 </div>
                                 
                             </form>
