@@ -51,7 +51,7 @@
                                 
                                 
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="houseProductId" placeholder="请输入仓库产品号" autocomplete="off" class="layui-input"></div>
+                                    <input type="text" name="houseProductId" placeholder="请输入仓库产号" autocomplete="off" class="layui-input"></div>
                                
                                 
                                  <div class="layui-input-inline layui-show-xs-block">
@@ -61,8 +61,8 @@
                                  <div class="layui-input-inline layui-show-xs-block">
                                     <input type="text" name="productNum" placeholder="请输入产品数量" autocomplete="off" class="layui-input"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    	<input type="submit" value="搜索" lay-filter="sreach">
-                                        <i class="layui-icon">&#xe615;</i>
+                                    	<input class="layui-btn" type="submit" value="搜索" lay-filter="sreach">
+                                        
                                 </div>
                                 
                             </form>
@@ -92,7 +92,8 @@
                                 			<td>${p.houseProductId}</td>
                                 			<td>${p.productId}</td>
                                 			<td>${p.product.productName}</td>
-                                			<td>${p.houseId}</td>
+                                			<td><c:if test="${p.houseId==1}">1号库</c:if><c:if test="${p.houseId==2}">2号库</c:if>
+                                			</td>
                                 			<td>${p.productNum}</td>
                                 			<td class="td-status">
                                 			     <c:if test="${p.houseProductState ==1}">缺货</c:if>

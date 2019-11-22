@@ -119,7 +119,7 @@
         house_product_id = #{houseproduct.houseProductId}
       </if>
    	  <if test="houseproduct.productId != null" >
-        and product_id = #{houseproduct.productId}
+        and p.product_id = #{houseproduct.productId}
       </if>
       <if test="houseproduct.houseId != null" >
         and house_id = #{houseproduct.houseId}

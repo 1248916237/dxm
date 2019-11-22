@@ -69,8 +69,8 @@
                                   <c:if test="${clientList.pageNum <=1 }">
                                   	<a class="prev">第一页</a>
                                   </c:if>
-                                  <a class="num" href="#">共${clientList.size }条记录</a>
-                                  <a class="num" href="#">共${clientList.pages }页</a>
+                                  <a class="num">共${clientList.size }条记录</a>
+                                  <a class="num" >共${clientList.pages }页</a>
                                   <c:if test="${clientList.pageNum < clientList.pages}">
                                   	<a class="prev" href="client_list?pn=${clientList.nextPage }">&gt;&gt;</a>
                                   </c:if>

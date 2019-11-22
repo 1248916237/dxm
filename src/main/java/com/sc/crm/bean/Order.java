@@ -24,6 +24,7 @@ public class Order {
     
     private Client client;
     
+    
     public Client getClient() {
 		return client;
 	}
