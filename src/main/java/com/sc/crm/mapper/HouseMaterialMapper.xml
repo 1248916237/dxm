@@ -106,22 +106,22 @@
   SELECT * FROM house_material hm JOIN material m ON hm.material_id = m.material_id
  
   <where>
-  	<if test="housematerial.houseMaterialId != null">
-  		hm.house_material_id = #{housematerial.houseMaterialId,jdbcType=INTEGER}
+  	<if test="houseMaterialId != null">
+  		hm.house_material_id = #{houseMaterialId,jdbcType=INTEGER}
   	</if>
-  	<if test="housematerial.houseMaterialId != null">
-  		and hm.material_id = #{housematerial.materialId,jdbcType=INTEGER}
+  	<if test="materialId != null">
+  		and hm.material_id = #{materialId,jdbcType=INTEGER}
   	</if>
- 	<if test="housematerial.houseMaterialId != null">
-  		and hm.material_number = #{housematerial.materialNumber}
+ 	<if test="materialNumber != null">
+  		and hm.material_number = #{materialNumber}
   	</if>
-  	<if test="housematerial.houseMaterialId != null">
-  		 and hm.house_id = #{housematerial.houseId}
+  	<if test="houseId != null">
+  		 and hm.house_id = #{houseId}
   	</if>
-  	<if test="housematerial.houseMaterialId != null">
-  		and hm.material_state = #{housematerial.materialState}
+  	<if test="materialState != null and materialState != ''">
+  		and hm.material_state = #{materialState}
   	</if>
-   <if test="materialName != ''">
+   <if test="materialName != null and materialName != ''">
   		and m.material_name = #{materialName}
   	</if> 
   </where>

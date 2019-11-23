@@ -15,7 +15,7 @@ public interface HousematerialService {
 	
 	public void updateHouseMaterial(HouseMaterial housemeterial);
 	
-	public PageInfo<HouseMaterial> selHouseMaterialList(int pn,int size,HouseMaterial housematerail,String material); 
+	public PageInfo<HouseMaterial> selHouseMaterialList(int pn,int size,HouseMaterial housematerial); 
 	
 	
 }

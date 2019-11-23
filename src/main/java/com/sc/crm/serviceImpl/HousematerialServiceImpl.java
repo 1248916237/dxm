@@ -61,11 +61,10 @@ public class HousematerialServiceImpl implements HousematerialService{
 	}
 
 	@Override
-	public PageInfo<HouseMaterial> selHouseMaterialList(int pn, int size, HouseMaterial housematerail,
-			String material) {
+	public PageInfo<HouseMaterial> selHouseMaterialList(int pn, int size, HouseMaterial housematerail) {
 		HouseMaterialMapper mapper = st.getMapper(HouseMaterialMapper.class);
 		PageHelper.startPage(pn, size);
-		List<HouseMaterial> list = mapper.selHouseMaterialList(housematerail, material);
+		List<HouseMaterial> list = mapper.selHouseMaterialList(housematerail);
 		PageInfo<HouseMaterial> pageInfo = new PageInfo<HouseMaterial>(list);
 		return pageInfo;	
 	}

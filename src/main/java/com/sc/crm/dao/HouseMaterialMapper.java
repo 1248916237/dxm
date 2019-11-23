@@ -21,7 +21,7 @@ public interface HouseMaterialMapper {
 
 	List<HouseMaterial> getHouseMaterialList();
 
-	List<HouseMaterial> selHouseMaterialList(@Param("housematerial") HouseMaterial housematerial, @Param("materialName")String materialName);
+	List<HouseMaterial> selHouseMaterialList( HouseMaterial housematerial);
 	
 
 }
