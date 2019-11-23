@@ -3,25 +3,21 @@ package com.sc.crm.bean;
 public class Material {
     private Integer materialId;
 
-    private String materialName;
+    private Integer houseId;
+
+
+	private String materialName;
 
     private String materialIntro;
 
+    private Integer materialState;
+
     private Integer materialNum;
-
-    private Long materialPrice;
-
-    private Integer houseId;
     
-
-    @Override
-	public String toString() {
-		return "Material [materialId=" + materialId + ", materialName=" + materialName + ", materialIntro="
-				+ materialIntro + ", materialNum=" + materialNum + ", materialPrice=" + materialPrice + ", houseId="
-				+ houseId + "]";
-	}
-
-	public Integer getMaterialId() {
+    private Long materialPrice;
+    
+    		
+    public Integer getMaterialId() {
         return materialId;
     }
 
@@ -45,27 +41,53 @@ public class Material {
         this.materialIntro = materialIntro == null ? null : materialIntro.trim();
     }
 
-    public Integer getMaterialNum() {
-        return materialNum;
+    public Integer getMaterialState() {
+        return materialState;
     }
 
-    public void setMaterialNum(Integer materialNum) {
-        this.materialNum = materialNum;
+    public void setMaterialState(Integer materialState) {
+        this.materialState = materialState;
     }
 
-    public Long getMaterialPrice() {
-        return materialPrice;
-    }
+    /**
+	 * @return the materialNum
+	 */
+	public Integer getMaterialNum() {
+		return materialNum;
+	}
 
-    public void setMaterialPrice(Long materialPrice) {
-        this.materialPrice = materialPrice;
-    }
+	/**
+	 * @param materialNum the materialNum to set
+	 */
+	public void setMaterialNum(Integer materialNum) {
+		this.materialNum = materialNum;
+	}
 
-    public Integer getHouseId() {
-        return houseId;
-    }
+	/**
+	 * @return the materialPrice
+	 */
+	public Long getMaterialPrice() {
+		return materialPrice;
+	}
 
-    public void setHouseId(Integer houseId) {
-        this.houseId = houseId;
-    }
+	/**
+	 * @param materialPrice the materialPrice to set
+	 */
+	public void setMaterialPrice(Long materialPrice) {
+		this.materialPrice = materialPrice;
+	}
+	/**
+	 * @return the houseId
+	 */
+	public Integer getHouseId() {
+		return houseId;
+	}
+
+	/**
+	 * @param houseId the houseId to set
+	 */
+	public void setHouseId(Integer houseId) {
+		this.houseId = houseId;
+	}
+
 }
