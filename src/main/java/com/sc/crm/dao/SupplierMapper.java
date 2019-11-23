@@ -2,6 +2,8 @@ package com.sc.crm.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.sc.crm.bean.Supplier;
 
 public interface SupplierMapper {
@@ -17,5 +19,6 @@ public interface SupplierMapper {
 
     int updateByPrimaryKey(Supplier record);
     
-    List<Supplier> selSupplier();
+    List<Supplier> selSupplier(@Param("supplierName")String supplierName);
+    
 }

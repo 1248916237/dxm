@@ -69,19 +69,17 @@
                                 
                                  <div class="layui-input-inline layui-show-xs-block">
                                     <input type="text" name="materialNumber" placeholder="请输入原材料数量" autocomplete="off" class="layui-input"></div>
+                                    <br>
                                 <div class="layui-input-inline layui-show-xs-block">
                                     	<input type="submit" class="layui-btn" value="搜索" lay-filter="sreach">
-                                        
                                 </div>
+                                <div class="layui-card-header" style="display: inline;">
+                            		<button class="layui-btn" type="button" onclick="xadmin.open('添加仓库原材料','./addhousematerial.jsp',700,500)">
+                                <i class="layui-icon"></i>添加</button></div>
                                 
                             </form>
                         </div>
                         
-                        
-                        <div class="layui-card-header">
-                            
-                            <button class="layui-btn" onclick="xadmin.open('添加仓库原材料','./addhousematerial.jsp',700,500)">
-                                <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                                 <thead>

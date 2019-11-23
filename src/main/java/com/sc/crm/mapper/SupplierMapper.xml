@@ -118,5 +118,12 @@
   
   <select id="selSupplier" resultMap="BaseResultMap">
   SELECT * FROM supplier
+  <where>
+  <if test="supplierName != null and supplierName != ''">
+  supplier_name like concat("%",#{supplierName},"%")
+  </if>
+  </where>
   </select>
+  
+  
 </mapper>

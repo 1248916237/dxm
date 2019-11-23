@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crm.dao.EmpsMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.crm.bean.Emps" >
+    <id column="emp_id" property="empId" jdbcType="INTEGER" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="emp_sex" property="empSex" jdbcType="VARCHAR" />
+    <result column="emp_birthday" property="empBirthday" jdbcType="TIMESTAMP" />
+    <result column="emp_hometown" property="empHometown" jdbcType="VARCHAR" />
+    <result column="emp_startwork" property="empStartwork" jdbcType="TIMESTAMP" />
+    <result column="emp_address" property="empAddress" jdbcType="VARCHAR" />
+    <result column="emp_phone" property="empPhone" jdbcType="VARCHAR" />
+    <result column="emp_qq" property="empQq" jdbcType="VARCHAR" />
+    <result column="emp_picture" property="empPicture" jdbcType="VARCHAR" />
+    <result column="emp_identity" property="empIdentity" jdbcType="VARCHAR" />
+    <result column="emp_education" property="empEducation" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    emp_id, emp_name, emp_sex, emp_birthday, emp_hometown, emp_startwork, emp_address, 
+    emp_phone, emp_qq, emp_picture, emp_identity, emp_education, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from emps
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from emps
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sc.crm.bean.Emps" >
+    insert into emps (emp_id, emp_name, emp_sex, 
+      emp_birthday, emp_hometown, emp_startwork, 
+      emp_address, emp_phone, emp_qq, 
+      emp_picture, emp_identity, emp_education, 
+      user_id)
+    values (#{empId,jdbcType=INTEGER}, #{empName,jdbcType=VARCHAR}, #{empSex,jdbcType=VARCHAR}, 
+      #{empBirthday,jdbcType=TIMESTAMP}, #{empHometown,jdbcType=VARCHAR}, #{empStartwork,jdbcType=TIMESTAMP}, 
+      #{empAddress,jdbcType=VARCHAR}, #{empPhone,jdbcType=VARCHAR}, #{empQq,jdbcType=VARCHAR}, 
+      #{empPicture,jdbcType=VARCHAR}, #{empIdentity,jdbcType=VARCHAR}, #{empEducation,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.Emps" >
+    insert into emps
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="empName != null" >
+        emp_name,
+      </if>
+      <if test="empSex != null" >
+        emp_sex,
+      </if>
+      <if test="empBirthday != null" >
+        emp_birthday,
+      </if>
+      <if test="empHometown != null" >
+        emp_hometown,
+      </if>
+      <if test="empStartwork != null" >
+        emp_startwork,
+      </if>
+      <if test="empAddress != null" >
+        emp_address,
+      </if>
+      <if test="empPhone != null" >
+        emp_phone,
+      </if>
+      <if test="empQq != null" >
+        emp_qq,
+      </if>
+      <if test="empPicture != null" >
+        emp_picture,
+      </if>
+      <if test="empIdentity != null" >
+        emp_identity,
+      </if>
+      <if test="empEducation != null" >
+        emp_education,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="empId != null" >
+        #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="empName != null" >
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empSex != null" >
+        #{empSex,jdbcType=VARCHAR},
+      </if>
+      <if test="empBirthday != null" >
+        #{empBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empHometown != null" >
+        #{empHometown,jdbcType=VARCHAR},
+      </if>
+      <if test="empStartwork != null" >
+        #{empStartwork,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empAddress != null" >
+        #{empAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="empPhone != null" >
+        #{empPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="empQq != null" >
+        #{empQq,jdbcType=VARCHAR},
+      </if>
+      <if test="empPicture != null" >
+        #{empPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="empIdentity != null" >
+        #{empIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="empEducation != null" >
+        #{empEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.crm.bean.Emps" >
+    update emps
+    <set >
+      <if test="empName != null" >
+        emp_name = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empSex != null" >
+        emp_sex = #{empSex,jdbcType=VARCHAR},
+      </if>
+      <if test="empBirthday != null" >
+        emp_birthday = #{empBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empHometown != null" >
+        emp_hometown = #{empHometown,jdbcType=VARCHAR},
+      </if>
+      <if test="empStartwork != null" >
+        emp_startwork = #{empStartwork,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empAddress != null" >
+        emp_address = #{empAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="empPhone != null" >
+        emp_phone = #{empPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="empQq != null" >
+        emp_qq = #{empQq,jdbcType=VARCHAR},
+      </if>
+      <if test="empPicture != null" >
+        emp_picture = #{empPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="empIdentity != null" >
+        emp_identity = #{empIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="empEducation != null" >
+        emp_education = #{empEducation,jdbcType=VARCHAR},
+      </if>
+      <!-- <if test="userId != null" >
+        emp_id = #{empId,jdbcType=INTEGER},
+      </if> -->
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.crm.bean.Emps" >
+    update emps
+    set emp_name = #{empName,jdbcType=VARCHAR},
+      emp_sex = #{empSex,jdbcType=VARCHAR},
+      emp_birthday = #{empBirthday,jdbcType=TIMESTAMP},
+      emp_hometown = #{empHometown,jdbcType=VARCHAR},
+      emp_startwork = #{empStartwork,jdbcType=TIMESTAMP},
+      emp_address = #{empAddress,jdbcType=VARCHAR},
+      emp_phone = #{empPhone,jdbcType=VARCHAR},
+      emp_qq = #{empQq,jdbcType=VARCHAR},
+      emp_picture = #{empPicture,jdbcType=VARCHAR},
+      emp_identity = #{empIdentity,jdbcType=VARCHAR},
+      emp_education = #{empEducation,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selByUserId" resultMap="EmpsMap">
+  	SELECT e.*,d.* FROM emps e
+	INNER JOIN users u ON e.user_id = u.user_id
+	INNER JOIN dept d ON u.dept_id = d.dept_id
+	WHERE e.user_id = #{userId}
+  </select>
+  
+  <resultMap id="EmpsMap" type="com.sc.crm.bean.Emps" >
+    <id column="emp_id" property="empId" jdbcType="INTEGER" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="emp_sex" property="empSex" jdbcType="VARCHAR" />
+    <result column="emp_birthday" property="empBirthday" jdbcType="TIMESTAMP" />
+    <result column="emp_hometown" property="empHometown" jdbcType="VARCHAR" />
+    <result column="emp_startwork" property="empStartwork" jdbcType="TIMESTAMP" />
+    <result column="emp_address" property="empAddress" jdbcType="VARCHAR" />
+    <result column="emp_phone" property="empPhone" jdbcType="VARCHAR" />
+    <result column="emp_qq" property="empQq" jdbcType="VARCHAR" />
+    <result column="emp_picture" property="empPicture" jdbcType="VARCHAR" />
+    <result column="emp_identity" property="empIdentity" jdbcType="VARCHAR" />
+    <result column="emp_education" property="empEducation" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <association property="user" column="user_id" javaType="com.sc.crm.bean.User">
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="user_state" property="userState" jdbcType="INTEGER" />
+    <result column="user_pass" property="userPass" jdbcType="VARCHAR" />
+    <result column="user_salt" property="userSalt" jdbcType="VARCHAR" />
+    <result column="emp_id" property="empId" jdbcType="INTEGER" />
+    </association>
+    <association property="dept" column="dept_id" javaType="com.sc.crm.bean.Dept">
+    <id column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+    <result column="dept_salary" property="deptSalary" jdbcType="DECIMAL" />
+    </association>
+  </resultMap>
+  
+</mapper>

@@ -1,5 +1,6 @@
 package com.sc.crm.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,10 +24,10 @@ public class PurchaseServiceImpl implements PurchaseService{
 	private SqlSessionTemplate st;
 	
 	@Override
-	public PageInfo<Purchase> selectPurchase(int pn,int size) {
+	public PageInfo<Purchase> selectPurchase(int pn,int size,Date time1,Date time2) {
 		PurchaseMapper mapper = st.getMapper(PurchaseMapper.class);
 		PageHelper.startPage(pn, size);
-		List<Purchase> selectPurchase = mapper.selectPurchase();
+		List<Purchase> selectPurchase = mapper.selectPurchase(time1,time2);
 		
 		for (Purchase p : selectPurchase) {
 			List<Material> material = mapper.selectMaterialById(p.getPurchaseId());

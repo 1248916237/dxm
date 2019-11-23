@@ -31,21 +31,21 @@
 	  		<mvc:exclude-mapping path="/login"/>
 	  		<bean class="com.sc.shiro.interceptor.MvcInterceptor"></bean>
 	  	</mvc:interceptor>
-	  </mvc:interceptors>
+	  </mvc:interceptors>  -->
 
-	  配置解析流的类
+	 <!--  配置解析流的类 -->
 	  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
 		  <property name="defaultEncoding" value="UTF-8" ></property>
-		  配置文件的大小
+		 <!--  配置文件的大小 -->
 		  <property name="maxUploadSize" value="10240000" ></property>
-		  当需要获取文件信息时才会去解析请求数据，这种方式用了懒加载的思想
+		  <!-- 当需要获取文件信息时才会去解析请求数据，这种方式用了懒加载的思想 -->
 		  <property name="resolveLazily" value="true" ></property>
 	  </bean>
 
-	  异常处理器，异常处理配置simpleMappingExcptionResolver 
+	<!--   异常处理器，异常处理配置simpleMappingExcptionResolver 
 	  <bean id="simpleMappingExcptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 	  	<property name="defaultErrorView" value="redirect:/erro.jsp"></property>
-	  </bean>	-->
+	  </bean> -->	
 	  
 	  <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
 	  <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>

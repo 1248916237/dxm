@@ -88,14 +88,21 @@
 		WHERE  p.purchase_state = 1 -->
 		
 	<select id="selectPurchase" resultMap="BaseResultMap">
-	SELECT * FROM purchase
-   	WHERE purchase_state =1
+	SELECT * FROM purchase WHERE purchase_state =1
+	<if test="time1 != null"> 
+    and purchase_date > #{time1}
+    </if> 
+    <if test="time2 != null"> 
+     AND purchase_date &lt; #{time2}
+    </if> 
 	</select>
 		
   <select id="selectMaterialById" resultMap="PurchaseMap">
 	SELECT * FROM material m
 	INNER JOIN purchase_material pm
 	ON pm.material_id = m.material_id
+	INNER JOIN material_supplier ms
+    ON m.material_id = ms.material_id
 	WHERE pm.purchase_id = #{id}
 			
   </select>  
@@ -104,6 +111,7 @@
    SELECT * FROM purchase
    	WHERE purchase_state =0
   </select>
+  
   
   <resultMap type="com.sc.crm.bean.Material" id="PurchaseMap">
   		<id column="material_id" property="materialId" jdbcType="INTEGER" />

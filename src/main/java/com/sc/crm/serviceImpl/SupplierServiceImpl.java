@@ -34,10 +34,10 @@ public class SupplierServiceImpl implements SupplierService{
 	}
 
 	@Override
-	public PageInfo<Supplier> selSupplier(int pn,int size) {
+	public PageInfo<Supplier> selSupplier(String supplierName,int pn,int size) {
 		SupplierMapper mapper = st.getMapper(SupplierMapper.class);
 		PageHelper.startPage(pn, size);
-		List<Supplier> selSupplier = mapper.selSupplier();
+		List<Supplier> selSupplier = mapper.selSupplier(supplierName);
 		PageInfo<Supplier> pageInfo = new PageInfo<>(selSupplier);
 		return pageInfo;
 	}
@@ -75,5 +75,6 @@ public class SupplierServiceImpl implements SupplierService{
 			return false;
 		}
 	}
+
 
 }
