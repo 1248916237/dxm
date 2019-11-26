@@ -2,6 +2,8 @@ package com.sc.crm.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Emps {
     private Integer empId;
 
@@ -9,10 +11,12 @@ public class Emps {
 
     private String empSex;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date empBirthday;
 
     private String empHometown;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date empStartwork;
 
     private String empAddress;
@@ -33,7 +37,16 @@ public class Emps {
     
     private User user;
     
-    public User getUser() {
+    @Override
+	public String toString() {
+		return "Emps [empId=" + empId + ", empName=" + empName + ", empSex=" + empSex + ", empBirthday=" + empBirthday
+				+ ", empHometown=" + empHometown + ", empStartwork=" + empStartwork + ", empAddress=" + empAddress
+				+ ", empPhone=" + empPhone + ", empQq=" + empQq + ", empPicture=" + empPicture + ", empIdentity="
+				+ empIdentity + ", empEducation=" + empEducation + ", userId=" + userId + ", dept=" + dept + ", user="
+				+ user + "]";
+	}
+
+	public User getUser() {
 		return user;
 	}
 

@@ -172,5 +172,8 @@
     </collection>
   </resultMap>
   
+  <update id="delUser">
+  	update users set user_state=0 where user_id=#{userId}
+  </update>
   
 </mapper>
