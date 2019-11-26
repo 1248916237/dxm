@@ -69,4 +69,11 @@ public class EmpsServiceImpl implements EmpsService{
 		return i;
 	}
 
+	@Override
+	public int updatePass(User user) {
+		UserMapper mapper = st.getMapper(UserMapper.class);
+		int i = mapper.updateByPrimaryKeySelective(user);
+		return i;
+	}
+
 }

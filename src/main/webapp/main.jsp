@@ -58,7 +58,7 @@
                         <dd>
                             <a onclick="xadmin.open('个人信息','selByUserId',1025,595)">个人信息</a></dd>
                         <dd>
-                            <a href="./logout">切换帐号</a></dd>
+                            <a onclick="xadmin.open('修改密码','editPass.jsp',1025,595)">修改密码</a></dd>
                         <dd>
                             <a href="./logout">退出</a></dd>
                     </dl>

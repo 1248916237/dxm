@@ -5,6 +5,13 @@ public class ResultBean {
 	private Integer resultState;
 	
 	private String resultMsg;
+	
+	
+
+	@Override
+	public String toString() {
+		return "ResultBean [resultState=" + resultState + ", resultMsg=" + resultMsg + "]";
+	}
 
 	public Integer getResultState() {
 		return resultState;

@@ -21,4 +21,6 @@ public interface EmpsService {
 	int addEmps(Emps emps);
 	
 	int delUser(User user);
+	
+	int updatePass(User user);
 }
