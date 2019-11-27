@@ -11,11 +11,13 @@ public class Product {
 
     private Long productPrice;
 
-    private Integer productState;
+	private Integer productState;
 
     private String productIntro;
 
     private Integer houseId;
+    
+    private List<ProductMaterial> productmaterial;
 
     public Integer getProductId() {
         return productId;
@@ -72,4 +74,29 @@ public class Product {
     public void setHouseId(Integer houseId) {
         this.houseId = houseId;
     }
+    /**
+	 * @return the productmaterial
+	 */
+	public List<ProductMaterial> getProductmaterial() {
+		return productmaterial;
+	}
+
+	/**
+	 * @param productmaterial the productmaterial to set
+	 */
+	public void setProductmaterial(List<ProductMaterial> productmaterial) {
+		this.productmaterial = productmaterial;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productNumber=" + productNumber + ", productName=" + productName
+				+ ", productPrice=" + productPrice + ", productState=" + productState + ", productIntro=" + productIntro
+				+ ", houseId=" + houseId + "]";
+	}
+	
+	
 }

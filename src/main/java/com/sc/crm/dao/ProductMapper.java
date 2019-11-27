@@ -2,7 +2,10 @@ package com.sc.crm.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.sc.crm.bean.Product;
+import com.sc.crm.bean.ProductMaterial;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer productId);
@@ -18,4 +21,9 @@ public interface ProductMapper {
     int updateByPrimaryKey(Product record);
     
     List<Product> getProList();
+    
+    List<Product> selProduct(Product product);
+    
+    List<ProductMaterial> selProductMaterial(String productId);
+    
 }

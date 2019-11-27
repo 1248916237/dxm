@@ -10,6 +10,21 @@
     <result column="product_intro" property="productIntro" jdbcType="VARCHAR" />
     <result column="house_id" property="houseId" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap type="com.sc.crm.bean.ProductMaterial" id="ddd">
+  		<id column="product_material_id" property="productMaterialId"/>
+    	<result column="product_id" property="productId"/>
+    	<result column="material_id" property="materialId"/>
+    	<result column="material_number" property="materialNumber"/>
+    	<association column="material_id" property="material" javaType="com.sc.crm.bean.Material">
+    		<id column="material_id" property="materialId"/>
+    		<result column="house_id" property="houseId"/>
+    		<result column="material_name" property="materialName"/>
+    		<result column="material_intro" property="materialIntro"/>
+    		<result column="material_state" property="materialState"/>
+    		<result column="material_num" property="materialNum"/>
+    		<result column="material_price" property="materialPrice"/>
+    	</association>
+  </resultMap>
   <sql id="Base_Column_List" >
     product_id, product_number, product_name, product_price, product_state, product_intro, 
     house_id
@@ -120,4 +135,32 @@
       house_id = #{houseId,jdbcType=INTEGER}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
+  <select id="selProduct" resultMap="BaseResultMap">
+  	select * from product
+  	<where>
+  		<if test="productNumber != ''">
+  			product_number = #{productNumber}
+  		</if>
+  		<if test="productName != ''">
+  			and product_name = #{productName}
+  		</if>
+  		<if test="productPrice != null">
+  			and product_price = #{productPrice}
+  		</if>
+  		<if test="productState != null">
+  			and product_state = #{productState}
+  		</if>
+  		<if test="houseId != null">
+  			and house_id = #{houseId}
+  		</if>
+  	</where>
+  </select>
+  <select id="selProductMaterial" resultMap="ddd">
+  		SELECT pm.*,m.* FROM product p 
+		INNER JOIN product_material pm
+		ON p.product_id = pm.product_id
+		INNER JOIN material m
+		ON pm.material_id = m.material_id
+		WHERE p.product_id=#{productId}
+  </select>
 </mapper>

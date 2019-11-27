@@ -19,61 +19,17 @@
     </head>
     
     <body>
-        <div class="x-nav">
-            <span class="layui-breadcrumb">
-                <a href="">首页</a>
-                <a href="">演示</a>
-                <a>
-                    <cite>导航元素</cite></a>
-            </span>
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
-            </a>
-        </div>
+        
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
                     
                         <div class="layui-card-body ">
-                            <form action="selProduct" class="layui-form layui-col-space5">
                             
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <select name="productState">
-                                        <option value="">产品状态</option>
-                                        <option value="1">正常</option>
-                                        <option value="0">淘汰</option>
-                                        </select>
-                                </div>
-                                
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <select name="houseId">
-                                        <option value="">仓库名</option>
-                                        <option value="1">一号库</option>
-                                        <option value="2">二号库</option>
-                                        </select>
-                                </div>
-                                
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="productName" placeholder="请输入产品名" autocomplete="off" class="layui-input"></div>
-                               
-                                
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="productNumber" placeholder="请输入产品型号" autocomplete="off" class="layui-input"></div>
-                               
-                                
-                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="productPrice" placeholder="请输入产品价格" autocomplete="off" class="layui-input">
-                                 </div>
-                                <br>
-                                 
-                                <div class="layui-input-inline layui-show-xs-block" >
-                                    	<input type="submit" class="layui-btn" value="搜索" lay-filter="sreach">   
-                                </div> 
-                                 <div class="layui-card-header" style="display: inline;">
-                          				  <button  class="layui-btn" type="button" onclick="xadmin.open('添加产品','./addproduct.jsp',700,500)">
+                            <div class="layui-card-header" style="display: inline;">
+                          				  <button  class="layui-btn" type="button" onclick="xadmin.open('添加产品原材料','./addproductmaterial.jsp?productId=${productId}',600,450)">
                                 <i class="layui-icon"></i>添加</button></div>
-                            </form>
                         </div>
                         
                         
@@ -82,34 +38,30 @@
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
-                                        <th>产品型号</th>
-                                        <th>产品名</th>
-                                        <th>产品价格</th>
-                                        <th>产品介绍</th>
-                                        <th>仓库名</th>
-                                        <th>产品状态</th>
+                                        <th>原材料编号</th>
+                                        <th>原材料名</th>
+                                        <th>原材料使用数量</th>
+                                        <th>原材料介绍</th>
+                                        <th>原材料仓库名</th>
                                         <th>操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 	<c:forEach items="${pageinfo.list }" var="p">
                                 		<tr>
-                                			<td><a  onclick="xadmin.open('查看','/dxm/selProductMaterial?productId=${p.productId}')" href="javascript:;">${p.productNumber}</a></td>
-                                			<td>${p.productName}</td>
-                                			<td>${p.productPrice}</td>
-                                			<td>${p.productIntro}</td>
+                                			<td>${p.material.materialId}</td>
+                                			<td>${p.material.materialName}</td>
+                                			<td>${p.materialNumber}</td>
+                                			<td>${p.material.materialIntro}</td>
                                 			<td>
-                                				<c:if test="${p.houseId ==1}">一号库</c:if>
-                                                <c:if test="${p.houseId ==2}">二号库</c:if>
+                                				<c:if test="${p.material.houseId ==1}">一号库</c:if>
+                                                <c:if test="${p.material.houseId ==2}">二号库</c:if>
                                 			</td>
-                                			<td class="td-status">
-                                			     <c:if test="${p.productState ==0}">淘汰</c:if>
-                                                 <c:if test="${p.productState ==1}">正常</c:if>
-                                            </td>
+                                			
                                 			<td class="td-manage">
-                                            <a title="修改" onclick="xadmin.open('修改','/dxm/updateProduct?productId=${p.productId}')" href="javascript:;">
+                                            <a title="修改" onclick="xadmin.open('修改','/dxm/updateProductMaterial?productMaterialId=${p.productMaterialId}')" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>
-                                            <a title="删除" onclick="member_del(this,'${p.productId }')" href="javascript:;">
+                                            <a title="删除" onclick="member_del(this,'${p.productMaterialId }')" href="javascript:;">
                                                 <i class="layui-icon">&#xe640;</i></a> 
                                             </td>	
                                 		</tr>
@@ -200,8 +152,8 @@
    	                //$(obj).parents("tr").remove();
 	   	            $.ajax({
 	                     type: "post",
-	                     url: "delProduct",
-	                     data: {"productId":id},
+	                     url: "delProductMaterial",
+	                     data: {"productMaterialId":id},
 	                     dataType: "json",
 	                     success: function (response) 
 	                     {
