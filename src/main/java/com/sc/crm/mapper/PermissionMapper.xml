@@ -10,11 +10,41 @@
     <result column="permission_parentid" property="permissionParentid" jdbcType="INTEGER" />
     <result column="permission_parentids" property="permissionParentids" jdbcType="VARCHAR" />
     <result column="permission_sotr" property="permissionSotr" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="perMap" type="com.sc.crm.bean.Permission" >
+    <id column="permission_id" property="permissionId" jdbcType="INTEGER" />
+    <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
+    <result column="permission_type" property="permissionType" jdbcType="VARCHAR" />
+    <result column="permission_url" property="permissionUrl" jdbcType="VARCHAR" />
+    <result column="permission_code" property="permissionCode" jdbcType="VARCHAR" />
+    <result column="permission_parentid" property="permissionParentid" jdbcType="INTEGER" />
+    <result column="permission_parentids" property="permissionParentids" jdbcType="VARCHAR" />
+    <result column="permission_sotr" property="permissionSotr" jdbcType="VARCHAR" />
+    <collection property="perList" column="permission_parentid" ofType="com.sc.crm.bean.Pee">
+    	<id column="per_id" property="perId" jdbcType="INTEGER" />
+	    <result column="per_name" property="perName" jdbcType="VARCHAR" />
+	    <result column="per_type" property="perType" jdbcType="VARCHAR" />
+	    <result column="per_url" property="perUrl" jdbcType="VARCHAR" />
+	    <result column="per_code" property="perCode" jdbcType="VARCHAR" />
+	    <result column="per_parentid" property="perParentid" jdbcType="INTEGER" />
+	    <result column="per_parentids" property="perParentids" jdbcType="VARCHAR" />
+	    <result column="per_sotr" property="perSotr" jdbcType="VARCHAR" />
+    </collection>
   </resultMap>  
   <sql id="Base_Column_List" >
     permission_id, permission_name, permission_type, permission_url, permission_code, 
     permission_parentid, permission_parentids, permission_sotr
   </sql>
+  
+  <select id="getPermissionList" resultMap="perMap">
+  		SELECT sp.*,spp.permission_id per_id,spp.permission_name per_name,
+		spp.permission_type per_type,spp.permission_url per_url,
+		spp.permission_code per_code,spp.permission_parentid per_parenid,
+		spp.permission_parentids per_parentids,spp.permission_sotr per_sotr
+		FROM sys_permission sp INNER JOIN sys_permission spp 
+		ON sp.permission_id = spp.permission_parentid
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
