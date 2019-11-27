@@ -27,5 +27,7 @@ public interface UserMapper {
 	List<Role> chaRoleList(@Param("userId")Integer userId);
 	
     List<Permission> perListPer(@Param("userId")Integer userId);
+    
+    List<User> selUserId();
 	
 }

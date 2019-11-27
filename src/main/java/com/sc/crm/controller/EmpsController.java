@@ -74,4 +74,14 @@ public class EmpsController {
 		return "";
 	}
 	
+	@RequestMapping("/selUser")
+	public String selUser(Map<String, Object> data,Integer userId)
+	{
+		
+		Emps selUser = empsService.selByUserId(userId);
+		data.put("selUser", selUser);
+		return "forward:/purchase-userinfo.jsp";
+		
+	}
+	
 }

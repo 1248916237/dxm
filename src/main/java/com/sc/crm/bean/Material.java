@@ -13,6 +13,7 @@ public class Material {
 
     private Integer houseId;
     
+    private Supplier supplier;
 
     @Override
 	public String toString() {
@@ -68,4 +69,14 @@ public class Material {
     public void setHouseId(Integer houseId) {
         this.houseId = houseId;
     }
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+    
+    
 }

@@ -21,4 +21,5 @@ public interface SupplierMapper {
     
     List<Supplier> selSupplier(@Param("supplierName")String supplierName);
     
+    List<Supplier> selSupplierId();
 }

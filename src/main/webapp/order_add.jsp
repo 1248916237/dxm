@@ -134,12 +134,12 @@
                 	var productNum = $('#productNum').val();
                 	var tr = $('<tr class="data"><th>'+productId+'</th><th>'+productNum+'</th><th><button id="proDel" style="width: 40px;height: 35px;border-radius:4px;border:1px solid #dddddd" type="button" onclick="del(this)" >-</button></th></tr>');
                 	$('#tbody').append(tr);
-                	$('#productNum').val('');
+                	/* $('#productNum').val(''); */
                 });
                 
-                $('#proDel').click(function(e){
+                /* $('#proDel').click(function(e){
                 	
-                });
+                }); */
             	
             	$('#add').click(function(){
             		var orderProductList = [];

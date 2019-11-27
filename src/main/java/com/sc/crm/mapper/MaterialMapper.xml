@@ -26,7 +26,7 @@
     values (#{materialId,jdbcType=INTEGER}, #{materialName,jdbcType=VARCHAR}, #{materialIntro,jdbcType=VARCHAR}, 
       #{houseId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.sc.crm.bean.Material" >
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.Material" useGeneratedKeys="true" keyProperty="materialId">
     insert into material
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="materialId != null" >
@@ -79,4 +79,38 @@
       house_id = #{houseId,jdbcType=INTEGER}
     where material_id = #{materialId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selMaterial" resultMap="BaseResultMap">
+  SELECT * FROM material
+  </select>
+  
+  <resultMap id="MaterialSupplierMap" type="com.sc.crm.bean.Material" >
+    <id column="material_id" property="materialId" jdbcType="INTEGER" />
+    <result column="material_name" property="materialName" jdbcType="VARCHAR" />
+    <result column="material_intro" property="materialIntro" jdbcType="VARCHAR" />
+    <result column="house_id" property="houseId" jdbcType="INTEGER" />
+    <association property="supplier" column="supplier_id" javaType="com.sc.crm.bean.Supplier">
+    <id column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="supplier_address" property="supplierAddress" jdbcType="VARCHAR" />
+    <result column="supplier_kind" property="supplierKind" jdbcType="VARCHAR" />
+    <result column="supplier_phone" property="supplierPhone" jdbcType="VARCHAR" />
+    <result column="supplier_card" property="supplierCard" jdbcType="VARCHAR" />
+    <result column="card_kind" property="cardKind" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <select id="selMatSupplier" resultMap="MaterialSupplierMap">
+	   SELECT m.*,s.* FROM material m
+	INNER JOIN material_supplier ms 
+	ON m.material_id = ms.material_id
+	INNER JOIN supplier s
+	ON ms.supplier_id= s.supplier_id
+  <where>
+  <if test="materialName != null and materialName !='' " >
+   material_name like concat("%",#{materialName},"%")
+  </if>
+  </where>
+  </select>
+  
 </mapper>

@@ -39,9 +39,9 @@
                                 <div class="layui-inline layui-show-xs-block">
                                     <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
                                 </div> -->
-                                <form class="layui-form layui-col-space5" action="selSupplier" method="post">
+                                <form class="layui-form layui-col-space5" action="selMatSupplier" method="post">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="supplierName"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                                    <input type="text" name="materialName"  placeholder="请输入原材料名称关键字" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" type="submit" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -50,45 +50,37 @@
                         </div>
                         <div class="layui-card-header">
                             <!-- <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button> -->
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','add-supplier.jsp',800,500)"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加原材料','selHouse',800,500)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                               <thead>
                                 <tr>
-                                  <!-- <th>
-                                    <input type="checkbox" name=""  lay-skin="primary">
-                                  </th> -->
-                                  <th>ID</th>
+                                  <th>原材料ID</th>
+                                  <th>原材料名称</th>
+                                  <th>原材料用途</th>
+                                  <th>原材料单价</th>
+                                  <th>仓库编号</th>
                                   <th>供应商名称</th>
-                                  <th>供应商地址</th>
-                                  <th>供应商种类</th>
-                                  <th>供应商电话</th>
-                                  <th>供应商银行卡号</th>
-                                  <th>供应商开户行</th>
                                   <th>操作</th>
                               </thead>
                               <tbody>
-                              <c:forEach items="${selSupplier.list }" var="ss">
+                              <c:forEach items="${selMatSupplier.list }" var="sms">
                                 <tr>
-                                 <!--  <td>
-                                    <input type="checkbox" name=""  lay-skin="primary">
-                                  </td> -->
-                                  <td>${ss.supplierId }</td>
-                                  <td>${ss.supplierName }</td>
-                                  <td>${ss.supplierAddress }</td>
-                                  <td>${ss.supplierKind }</td>
-                                  <td>${ss.supplierPhone }</td>
-                                  <td>${ss.supplierCard }</td>
-                                  <td>${ss.cardKind }</td>
+                                  <td>${sms.materialId }</td>
+                                  <td>${sms.materialName }</td>
+                                  <td>${sms.materialIntro }</td>
+                                  <td>${sms.materialPrice }</td>
+                                  <td>${sms.houseId }</td>
+                                  <td>${sms.supplier.supplierName }</td>
                                   <td class="td-manage">
                                     <!-- <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
                                       <i class="layui-icon">&#xe601;</i>
                                     </a> -->
-                                    <a title="编辑"  onclick="xadmin.open('编辑','selSupplierById?supplierId=${ss.supplierId}')" href="javascript:;">
+                                   <%--  <a title="编辑"  onclick="xadmin.open('编辑','selSupplierById?supplierId=${ss.supplierId}')" href="javascript:;">
                                       <i class="layui-icon">&#xe642;</i>
-                                    </a>
-                                    <a title="删除" onclick="member_del(this,${ss.supplierId })" href="javascript:;">
+                                    </a> --%>
+                                    <a title="删除" onclick="member_del(this,${sms.materialId })" >
                                       <i class="layui-icon">&#xe640;</i>
                                     </a>
                                   </td>
@@ -98,28 +90,28 @@
                             </table>
                         </div>
                                                <div class="message" style="margin-left:20px">
-                        共<i class="blue">${selSupplier.total}</i>条记录，当前显示第&nbsp;<i
-                            class="blue">${selSupplier.pageNum}/${selSupplier.pages}</i>&nbsp;页</div>
+                        共<i class="blue">${selMatSupplier.total}</i>条记录，当前显示第&nbsp;<i
+                            class="blue">${selMatSupplier.pageNum}/${selMatSupplier.pages}</i>&nbsp;页</div>
                         <div class="layui-card-body ">
                             <div class="page">
                                <div style="text-align:center;">
                         <ul class="pagination">
-                            <c:if test="${!selSupplier.isFirstPage}">
-                                <li><a href="selSupplier">首页</a></li>
-                                <li><a href="selSupplier?pn=${selSupplier.prePage }">上一页</a></li>
+                            <c:if test="${!selMatSupplier.isFirstPage}">
+                                <li><a href="selMatSupplier">首页</a></li>
+                                <li><a href="selMatSupplier?pn=${selMatSupplier.prePage }">上一页</a></li>
                             </c:if>
-                            <c:forEach items="${selSupplier.navigatepageNums}" var="navigatepageNum">
+                            <c:forEach items="${selMatSupplier.navigatepageNums}" var="navigatepageNum">
                             
-                                <c:if test="${navigatepageNum==selSupplier.pageNum}">
-                                    <li class="active"><a  href="selSupplier?pn=${navigatepageNum}">${navigatepageNum}</a></li>
+                                <c:if test="${navigatepageNum==selMatSupplier.pageNum}">
+                                    <li class="active"><a  href="selMatSupplier?pn=${navigatepageNum}">${navigatepageNum}</a></li>
                                 </c:if>
-                                <c:if test="${navigatepageNum!=selSupplier.pageNum}">
-                                    <li><a href="selSupplier?pn=${navigatepageNum}">${navigatepageNum}</a></li>
+                                <c:if test="${navigatepageNum!=selMatSupplier.pageNum}">
+                                    <li><a href="selMatSupplier?pn=${navigatepageNum}">${navigatepageNum}</a></li>
                                 </c:if>
                             </c:forEach>
-                            <c:if test="${!selSupplier.isLastPage}">
-                                <li><a  href="selSupplier?pn=${selSupplier.nextPage  }">下一页</a></li>
-                                <li><a  href="selSupplier?pn=${selSupplier.pages }">最后一页</a></li>
+                            <c:if test="${!selMatSupplier.isLastPage}">
+                                <li><a  href="selMatSupplier?pn=${selMatSupplier.nextPage  }">下一页</a></li>
+                                <li><a  href="selMatSupplier?pn=${selMatSupplier.pages }">最后一页</a></li>
                             </c:if>
                         </ul>
                     </div> 
@@ -146,29 +138,6 @@
         });
       });
 
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
-
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
-          });
-      }
 
       /*用户-删除*/
       function member_del(obj,id){
@@ -176,8 +145,8 @@
               //发异步删除数据
               $.ajax({
             	  type:"get",
-            	  url:"delSupplier",
-            	  data:{supplierId:id},
+            	  url:"delMaterial",
+            	  data:{materialId : id},
             	  dataType:"json",
             	  success:function(response)
             	  {
@@ -188,7 +157,7 @@
               
           });
       }
-
+ 
 
 
       function delAll (argument) {

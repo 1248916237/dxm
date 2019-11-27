@@ -125,5 +125,9 @@
   </where>
   </select>
   
+  <select id="selSupplierId" resultMap="BaseResultMap">
+   SELECT * FROM supplier
+  </select>
+  
   
 </mapper>

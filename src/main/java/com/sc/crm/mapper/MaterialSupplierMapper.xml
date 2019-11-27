@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crm.dao.MaterialSupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.crm.bean.MaterialSupplier" >
+    <id column="material_supplier_id" property="materialSupplierId" jdbcType="INTEGER" />
+    <result column="material_id" property="materialId" jdbcType="INTEGER" />
+    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="material_price" property="materialPrice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    material_supplier_id, material_id, supplier_id, material_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from material_supplier
+    where material_supplier_id = #{materialSupplierId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from material_supplier
+    where material_supplier_id = #{materialSupplierId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sc.crm.bean.MaterialSupplier" >
+    insert into material_supplier (material_supplier_id, material_id, supplier_id, 
+      material_price)
+    values (#{materialSupplierId,jdbcType=INTEGER}, #{materialId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, 
+      #{materialPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.MaterialSupplier" >
+    insert into material_supplier
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="materialSupplierId != null" >
+        material_supplier_id,
+      </if>
+      <if test="materialId != null" >
+        material_id,
+      </if>
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="materialPrice != null" >
+        material_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="materialSupplierId != null" >
+        #{materialSupplierId,jdbcType=INTEGER},
+      </if>
+      <if test="materialId != null" >
+        #{materialId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="materialPrice != null" >
+        #{materialPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.crm.bean.MaterialSupplier" >
+    update material_supplier
+    <set >
+      <if test="materialId != null" >
+        material_id = #{materialId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null" >
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="materialPrice != null" >
+        material_price = #{materialPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where material_supplier_id = #{materialSupplierId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.crm.bean.MaterialSupplier" >
+    update material_supplier
+    set material_id = #{materialId,jdbcType=INTEGER},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      material_price = #{materialPrice,jdbcType=DECIMAL}
+    where material_supplier_id = #{materialSupplierId,jdbcType=INTEGER}
+  </update>
+</mapper>
