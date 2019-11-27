@@ -19,17 +19,6 @@
     </head>
     
     <body>
-        <div class="x-nav">
-            <span class="layui-breadcrumb">
-                <a href="">首页</a>
-                <a href="">演示</a>
-                <a>
-                    <cite>导航元素</cite></a>
-            </span>
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
-            </a>
-        </div>
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
@@ -60,7 +49,7 @@
                                 
                                 
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="houseProductId" placeholder="请输入仓库产品号" autocomplete="off" class="layui-input"></div>
+                                    <input type="text" name="houseProductId" placeholder="请输入仓库产号" autocomplete="off" class="layui-input"></div>
                                
                                 
                                  <div class="layui-input-inline layui-show-xs-block">
@@ -68,20 +57,18 @@
                                 
                                 
                                  <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="productNum" placeholder="请输入产品数量" autocomplete="off" class="layui-input"></div>
+                                    <input type="text" name="productNum" placeholder="请输入产品数量" autocomplete="off" class="layui-input"></div><br>
                                 <div class="layui-input-inline layui-show-xs-block">
                                     	<input type="submit" class="layui-btn" value="搜索" lay-filter="sreach">
                                         
                                 </div>
                                 
+                                <div class="layui-card-header" style="display: inline;">
+                            		<button class="layui-btn" type="button" onclick="xadmin.open('添加仓库产品','./addhouseproduct.jsp',700,500)">
+                                	<i class="layui-icon"></i>添加</button></div>
                             </form>
                         </div>
-                        
-                        
-                        <div class="layui-card-header">
-                            
-                            <button class="layui-btn" onclick="xadmin.open('添加仓库产品','./addhouseproduct.jsp',700,500)">
-                                <i class="layui-icon"></i>添加</button></div>
+ 
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                                 <thead>

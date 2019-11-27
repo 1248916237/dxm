@@ -6,6 +6,10 @@
     <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
     <result column="dept_salary" property="deptSalary" jdbcType="DECIMAL" />
   </resultMap>
+  
+  <select id="getDeptList" resultMap="BaseResultMap">
+  	SELECT * FROM dept
+  </select>
   <sql id="Base_Column_List" >
     dept_id, dept_name, dept_salary
   </sql>

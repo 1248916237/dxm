@@ -30,7 +30,7 @@
                                     <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
                             </form>
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','/dxm/client_add.jsp')"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加客户','/dxm/client_add.jsp')"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
@@ -48,12 +48,11 @@
                                     	<td>${client.clientCard }</td>
                                     	<td class="td-status">${client.cardKind }</td>
                                     	<td class="td-manage">
-	                                      <a title="编辑" onclick="xadmin.open('修改页面','/dxm/client_update?clientId=${client.clientId}')">
+	                                      <a title="编辑" onclick="xadmin.open('修改客户信息','/dxm/client_update?clientId=${client.clientId}')">
 	                                        <i class="layui-icon">&#xe642;</i>
 	                                      </a>&nbsp;&nbsp;&nbsp;&nbsp;
-	                                      <a title="删除"  onclick="member_del(this,'${client.clientId }')">
-	                                        <i class="layui-icon">&#xe640;</i>
-	                                      </a>
+	                                      <button class="layui-btn" onclick="member_del(this,'${client.clientId }')"
+	                                      	style="width: 70px;height: 30px;padding: 0px;line-height: 30px"><i class="layui-icon"></i>确认流失</button>
 	                                    </td>
 	                                   </tr>
                                     </c:forEach>
@@ -89,7 +88,7 @@
   <script>
       /*用户-删除*/
       function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
+          layer.confirm('确认流失吗？',function(index){
               //发异步删除数据
               $.ajax({
                 type: "get",

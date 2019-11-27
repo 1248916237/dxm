@@ -1,5 +1,9 @@
 package com.sc.crm.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.sc.crm.bean.Emps;
 
 public interface EmpsMapper {
@@ -15,5 +19,7 @@ public interface EmpsMapper {
 
     int updateByPrimaryKey(Emps record);
     
-    Emps selByUserId(Integer userId);
+    Emps selByUserId(@Param("userId")Integer userId);
+    
+    List<Emps> getEmpsList(Emps emps);
 }

@@ -48,7 +48,7 @@
                                 <tbody>
                                     <c:forEach items="${pageInfo.list }" var="order">
                                     <tr>
-                                    	<td><a onclick="xadmin.open('订单详情','/dxm/order_info?orderId=${order.orderId}')" style="color: blue;cursor: pointer;">${order.orderId }</a></td>
+                                    	<td><a title="订单详情" onclick="xadmin.open('订单详情','/dxm/order_info?orderId=${order.orderId}')" style="color: blue;cursor: pointer;">${order.orderId }</a></td>
                                     	<td> <fmt:formatDate value="${order.orderDate }" pattern="yyyy-MM-dd HH:mm"/></td>
                                     	<td><a title="客户详情" onclick="xadmin.open('客户详情','/dxm/client_info?clientId=${order.clientId}')" style="color: blue;cursor: pointer;">
 	                                        	${order.client.clientName }</a>
@@ -68,8 +68,9 @@
                                     	<td>￥${order.orderAllPrice }.00</td>
                                     	<td class="td-manage">
 										   <c:if test="${order.orderPayment==0 }">
+										   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											   <a title="尾款支付" onclick="xadmin.open('修改订单','/dxm/order_update?orderId=${order.orderId }')">
-		                                       	 <i class="layui-icon">&#xe642;</i>
+		                                       	 <i class="layui-icon">&#xe637;</i>
 		                                       </a>
 										   </c:if>
 										   &nbsp;&nbsp;&nbsp;&nbsp;

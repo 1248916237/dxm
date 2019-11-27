@@ -21,7 +21,8 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     
-
+    int delUser(@Param("userId")Integer userId);
+    
 	User chaUserById(@Param("userId")String userId);
 	
 	List<Role> chaRoleList(@Param("userId")Integer userId);
