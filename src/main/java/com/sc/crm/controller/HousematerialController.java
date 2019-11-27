@@ -84,7 +84,6 @@ public class HousematerialController {
 			Map<String, Object> data
 			)
 	{
-		System.out.println(housematerial);
 		PageInfo<HouseMaterial> list = housematerialservice.selHouseMaterialList(pn, size, housematerial);
 		data.put("pageinfo",list );
 		return "forward:/housematerial.jsp";

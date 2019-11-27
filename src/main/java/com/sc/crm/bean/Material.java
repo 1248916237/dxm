@@ -5,7 +5,6 @@ public class Material {
 
     private Integer houseId;
 
-
 	private String materialName;
 
     private String materialIntro;

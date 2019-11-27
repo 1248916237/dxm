@@ -26,43 +26,35 @@
     <body>
         <div class="layui-fluid">
             <div class="layui-row">
-                <form class="layui-form">
-                    
+                <form class="layui-form"> 
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label">
+                            <span class="x-red">*</span>产品编号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="productId" disabled="disabled" name="productId" value="${p.productId}" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label">
+                            <span class="x-red">*</span>产品原材料编号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" disabled="disabled" id="productMaterialId" name="productMaterialId" value="${p.productMaterialId}" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
                             <span class="x-red">*</span>原材料编号</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="materialId" name="materialId" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
-                    </div>
-                   <div class="layui-form-item">
-                        <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>仓库名</label>
-                   			<div class="layui-input-inline">
-                            <select id="houseId" name="houseId" class="valid">
-                            	<option value="1"  > 一号库</option>
-                            	<option value="2"  >二号库</option>
-                             </select>   
-                        </div>
-                    </div>
+                            <input type="text" id="materialId" name="materialId" value="${p.materialId}" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>  
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>原材料数量</label>
+                            <span class="x-red">*</span>原材料使用数量</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="materialNumber" name="materialNumber" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="materialNumber" name="materialNumber" value="${p.materialNumber}" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
-                    <div class="layui-form-item">
-                        <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>仓库原材料状态</label>
-                        <div class="layui-input-inline">
-                            <select id="materialState" name="materialState" class="valid">
-                                <option value="0">正常</option>
-                                <option value="1">缺货</option></select>
-                        </div>
-                    </div>
-                   
+                    
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label"></label>
-            <button class="layui-btn" lay-filter="add" lay-submit="">增加</button></div>
+            <button class="layui-btn" lay-filter="add" lay-submit="">修改</button></div>
         </form>
         </div>
         </div>
@@ -78,17 +70,17 @@
 		                'submit(add)',
 		                function(data)
 		                {
-		                    
+		                
 		                    $.ajax
 		                    ({
 		                        type: "POST",
-		                        url: "addHouseMaterial",
+		                        url: "uptProductMaterial",
 		                        data: data.field,
 		                        dataType: "json",
 		                        success: function (response)
 		                        {
 		                        	layer.alert(
-			                        			"增加成功", 
+			                        			"修改成功", 
 			                        			{icon: 6 },
 			                            		function()
 			                            			{

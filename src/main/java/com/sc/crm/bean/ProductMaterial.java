@@ -8,8 +8,24 @@ public class ProductMaterial {
     private Integer materialId;
 
     private Integer materialNumber;
+    
+    private Material material;
 
-    public Integer getProductMaterialId() {
+    /**
+	 * @return the material
+	 */
+	public Material getMaterial() {
+		return material;
+	}
+
+	/**
+	 * @param material the material to set
+	 */
+	public void setMaterial(Material material) {
+		this.material = material;
+	}
+
+	public Integer getProductMaterialId() {
         return productMaterialId;
     }
 

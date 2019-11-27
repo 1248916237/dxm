@@ -30,11 +30,23 @@
                     
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>原材料编号</label>
+                            <span class="x-red">*</span>产品型号</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="materialId" name="materialId" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="productNumber" name="productNumber" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
-                   <div class="layui-form-item">
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label">
+                            <span class="x-red">*</span>产品名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="productName" name="productName" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label">
+                            <span class="x-red">*</span>产品价格</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="productPrice" name="productPrice" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>
+                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
                             <span class="x-red">*</span>仓库名</label>
                    			<div class="layui-input-inline">
@@ -46,17 +58,17 @@
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>原材料数量</label>
+                            <span class="x-red">*</span>产品描述</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="materialNumber" name="materialNumber" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="productIntro" name="productIntro" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
-                            <span class="x-red">*</span>仓库原材料状态</label>
+                            <span class="x-red">*</span>产品状态</label>
                         <div class="layui-input-inline">
-                            <select id="materialState" name="materialState" class="valid">
-                                <option value="0">正常</option>
-                                <option value="1">缺货</option></select>
+                            <select id="productState" name="productState" class="valid">
+                                <option value="0">淘汰</option>
+                                <option value="1">正常</option></select>
                         </div>
                     </div>
                    
@@ -82,7 +94,7 @@
 		                    $.ajax
 		                    ({
 		                        type: "POST",
-		                        url: "addHouseMaterial",
+		                        url: "addProductMaterial",
 		                        data: data.field,
 		                        dataType: "json",
 		                        success: function (response)
