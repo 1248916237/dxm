@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.sc.crm.bean.Permission;
+import com.sc.crm.bean.Role;
 
 public interface PermissionMapper {
     int deleteByPrimaryKey(Integer permissionId);
@@ -18,5 +19,7 @@ public interface PermissionMapper {
     int updateByPrimaryKeySelective(Permission record);
 
     int updateByPrimaryKey(Permission record);
+    
+    List<Permission> getPermissionList();
 
 }

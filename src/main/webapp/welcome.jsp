@@ -103,58 +103,7 @@
                        </div>
                    </div>
                </div>
- <!--               <div class="layui-col-sm6 layui-col-md3">
-                   <div class="layui-card">
-                       <div class="layui-card-header">下载
-                           <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
-                       <div class="layui-card-body  ">
-                           <p class="layuiadmin-big-font">33,555</p>
-                           <p>新下载
-                               <span class="layuiadmin-span-color">10%
-                                   <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
-                           </p>
-                       </div>
-                   </div>
-               </div>
-               <div class="layui-col-sm6 layui-col-md3">
-                   <div class="layui-card">
-                       <div class="layui-card-header">下载
-                           <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
-                       <div class="layui-card-body ">
-                           <p class="layuiadmin-big-font">33,555</p>
-                           <p>新下载
-                               <span class="layuiadmin-span-color">10%
-                                   <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
-                           </p>
-                       </div>
-                   </div>
-               </div> 
-               <div class="layui-col-sm6 layui-col-md3">
-                   <div class="layui-card">
-                       <div class="layui-card-header">下载
-                           <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
-                       <div class="layui-card-body ">
-                           <p class="layuiadmin-big-font">33,555</p>
-                           <p>新下载
-                               <span class="layuiadmin-span-color">10%
-                                   <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
-                           </p>
-                       </div>
-                   </div>
-               </div>
-               <div class="layui-col-sm6 layui-col-md3">
-                   <div class="layui-card">
-                       <div class="layui-card-header">下载
-                           <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
-                       <div class="layui-card-body ">
-                           <p class="layuiadmin-big-font">33,555</p>
-                           <p>新下载
-                               <span class="layuiadmin-span-color">10%
-                                   <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
-                           </p>
-                       </div>
-                   </div>
-               </div>-->
+ 
                <div class="layui-col-md12">
                    <div class="layui-card">
                        <div class="layui-card-header">系统信息</div>
@@ -163,8 +112,9 @@
                                <tbody>
                                    <tr>
                                        <th>CRM系统版本</th>
-                                       <td>1.0.180420</td></tr>
-                                       <tr>
+                                       <td>1.0.180420</td>
+                                   </tr>
+                                       <!-- <tr>
                                         <th>服务器</th>
                                         <td>Tomcat</td></tr>
                                         <tr>
@@ -175,7 +125,7 @@
                                         <td>Eclipse</td></tr>
                                         <tr>
                                         <th>数据库</th>
-                                        <td>Mysql</td></tr>
+                                        <td>Mysql</td></tr> -->
                                </tbody>
                            </table>
                        </div>

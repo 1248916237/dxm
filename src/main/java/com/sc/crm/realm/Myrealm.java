@@ -38,7 +38,7 @@ public class Myrealm extends AuthorizingRealm{
 			List<Pee> perList = permission.getPerList();
 			for (Pee pee : perList) {
 				String perName = pee.getPerName();
-				System.out.println("---" + pee.getPerId()+"-" + perName);
+//				System.out.println("---" + pee.getPerId()+"-" + perName);
 			}
 		}
 		

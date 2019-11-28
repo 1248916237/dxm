@@ -14,7 +14,7 @@ public class LoginController {
 	public String logins(HttpServletRequest req)
 	{
 		String msg=(String)req.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-		System.out.println(msg);
+//		System.out.println(msg);
 		int state = 0;
 		if(msg == null)
 		{state = 4;System.out.println( "msg:" + msg);
@@ -34,7 +34,7 @@ public class LoginController {
 	@RequestMapping("/main")
 	public String mains()
 	{
-		System.out.println("登录成功");
+//		System.out.println("登录成功");
 		return "redirect:/main.jsp";
 	}
 	

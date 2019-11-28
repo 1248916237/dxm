@@ -8,14 +8,15 @@ public class OrderInfo {
 	private Integer clientId;
 	private Integer orderState;
 	private Integer orderPayment;
+	private String orderWay;
+	private List<OrderProduct> orderProductList;
+	
 	public Integer getOrderPayment() {
 		return orderPayment;
 	}
 	public void setOrderPayment(Integer orderPayment) {
 		this.orderPayment = orderPayment;
 	}
-	private String orderWay;
-	private List<OrderProduct> orderProductList;
 	public String getId() {
 		return id;
 	}
