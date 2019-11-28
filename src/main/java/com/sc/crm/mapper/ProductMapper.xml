@@ -163,4 +163,8 @@
 		ON pm.material_id = m.material_id
 		WHERE p.product_id=#{productId}
   </select>
+  
+  <select id="selProductNum" resultType="java.lang.Integer">
+  SELECT COUNT(*) FROM product
+  </select>
 </mapper>

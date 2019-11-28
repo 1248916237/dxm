@@ -109,4 +109,45 @@ public class EmpsController {
 		return "";
 	}
 	
+	@RequestMapping("/selUser")
+	public String selUser(Map<String, Object> data,Integer userId)
+	{
+		
+		Emps selUser = empsService.selByUserId(userId);
+		data.put("selUser", selUser);
+		return "forward:/purchase-userinfo.jsp";
+		
+	}
+	
+	@RequestMapping("/selNum")
+	public String selNum(Map<String, Object> data)
+	{
+		int selCliNum = empsService.selCliNum();
+		data.put("selCliNum",selCliNum);
+		
+		int selCliLossNum = empsService.selCliLossNum();
+		data.put("selCliLossNum", selCliLossNum);
+		
+		Integer selOrderNum = empsService.selOrderNum();
+		data.put("selOrderNum", selOrderNum);
+		
+		Integer selWaitPurNum = empsService.selWaitPurNum();
+		data.put("selWaitPurNum", selWaitPurNum);
+		
+		Integer selSupplierNum = empsService.selSupplierNum();
+		data.put("selSupplierNum", selSupplierNum);
+		
+		Integer selHouseNum = empsService.selHouseNum();
+		data.put("selHouseNum", selHouseNum);
+		
+		Integer selUserNum = empsService.selUserNum();
+		data.put("selUserNum", selUserNum);
+		
+		Integer selProductNum = empsService.selProductNum();
+		data.put("selProductNum", selProductNum);
+		
+		return "forward:/welcome.jsp";
+		
+	}
+	
 }

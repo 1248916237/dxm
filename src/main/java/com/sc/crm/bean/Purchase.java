@@ -14,6 +14,7 @@ public class Purchase {
     
     private List<Material> materialList;
     
+    
 
     @Override
 	public String toString() {

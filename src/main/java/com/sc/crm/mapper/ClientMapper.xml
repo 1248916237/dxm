@@ -189,4 +189,13 @@
       card_kind = #{cardKind,jdbcType=VARCHAR}
     where client_id = #{clientId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selCliNum" resultType="java.lang.Integer"> 
+  SELECT COUNT(*) FROM client
+  </select>
+  
+  <select id="selCliLossNum" resultType="java.lang.Integer">
+  SELECT COUNT(*) FROM client WHERE client_state = 0
+  </select>
+  
 </mapper>

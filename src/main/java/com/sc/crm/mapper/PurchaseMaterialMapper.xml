@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crm.dao.PurchaseMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.crm.bean.PurchaseMaterial" >
+    <id column="purchase_material_id" property="purchaseMaterialId" jdbcType="INTEGER" />
+    <result column="purchase_id" property="purchaseId" jdbcType="INTEGER" />
+    <result column="material_id" property="materialId" jdbcType="INTEGER" />
+    <result column="material_num" property="materialNum" jdbcType="INTEGER" />
+    <result column="material_supplier_id" property="materialSupplierId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    purchase_material_id, purchase_id, material_id, material_num, material_supplier_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchase_material
+    where purchase_material_id = #{purchaseMaterialId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchase_material
+    where purchase_material_id = #{purchaseMaterialId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sc.crm.bean.PurchaseMaterial" >
+    insert into purchase_material (purchase_material_id, purchase_id, material_id, 
+      material_num, material_supplier_id)
+    values (#{purchaseMaterialId,jdbcType=INTEGER}, #{purchaseId,jdbcType=INTEGER}, #{materialId,jdbcType=INTEGER}, 
+      #{materialNum,jdbcType=INTEGER}, #{materialSupplierId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.PurchaseMaterial" >
+    insert into purchase_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseMaterialId != null" >
+        purchase_material_id,
+      </if>
+      <if test="purchaseId != null" >
+        purchase_id,
+      </if>
+      <if test="materialId != null" >
+        material_id,
+      </if>
+      <if test="materialNum != null" >
+        material_num,
+      </if>
+      <if test="materialSupplierId != null" >
+        material_supplier_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseMaterialId != null" >
+        #{purchaseMaterialId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseId != null" >
+        #{purchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="materialId != null" >
+        #{materialId,jdbcType=INTEGER},
+      </if>
+      <if test="materialNum != null" >
+        #{materialNum,jdbcType=INTEGER},
+      </if>
+      <if test="materialSupplierId != null" >
+        #{materialSupplierId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.crm.bean.PurchaseMaterial" >
+    update purchase_material
+    <set >
+      <if test="purchaseId != null" >
+        purchase_id = #{purchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="materialId != null" >
+        material_id = #{materialId,jdbcType=INTEGER},
+      </if>
+      <if test="materialNum != null" >
+        material_num = #{materialNum,jdbcType=INTEGER},
+      </if>
+      <if test="materialSupplierId != null" >
+        material_supplier_id = #{materialSupplierId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where purchase_material_id = #{purchaseMaterialId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.crm.bean.PurchaseMaterial" >
+    update purchase_material
+    set purchase_id = #{purchaseId,jdbcType=INTEGER},
+      material_id = #{materialId,jdbcType=INTEGER},
+      material_num = #{materialNum,jdbcType=INTEGER},
+      material_supplier_id = #{materialSupplierId,jdbcType=INTEGER}
+    where purchase_material_id = #{purchaseMaterialId,jdbcType=INTEGER}
+  </update>
+</mapper>

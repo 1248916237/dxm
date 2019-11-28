@@ -28,6 +28,7 @@ public interface PurchaseMapper {
     
     List<Material> selectMaterialById(Integer id);
     
-    List<Purchase> waitPurchase();
+    List<Purchase> waitPurchase(@Param("userId")Integer userId);
     
+    Integer selWaitPurNum();
 }

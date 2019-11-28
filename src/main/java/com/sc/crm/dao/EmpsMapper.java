@@ -22,4 +22,5 @@ public interface EmpsMapper {
     Emps selByUserId(@Param("userId")Integer userId);
     
     List<Emps> getEmpsList(Emps emps);
+    
 }
