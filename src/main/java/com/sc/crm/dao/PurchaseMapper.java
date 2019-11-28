@@ -30,4 +30,5 @@ public interface PurchaseMapper {
     
     List<Purchase> waitPurchase(@Param("userId")Integer userId);
     
+    Integer selWaitPurNum();
 }

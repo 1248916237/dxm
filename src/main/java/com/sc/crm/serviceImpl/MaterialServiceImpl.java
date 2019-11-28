@@ -74,4 +74,14 @@ public class MaterialServiceImpl implements MaterialService{
 		
 	}
 
+	@Override
+	public void delByIds(List list) {
+		MaterialMapper mapper = st.getMapper(MaterialMapper.class);
+		int size = list.size();
+		for (int i = 0; i < size; i++) {
+			Integer id = (Integer)list.get(i);
+			mapper.deleteByPrimaryKey(id);
+		}
+	}
+
 }

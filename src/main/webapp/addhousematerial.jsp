@@ -34,11 +34,15 @@
                         <div class="layui-input-inline">
                             <input type="text" id="materialId" name="materialId" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
-                    <div class="layui-form-item">
+                   <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
                             <span class="x-red">*</span>仓库名</label>
-                        <div class="layui-input-inline">
-                            <input type="text" id="houseId" name="houseId" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                   			<div class="layui-input-inline">
+                            <select id="houseId" name="houseId" class="valid">
+                            	<option value="1"  > 一号库</option>
+                            	<option value="2"  >二号库</option>
+                             </select>   
+                        </div>
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">

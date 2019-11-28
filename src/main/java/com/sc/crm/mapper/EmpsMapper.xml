@@ -20,6 +20,7 @@
     emp_id, emp_name, emp_sex, emp_birthday, emp_hometown, emp_startwork, emp_address, 
     emp_phone, emp_qq, emp_picture, emp_identity, emp_education, user_id
   </sql>
+   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -187,10 +188,10 @@
   </update>
   
   <select id="selByUserId" resultMap="EmpsMap">
-  SELECT e.*,d.* FROM emps e
-INNER JOIN users u ON e.user_id = u.user_id
-INNER JOIN dept d ON u.dept_id = d.dept_id
-WHERE e.user_id = #{userId}
+  	SELECT e.*,d.* FROM emps e
+	INNER JOIN users u ON e.user_id = u.user_id
+	INNER JOIN dept d ON u.dept_id = d.dept_id
+	WHERE e.user_id = #{userId}
   </select>
   
   <resultMap id="EmpsMap" type="com.sc.crm.bean.Emps" >
@@ -222,4 +223,16 @@ WHERE e.user_id = #{userId}
     </association>
   </resultMap>
   
+    <select id="getEmpsList" resultMap="EmpsMap">
+      	SELECT e.*,d.*,u.* FROM emps e
+		INNER JOIN users u ON e.user_id = u.user_id
+		INNER JOIN dept d ON u.dept_id = d.dept_id
+		WHERE 1=1
+		<if test="userId != null" >
+        	and e.user_id = #{userId}
+		</if>
+		<if test="empName != null" >
+        	and e.emp_name LIKE concat('%',#{empName},'%')
+      </if>
+    </select>
 </mapper>

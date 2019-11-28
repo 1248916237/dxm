@@ -69,6 +69,14 @@ public class MaterialController {
 		materialService.delMaterial(materialId);
 		
 		return true;
+	}
+	
+	@RequestMapping("/delByIds")
+	@ResponseBody
+	public boolean delByIds(@RequestBody List<Integer> list)
+	{
+		materialService.delByIds(list);
+		return true;
 		
 	}
 	

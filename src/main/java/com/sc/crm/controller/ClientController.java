@@ -92,7 +92,6 @@ public class ClientController {
 	@ResponseBody
 	public ResultBean updateByPrimaryKey(Client client)
 	{
-		Integer id = client.getClientId();
 		clientService.updateByPrimaryKey(client);
 		ResultBean resultBean = new ResultBean();
 		resultBean.setResultState(1);

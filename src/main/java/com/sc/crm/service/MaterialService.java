@@ -21,4 +21,6 @@ public interface MaterialService {
 	List<Supplier> selSupplierId();
 	
 	void delMaterial(Integer materialId);
+	
+	void delByIds(List list);
 }

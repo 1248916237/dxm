@@ -64,7 +64,7 @@ public class Myrealm extends AuthorizingRealm{
 		try {
 			String principal = (String)token.getPrincipal();
 			User user = loginService.chaUserById(principal);
-			if (user == null) {
+			if (user == null || user.getUserState()==0) {
 				return null;
 			}
 			else {

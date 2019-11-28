@@ -113,4 +113,12 @@
   </where>
   </select>
   
+<!--   <delete id="delByIds" parameterType="java.util.List">
+  DELETE FROM material 
+  WHERE 1>2 or material_id in
+  <foreach collection="list" item="item" open="(" separator="," close=")">
+   #{list}
+  </foreach>
+  </delete> -->
+  
 </mapper>

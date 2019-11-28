@@ -49,13 +49,16 @@
                             </form>
                         </div>
                         <div class="layui-card-header">
-                            <!-- <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button> -->
+                            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button> 
                             <button class="layui-btn" onclick="xadmin.open('添加原材料','selHouse',800,500)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                               <thead>
                                 <tr>
+                                  <th>
+                                    <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
+                                  </th> 
                                   <th>原材料ID</th>
                                   <th>原材料名称</th>
                                   <th>原材料用途</th>
@@ -67,6 +70,9 @@
                               <tbody>
                               <c:forEach items="${selMatSupplier.list }" var="sms">
                                 <tr>
+                                 <td>
+                                    <input type="checkbox" name=" " value="${sms.materialId }"   lay-skin="primary"> 
+                                  </td> 
                                   <td>${sms.materialId }</td>
                                   <td>${sms.materialName }</td>
                                   <td>${sms.materialIntro }</td>
@@ -161,15 +167,34 @@
 
 
       function delAll (argument) {
+          var list = [];
 
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
+          // 获取选中的id 
+          $('tbody input').each(function(index, el) {
+              if($(this).prop('checked')){
+                 list.push($(this).val())
+              }
+              console.log(list);
+          });
+    
+          layer.confirm('确认要删除吗？'+list.toString(),function(index){
+              //捉到所有被选中的，发异步进行删除
+              $.ajax({
+            	 type:"POST",
+                 url:"delByIds",
+                 data:JSON.stringify(list),
+                 contentType:'application/json',
+                 dataType: "json",
+                 success:function (response) {
+                	 
+                	 layer.msg('删除成功', {icon: 1});
+                     $(".layui-form-checked").not('.header').parents('tr').remove();
+                 },
+            	  
+              })
+              
+          });
+        }
     </script>
     <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");

@@ -13,6 +13,8 @@ public class Material {
 
     private Integer houseId;
     
+    private Integer materialState;
+    
     private Supplier supplier;
 
     @Override
@@ -76,6 +78,14 @@ public class Material {
 
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
+	}
+
+	public Integer getMaterialState() {
+		return materialState;
+	}
+
+	public void setMaterialState(Integer materialState) {
+		this.materialState = materialState;
 	}
     
     

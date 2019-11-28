@@ -23,6 +23,7 @@ public class HousematerialController {
 	
 	@RequestMapping("/getHouseMaterial")
 	public String getHouseMaterial(
+	
 			@RequestParam(name="pn",defaultValue="1")Integer pn,
 			@RequestParam(name="size",defaultValue="5")Integer size,
 			Map<String, Object> data){
@@ -79,12 +80,11 @@ public class HousematerialController {
 			@RequestParam(name="pn",defaultValue="1")Integer pn,
 			@RequestParam(name="size",defaultValue="5")Integer size,
 			HouseMaterial housematerial,
-			String materialName,
+			
 			Map<String, Object> data
 			)
 	{
-		System.out.println(housematerial);
-		PageInfo<HouseMaterial> list = housematerialservice.selHouseMaterialList(pn, size, housematerial, materialName);
+		PageInfo<HouseMaterial> list = housematerialservice.selHouseMaterialList(pn, size, housematerial);
 		data.put("pageinfo",list );
 		return "forward:/housematerial.jsp";
 	}

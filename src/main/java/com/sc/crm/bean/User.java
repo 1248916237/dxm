@@ -20,50 +20,52 @@ public class User {
 	}
 
 	public Integer getUserId() {
-        return userId;
-    }
+		return userId;
+	}
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public Integer getDeptId() {
-        return deptId;
-    }
+	public Integer getDeptId() {
+		return deptId;
+	}
 
-    public void setDeptId(Integer deptId) {
-        this.deptId = deptId;
-    }
+	public void setDeptId(Integer deptId) {
+		this.deptId = deptId;
+	}
 
-    public Integer getUserState() {
-        return userState;
-    }
+	public Integer getUserState() {
+		return userState;
+	}
 
-    public void setUserState(Integer userState) {
-        this.userState = userState;
-    }
+	public void setUserState(Integer userState) {
+		this.userState = userState;
+	}
 
-    public String getUserPass() {
-        return userPass;
-    }
+	public String getUserPass() {
+		return userPass;
+	}
 
-    public void setUserPass(String userPass) {
-        this.userPass = userPass == null ? null : userPass.trim();
-    }
+	public void setUserPass(String userPass) {
+		this.userPass = userPass;
+	}
 
-    public String getUserSalt() {
-        return userSalt;
-    }
+	public String getUserSalt() {
+		return userSalt;
+	}
 
-    public void setUserSalt(String userSalt) {
-        this.userSalt = userSalt == null ? null : userSalt.trim();
-    }
+	public void setUserSalt(String userSalt) {
+		this.userSalt = userSalt;
+	}
 
-    public Integer getEmpId() {
-        return empId;
-    }
+	public Integer getEmpId() {
+		return empId;
+	}
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
-    }
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
+
+	
 }

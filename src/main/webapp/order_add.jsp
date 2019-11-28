@@ -95,15 +95,15 @@
 
        		<tr>
        			<td>	
-       			    <select class="inp" style="width: 200px" name="" id="productId">
+       			    <select class="inp" style="width: 220px" name="" id="productId">
        					<c:forEach items="${proList }" var="pro">
        						<option value="${pro.productId }">${pro.productId }、${pro.productName }&nbsp;￥${pro.productPrice }.00</option>
        					</c:forEach>
        				</select>
        				
        			</td>
-       			<td>
-       				<input class="inp" type="text" required="" lay-verify="required" id="productNum" autocomplete="off"> 
+       			<td style="text-align:center;">
+       				<input class="inp" type="text" required="" lay-verify="required" id="productNum" autocomplete="off" style="padding-left: 10px"> 
        			</td>
        			<td>
        				<button id="proAdd" style="width: 120px;height: 35px;border-radius:4px;border:1px solid #dddddd" type="button">+</button>

@@ -18,4 +18,6 @@ public interface HouseMapper {
     int updateByPrimaryKey(House record);
     
     List<House> selHouse();
+    
+    Integer selHouseNum();
 }

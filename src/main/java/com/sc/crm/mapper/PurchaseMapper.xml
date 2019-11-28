@@ -124,6 +124,10 @@
 	    <result column="house_id" property="houseId" jdbcType="INTEGER" />
   </resultMap>
      
+     
+     <select id="selWaitPurNum" resultType="java.lang.Integer">
+     SELECT COUNT(*) FROM purchase WHERE purchase_state = 0
+     </select>
   
    <!-- <resultMap type="com.sc.crm.bean.Purchase" id="WaitPurchaseMap">
     <id column="purchase_id" property="purchaseId" jdbcType="INTEGER" />

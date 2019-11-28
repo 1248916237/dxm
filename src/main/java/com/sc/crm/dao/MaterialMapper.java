@@ -22,4 +22,6 @@ public interface MaterialMapper {
    List<Material> selMaterial();
    
    List<Material> selMatSupplier(@Param("materialName")String materialName);
+   
+   void delByIds(List list);
 }
