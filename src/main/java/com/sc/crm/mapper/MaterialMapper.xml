@@ -88,6 +88,7 @@
     <id column="material_id" property="materialId" jdbcType="INTEGER" />
     <result column="material_name" property="materialName" jdbcType="VARCHAR" />
     <result column="material_intro" property="materialIntro" jdbcType="VARCHAR" />
+    <result column="material_price" property="materialPrice" />
     <result column="house_id" property="houseId" jdbcType="INTEGER" />
     <association property="supplier" column="supplier_id" javaType="com.sc.crm.bean.Supplier">
     <id column="supplier_id" property="supplierId" jdbcType="INTEGER" />

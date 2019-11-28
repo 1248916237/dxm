@@ -46,7 +46,7 @@
                                   <th>原材料名称</th>
                                   <th>原材料用途</th>
                                   <th>原材料单价</th>
-                                  <th>仓库编号</th>
+                                  <th>仓库名</th>
                                   <th>供应商名称</th>
                                   <th>操作</th>
                               </thead>
@@ -59,8 +59,8 @@
                                   <td>${sms.materialId }</td>
                                   <td>${sms.materialName }</td>
                                   <td>${sms.materialIntro }</td>
-                                  <td>${sms.materialPrice }</td>
-                                  <td>${sms.houseId }</td>
+                                  <td>￥${sms.materialPrice }.00</td>
+                                  <td>${sms.houseId }号库</td>
                                   <td>${sms.supplier.supplierName }</td>
                                   <td class="td-manage">
                                     <!-- <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
