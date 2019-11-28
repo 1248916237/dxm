@@ -60,26 +60,6 @@
 								</tbody>
                				</table>
                         </div>
-                        <%-- <div class="layui-card-body ">
-                            <div class="page">
-                                <div>
-                                  <c:if test="${pageInfo.pageNum >1 }">
-                                  	<a class="prev" href="order_list?pn=${pageInfo.prePage }">&lt;&lt;</a>
-                                  </c:if>
-                                  <c:if test="${pageInfo.pageNum <=1 }">
-                                  	<a class="prev">第一页</a>
-                                  </c:if>
-                                  <a class="num">共${pageInfo.size }条记录</a>
-                                  <a class="num" >共${pageInfo.pages }页</a>
-                                  <c:if test="${pageInfo.pageNum < pageInfo.pages}">
-                                  	<a class="prev" href="order_list?pn=${pageInfo.nextPage }">&gt;&gt;</a>
-                                  </c:if>
-                                  <c:if test="${pageInfo.pageNum == pageInfo.pages }">
-                                  	<a class="prev">尾页</a>
-                                  </c:if>
-                                </div>
-                            </div>
-                        </div> --%>
                     </div>
                 </div>
             </div>

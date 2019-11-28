@@ -11,6 +11,7 @@
     <result column="permission_parentids" property="permissionParentids" jdbcType="VARCHAR" />
     <result column="permission_sotr" property="permissionSotr" jdbcType="VARCHAR" />
   </resultMap>
+  
   <resultMap id="perMap" type="com.sc.crm.bean.Permission" >
     <id column="permission_id" property="permissionId" jdbcType="INTEGER" />
     <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
