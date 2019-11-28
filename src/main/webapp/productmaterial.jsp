@@ -19,7 +19,6 @@
     </head>
     
     <body>
-        
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
@@ -31,8 +30,6 @@
                           				  <button  class="layui-btn" type="button" onclick="xadmin.open('添加产品原材料','./addproductmaterial.jsp?productId=${productId}',600,450)">
                                 <i class="layui-icon"></i>添加</button></div>
                         </div>
-                        
-                        
                        
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">

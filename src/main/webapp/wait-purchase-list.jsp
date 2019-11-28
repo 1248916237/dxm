@@ -29,22 +29,12 @@
     </style>
 </head>
 <body>
-  <div class="x-nav">
-          <span class="layui-breadcrumb">
-            <a href="">首页</a>
-            <a href="">演示</a>
-            <a>
-              <cite>导航元素</cite></a>
-          </span>
-          <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-            <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
-        </div>
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5" action="waitPurchase">
+                            <form class="layui-form layui-col-space5" action="waitPurchase" style="display: inline;">
                                 <!-- <div class="layui-inline layui-show-xs-block">
                                     <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
                                 </div>
@@ -58,10 +48,11 @@
                                     <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
                             </form>
-                        </div>
-                        <div class="layui-card-header">
                             <button class="layui-btn" onclick="xadmin.open('添加采购单','./selMaterial',1025,595)"><i class="layui-icon"></i>添加</button>
                         </div>
+                        <!-- <div class="layui-card-header">
+                            
+                        </div> -->
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
                                 <thead>

@@ -101,7 +101,7 @@
   </resultMap>
   
   <select id="selMatSupplier" resultMap="MaterialSupplierMap">
-	   SELECT m.*,s.* FROM material m
+	SELECT * FROM material m
 	INNER JOIN material_supplier ms 
 	ON m.material_id = ms.material_id
 	INNER JOIN supplier s
