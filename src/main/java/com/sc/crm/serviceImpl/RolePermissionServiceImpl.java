@@ -57,6 +57,48 @@ public class RolePermissionServiceImpl implements RolePermissionService {
 		return i;
 	}
 
+	@Override
+	public Permission getPermissionById(Integer permissionId) {
+		PermissionMapper mapper = st.getMapper(PermissionMapper.class);
+		Permission permission = mapper.selectByPrimaryKey(permissionId);
+		return permission;
+	}
+
+	@Override
+	public int updatePermission(Permission permission) {
+		PermissionMapper mapper = st.getMapper(PermissionMapper.class);
+		int i = mapper.updateByPrimaryKeySelective(permission);
+		return i;
+	}
+
+	@Override
+	public int addPermission(Permission permission) {
+		PermissionMapper mapper = st.getMapper(PermissionMapper.class);
+		int i = mapper.insertSelective(permission);
+		return i;
+	}
+
+	@Override
+	public int delPermission(Permission permission) {
+		PermissionMapper mapper = st.getMapper(PermissionMapper.class);
+		int i = mapper.deleteByPrimaryKey(permission.getPermissionId());
+		return i;
+	}
+
+	@Override
+	public List<Permission> getAllPermissionList() {
+		PermissionMapper mapper = st.getMapper(PermissionMapper.class);
+		List<Permission> permissionList = mapper.getAllPermissionList();
+		return permissionList;
+	}
+
+	@Override
+	public List<Permission> getPermissionListByParentid(Integer parentid) {
+		PermissionMapper mapper = st.getMapper(PermissionMapper.class);
+		List<Permission> permissionList = mapper.getPermissionListByParentid(parentid);
+		return permissionList;
+	}
+
 
 
 

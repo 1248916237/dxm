@@ -43,7 +43,7 @@
                         	<div style="text-align: center;font-size: 18px;font-weight: 600">${roleById.roleName }权限列表</div>
                             <table class="layui-table layui-form">
                                 <thead>
-                                  <tr><th>选择</th><th>权限ID</th><th>权限名称</th><th>URL</th><th>操作</th></tr>
+                                  <tr><th>选择</th><th>权限ID</th><th>权限名称</th><th>URL</th><th>角色名</th></tr>
                                 </thead>
                                 <tbody>
 									<c:forEach items="${roleById.permissionList }" var="rpe" varStatus="status">
@@ -54,7 +54,7 @@
 											</td>
 											<td>${rpe.permissionName }</td>
 											<td>${rpe.permissionUrl }</td>
-											<td>操作</td>
+											<td>${roleById.roleName }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

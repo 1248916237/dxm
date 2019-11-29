@@ -12,6 +12,12 @@
     <result column="permission_sotr" property="permissionSotr" jdbcType="VARCHAR" />
   </resultMap>
   
+  <select id="getAllPermissionList" resultMap="BaseResultMap">
+  	select * from sys_permission
+  </select>
+  <select id="getPermissionListByParentid" resultMap="BaseResultMap">
+  	select * from sys_permission where permission_parentid=#{parentid}
+  </select>
   <resultMap id="perMap" type="com.sc.crm.bean.Permission" >
     <id column="permission_id" property="permissionId" jdbcType="INTEGER" />
     <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
@@ -44,6 +50,8 @@
 		spp.permission_parentids per_parentids,spp.permission_sotr per_sotr
 		FROM sys_permission sp INNER JOIN sys_permission spp 
 		ON sp.permission_id = spp.permission_parentid
+		WHERE sp.permission_type='menu1'
+		
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
