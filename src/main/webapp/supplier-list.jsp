@@ -31,7 +31,7 @@
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" type="submit" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
-                                <button class="layui-btn" onclick="xadmin.open('添加用户','add-supplier.jsp',800,500)"><i class="layui-icon"></i>添加</button>
+                                <button class="layui-btn" type="button" onclick="xadmin.open('添加用户','add-supplier.jsp',800,500)"><i class="layui-icon"></i>添加</button>
                             </form>
                         </div>
                         <div class="layui-card-body ">
