@@ -1,5 +1,7 @@
 package com.sc.crm.bean;
 
+import java.util.List;
+
 public class User {
     private Integer userId;
 
@@ -12,8 +14,38 @@ public class User {
     private String userSalt;
 
     private Integer empId;
+    
+    private Emps emps;
+    
+    private List<Role> roleList;
+    
+    private Integer[] roleShu;
 
-    @Override
+    public Integer[] getRoleShu() {
+		return roleShu;
+	}
+
+	public void setRoleShu(Integer[] roleShu) {
+		this.roleShu = roleShu;
+	}
+
+	public Emps getEmps() {
+		return emps;
+	}
+
+	public void setEmps(Emps emps) {
+		this.emps = emps;
+	}
+
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
+
+	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", deptId=" + deptId + ", userState=" + userState + ", userPass=" + userPass
 				+ ", userSalt=" + userSalt + ", empId=" + empId + "]";

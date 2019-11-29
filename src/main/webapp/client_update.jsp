@@ -63,15 +63,16 @@
                             	<span class="x-red">*</span>开户行</label>
                         	<div class="layui-input-inline">
                             <input type="text" id="L_username" name="cardKind"  class="layui-input" value="${clientById.cardKind }">
+                            <input type="hidden" id="L_username" name="clientState"  class="layui-input" value="${clientById.clientState }">
                             </div>
                     	</div>
-                    	<div class="layui-form-item">
+                    	<%-- <div class="layui-form-item">
                         	<label for="L_username" class="layui-form-label">
                             	<span class="x-red"></span>客户状态</label>
                         	<div class="layui-input-inline">
                             <input type="text" id="L_username" name="clientState"  class="layui-input" value="${clientById.clientState }">
                             </div>
-                    	</div>
+                    	</div> --%>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
                         <button  class="layui-btn" lay-filter="update" lay-submit="">

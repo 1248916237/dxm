@@ -40,7 +40,6 @@
                             <button class="layui-btn" onclick="xadmin.open('添加角色','/dxm/addRole')"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
-                        	<div style="text-align: center;font-size: 18px;font-weight: 600">${roleById.roleName }权限列表</div>
                             <table class="layui-table layui-form">
                                 <thead>
                                   <tr><th>选择</th><th>权限ID</th><th>权限名称</th><th>URL</th><th>角色名</th></tr>

@@ -223,6 +223,13 @@
     </association>
   </resultMap>
   
+  <select id="getEmpsListJust" resultMap="BaseResultMap">
+  	select * from emps WHERE 1=1
+	<if test="empName != null" >
+       and emp_name LIKE concat('%',#{empName},'%')
+    </if>
+  </select>
+  
     <select id="getEmpsList" resultMap="EmpsMap">
       	SELECT e.*,d.*,u.* FROM emps e
 		INNER JOIN users u ON e.user_id = u.user_id

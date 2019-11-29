@@ -19,17 +19,17 @@
     	table{
     		margin:10px 20px;
     		float:left;
-    		border: 1px solid;
+    		border: 1px solid red;
     		width: 400px;
     	}
     	tr {
-    		border: 1px solid;
+    		border: 1px solid red;
 			width: 400px;
 			height: 40px;
 			text-align: center;
 		}
 		td {
-			border: 1px solid;
+			border: 1px solid red;
 			width: 400px;
 			height: 40px;
 		}
@@ -40,13 +40,12 @@
         <div class="layui-fluid">
             <div class="layui-row">
                 <form style="width: 900px;position: relative;" action="addRolePer" >
-                    <div class="layui-inline layui-show-xs-block" style="float: left;width: 500px">
+                    <div class="layui-inline layui-show-xs-block" style="float: left;width: 500px;margin-bottom: 30px">
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>角色名</label>
                         <div class="layui-input-inline">
                             <input type="text" id="roleName" name="roleName" required="required" lay-verify="required" class="layui-input" >
                         </div>
-                        <div class="layui-form-mid layui-word-aux">4到10个字母</div>
                     </div>
                     
 	               	<c:forEach items="${permissionList }" var="per" begin="1">
@@ -65,7 +64,8 @@
 	                   	</tr>
 	                   </table>
 	               	</c:forEach>
-                    <div style="float: left;width: 400px;height: 80px;margin: 10px 20px;text-align: center;line-height: 80px">
+                    <div style="position: absolute;top: -20px;left: 622px">
+                    <!-- style="float: left;width: 400px;height: 80px;margin: 10px 20px;text-align: center;line-height: 80px" -->
                         <button id="add" class="layui-btn" lay-filter="add" lay-submit="" type="button" style="margin-top: 20px">
                           	添加
                       </button>

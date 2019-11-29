@@ -34,36 +34,11 @@
                 <table>
                 	<tr>
                 		<td>
-                		    <div class="layui-form-item">
-		                        <label for="userId" class="layui-form-label">
-		                            <span class="x-red">*</span>用户编号</label>
-		                        <div class="layui-input-inline">
-		                            <input type="text" id="userId" autocomplete="off" name="userId"  class="layui-input"  required="" lay-verify="number" >
-		                        </div>
-	                        </div>
-                		</td>
-                		<td>
                 			<div class="layui-form-item">
 		                        <label for="empName" class="layui-form-label">
 		                            <span class="x-red">*</span>姓名</label>
 		                        <div class="layui-input-inline">
 		                            <input type="text" id="empName" autocomplete="off" name="empName"  class="layui-input" required="" lay-verify="required" >
-		                        </div>
-		                    </div>
-                		</td>
-                	</tr>
-                	
-					<tr>
-                		<td>
-                			<div class="layui-form-item">
-		                        <label for="deptId" class="layui-form-label">
-		                            <span class="x-red">*</span>部门</label>
-		                        <div class="layui-input-inline">
-		                            <select id="deptId" name="deptId" class="layui-input">
-		                            	<c:forEach items="${deptList }" var="dep">
-		                            		<option value="${dep.deptId }" >${dep.deptName }</option>
-		                            	</c:forEach>
-		                            </select>
 		                        </div>
 		                    </div>
                 		</td>
@@ -164,7 +139,7 @@
                 			<div class="layui-form-item">
 		                        <label for="L_repass" class="layui-form-label"></label>
 		                        <button  class="layui-btn" style="width: 120px" lay-filter="add" lay-submit="add" type="button">
-		                          	修改
+		                          	添加
 		                      </button>
 		                    </div>
                 		</td>

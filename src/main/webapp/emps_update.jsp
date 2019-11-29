@@ -28,9 +28,7 @@
 </head>
     <body>
         <div class="layui-fluid">
-        	<div style="font-size:18px;color:red;margin:20 auto;">修改用户信息</div>
         	<!-- 循环起始 -->
-        <c:forEach items="${empsList }" var="emp">
             <div class="layui-row">
                 <form class="layui-form" >
                 <table>
@@ -38,10 +36,9 @@
                 		<td>
                 		    <div class="layui-form-item">
 		                        <label for="userId" class="layui-form-label">
-		                            <span class="x-red">*</span>用户编号</label>
+		                            <span class="x-red">*</span>账号</label>
 		                        <div class="layui-input-inline">
-		                            <input type="text" id="userId" name="userId"  class="layui-input" readonly="readonly" value="${emp.userId }">
-		                            <input type="hidden" id="empId" name="empId"  class="layui-input" readonly="readonly" value="${emp.empId }">
+		                            <input type="text" id="userId" name="userId"  class="layui-input" readonly="readonly" value="${empsByEmpsId.userId }">
 		                        </div>
 	                        </div>
                 		</td>
@@ -50,7 +47,7 @@
 		                        <label for="empName" class="layui-form-label">
 		                            <span class="x-red">*</span>姓名</label>
 		                        <div class="layui-input-inline">
-		                            <input type="text" id="empName" name="empName"  class="layui-input" value="${emp.empName }">
+		                            <input type="text" id="empName" name="empName"  class="layui-input" value="${empsByEmpsId.empName }">
 		                        </div>
 		                    </div>
                 		</td>
@@ -64,7 +61,7 @@
 		                        <div class="layui-input-inline">
 		                            <select id="deptId" name="deptId" class="layui-input">
 		                            	<c:forEach items="${deptList }" var="dep">
-		                            		<option value="${dep.deptId }" ${dep.deptId == emp.user.deptId?'selected':''} >${dep.deptName }</option>
+		                            		<option value="${dep.deptId }">${dep.deptName }</option>
 		                            	</c:forEach>
 		                            </select>
 		                        </div>
@@ -75,7 +72,7 @@
 		                        <label for="empSex" class="layui-form-label">
 		                            <span class="x-red">*</span>性别</label>
 		                        <div class="layui-input-inline">
-		                           <input type="text" id="empSex" name="empSex"  class="layui-input" value="${emp.empSex }">
+		                           <input type="text" id="empSex" name="empSex"  class="layui-input" value="${empsByEmpsId.empSex }">
 		                        </div>
 		                    </div>
                 		</td>
@@ -88,7 +85,7 @@
 		                            <span class="x-red">*</span>生日</label>
 		                        <div class="layui-input-inline">
 		                            <input type="text" id="empBirthday" autocomplete="off" name="empBirthday"  class="layui-input"
-		                            	value="<fmt:formatDate value='${emp.empBirthday}' pattern='yyyy-MM-dd'/>">
+		                            	value="<fmt:formatDate value='${empsByEmpsId.empBirthday}' pattern='yyyy-MM-dd'/>">
 		                        </div>
 		                    </div>
                 		</td>
@@ -98,7 +95,7 @@
 		                            <span class="x-red">*</span>入职时间</label>
 		                        <div class="layui-input-inline">
 		                            <input type="text" id="empStartwork" autocomplete="off" name="empStartwork"  class="layui-input" 
-		                            	value="<fmt:formatDate value='${emp.empStartwork}' pattern='yyyy-MM-dd'/>">
+		                            	value="<fmt:formatDate value='${empsByEmpsId.empStartwork}' pattern='yyyy-MM-dd'/>">
 		                        </div>
 		                     </div>
                 		</td>
@@ -110,7 +107,7 @@
 		                        <label for="empEducation" class="layui-form-label">
 		                            <span class="x-red">*</span>学历</label>
 		                        <div class="layui-input-inline">
-		                            <input type="text" id="empEducation" name="empEducation"  class="layui-input" value="${emp.empEducation }"></div>
+		                            <input type="text" id="empEducation" name="empEducation"  class="layui-input" value="${empsByEmpsId.empEducation }"></div>
 		                    </div>
                 		</td>
                 		<td>
@@ -118,7 +115,7 @@
 		                        <label for="empIdentity" class="layui-form-label">
 		                            <span class="x-red">*</span>身份证</label>
 		                        <div class="layui-input-inline">
-		                            <input type="text" id="empIdentity" name="empIdentity"  class="layui-input" value="${emp.empIdentity }"></div>
+		                            <input type="text" id="empIdentity" name="empIdentity"  class="layui-input" value="${empsByEmpsId.empIdentity }"></div>
 		                     </div>
                 		</td>
                 	</tr>
@@ -129,7 +126,7 @@
 		                        <label for="empPhone" class="layui-form-label">
 		                            <span class="x-red">*</span>电话</label>
 		                        <div class="layui-input-inline">
-		                            <input type="text" id="empPhone" name="empPhone"  class="layui-input" value="${emp.empPhone }"></div>
+		                            <input type="text" id="empPhone" name="empPhone"  class="layui-input" value="${empsByEmpsId.empPhone }"></div>
 		                    </div>
                 		</td>
                 		<td>
@@ -137,7 +134,7 @@
 		                        <label for="empQq" class="layui-form-label">
 		                            <span class="x-red">*</span>QQ</label>
 		                        <div class="layui-input-inline">
-		                            <input type="text" id="empQq" name="empQq"  class="layui-input" value="${emp.empQq }"></div>
+		                            <input type="text" id="empQq" name="empQq"  class="layui-input" value="${empsByEmpsId.empQq }"></div>
 		                     </div>
                 		</td>
                 	</tr>
@@ -148,7 +145,7 @@
 		                        <label for="empAddress" class="layui-form-label">
 		                            <span class="x-red">*</span>住址</label>
 		                        <div class="layui-input-inline">
-		                            <input type="text" id="empAddress" name="empAddress"  class="layui-input" value="${emp.empAddress }"></div>
+		                            <input type="text" id="empAddress" name="empAddress"  class="layui-input" value="${empsByEmpsId.empAddress }"></div>
 		                    </div>
                 		</td>
                 		<td>
@@ -156,7 +153,7 @@
 		                        <label for="empHometown" class="layui-form-label">
 		                            <span class="x-red">*</span>家乡</label>
 		                        <div class="layui-input-inline">
-		                            <input type="text" id="empHometown" name="empHometown"  class="layui-input" value="${emp.empHometown }"></div>
+		                            <input type="text" id="empHometown" name="empHometown"  class="layui-input" value="${empsByEmpsId.empHometown }"></div>
 		                     </div>
                 		</td>
                 	</tr>
@@ -174,7 +171,6 @@
                 </table>
                </form>
             </div>
-          </c:forEach>
             <!-- 循环结尾 -->
             
         </div>

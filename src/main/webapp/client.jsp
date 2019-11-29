@@ -30,7 +30,7 @@
                                     <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
                             </form>
-                            <button class="layui-btn" onclick="xadmin.open('添加客户','/dxm/client_add.jsp')"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加客户','/dxm/client_add.jsp',800,550)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">

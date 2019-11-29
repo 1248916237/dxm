@@ -23,4 +23,6 @@ public interface EmpsMapper {
     
     List<Emps> getEmpsList(Emps emps);
     
+    List<Emps> getEmpsListJust(Emps emps);
+    
 }

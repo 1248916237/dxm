@@ -25,7 +25,7 @@
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>姓名</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="clientName" name="clientName" required="" lay-verify="required" class="layui-input" ></div>
+                            <input type="text" id="clientName" name="clientName" autocomplete="off" required="" lay-verify="required" class="layui-input" ></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_pass" class="layui-form-label">

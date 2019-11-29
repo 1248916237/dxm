@@ -25,54 +25,37 @@
                         <div class="layui-card-body ">
                             <form action="getEmpsList" class="layui-form layui-col-space5" style="display: inline;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="userId" id="userId" placeholder="请输入账号" autocomplete="off" class="layui-input">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
                                     <input type="text" name="empName" id="empName" placeholder="请输入用户名" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
                             </form>
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','/dxm/emps_add')"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加员工','/dxm/emps_add')"><i class="layui-icon"></i>添加员工</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
                                 <thead>
-                                  <tr><th>账号</th><th>账号状态</th><th>姓名</th><th>性别</th><th>部门</th><th>现住址</th><th>进入公司时间</th><th>电话</th><th>身份证号</th></tr>
+                                  <tr><th>编号</th><th>姓名</th><th>性别</th><th>生日</th><th>学历</th><th>现住址</th><th>进入公司时间</th><th>电话</th><th>操作</th></tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${empsList }" var="emp">
                                     <tr>
-                                    	<td>${emp.userId }</td>
-                                    	<td>
-                                    		<c:if test="${emp.user.userState == 0 }">
-                                    			<span style="color: red">已停用</span>
-                                    		</c:if>
-                                    		<c:if test="${emp.user.userState == 1 }">
-                                    			<span >正常使用</span>
-                                    		</c:if>
-                                    	</td>
+                                    	<td>${emp.empId }</td>
                                     	<td>${emp.empName }</td>
                                     	<td>${emp.empSex }</td>
-                                    	<td>${emp.dept.deptName }</td>
+                                    	<td><fmt:formatDate value="${emp.empBirthday }" pattern="yyyy-MM-dd"/> </td>
+                                    	<td>${emp.empEducation }</td>
                                     	<td>${emp.empAddress }</td>
                                     	<td><fmt:formatDate value="${emp.empStartwork }" pattern="yyyy-MM-dd"/> </td>
                                     	<td class="td-status">${emp.empPhone }</td>
                                     	<td class="td-manage">
-	                                      <a title="编辑" onclick="xadmin.open('','/dxm/emps_update?userId=${emp.userId}')">
+	                                      <a title="编辑" onclick="xadmin.open('员工信息修改','/dxm/emps_update?empId=${emp.empId}')">
 	                                        <i class="layui-icon">&#xe642;</i>
 	                                      </a>&nbsp;&nbsp;&nbsp;&nbsp;
-	                                      <c:if test="${emp.user.userState == 1 }">
-                                    			<a title="停用账号"  onclick="member_del(this,'${emp.userId }','0')">
-	                                        		<i class="layui-icon">&#xe640;</i>
-	                                      		</a>
-                                    	  </c:if>
-                                    	  <c:if test="${emp.user.userState == 0 }">
-                                    			<a title="启用账号"  onclick="member_del(this,'${emp.userId }','1')">
-	                                        		<i class="layui-icon">&#xe62f;</i>
-	                                      		</a>
-                                    	  </c:if>
+	                                      <a title="删除"  onclick="member_del(this,'${emp.empId}')">
+                                      	  	<i class="layui-icon">&#xe640;</i>
+                                    	  </a>
 	                                    </td>
 	                                   </tr>
                                     </c:forEach>
@@ -87,44 +70,21 @@
     
   <script>
       /*用户-删除*/
-      function member_del(obj,id,userState){
-    	  if(userState == 1){
-    		  layer.confirm('确认要启用吗？',function(index){
-                  //发异步删除数据
-                  $.ajax({
-                    type: "get",
-                    url: "del_userId",
-                    data: {
-                    	"userId":id,
-                    	"userState":userState
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                    	
-                    }
-                  });
-                  xadmin.father_reload();
-                  layer.msg('已启用!',{icon:1,time:1000});
-              });
-    	  }if (userState == 0) {
-    		  layer.confirm('确认要停用吗？',function(index){
-                  //发异步删除数据
-                  $.ajax({
-                    type: "get",
-                    url: "del_userId",
-                    data: {
-                    	"userId":id,
-                    	"userState":userState
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                    	
-                    }
-                  });
-                  xadmin.father_reload();
-                  layer.msg('已停用!',{icon:1,time:1000});
-              });
-		}
+      function member_del(obj,id){
+   		  layer.confirm('确认要启用吗？',function(index){
+                 //发异步删除数据
+                 $.ajax({
+                   type: "get",
+                   url: "del_emps",
+                   data: {"empId":id},
+                   dataType: "json",
+                   success: function (response) {
+                   	
+                   }
+                 });
+                 xadmin.father_reload();
+                 layer.msg('删除!',{icon:1,time:1000});
+             });
           
       }
       
