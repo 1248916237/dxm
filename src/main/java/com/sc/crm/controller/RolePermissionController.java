@@ -51,26 +51,23 @@ public class RolePermissionController {
 	@ResponseBody
 	public ResultBean addRolePer(@RequestBody Role role,HashMap<String, Object> data) 
 	{
+
+		
+		String[] perId = role.getPerId();
 		rolePermissionService.addRole(role);
 		Integer roleId = role.getRoleId();
-		String[] perId = role.getPerId();
+		
 		ResultBean resultBean = new ResultBean();
-		if (role.getRoleName()==null || role.getRoleName().length()==0 || role.getRoleName()==" ") 
-		{
-			resultBean.setResultMsg("角色名不能为空");
-			resultBean.setResultState(0);
-			return resultBean;
-		} else {
-			for (int j = 0; j < perId.length; j++) {
-				RolePermission rolePermission = new RolePermission();
-				rolePermission.setRoleId(roleId);
-				rolePermission.setPermissionId(Integer.valueOf(perId[j]));
-				rolePermissionService.addRolePermission(rolePermission);
-			}
-			resultBean.setResultState(1);
-			resultBean.setResultMsg("成功了");
-			return resultBean;
+		
+		for (int j = 0; j < perId.length; j++) {
+			RolePermission rolePermission = new RolePermission();
+			rolePermission.setRoleId(roleId);
+			rolePermission.setPermissionId(Integer.valueOf(perId[j]));
+			rolePermissionService.addRolePermission(rolePermission);
 		}
+		resultBean.setResultState(1);
+		resultBean.setResultMsg("添加成功成功");
+		return resultBean;
 	}
 	
 	@RequestMapping("/getPermissionList")

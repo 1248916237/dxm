@@ -39,12 +39,12 @@
     <body>
         <div class="layui-fluid">
             <div class="layui-row">
-                <form style="width: 900px;position: relative;" action="addRolePer" >
+                <form style="width: 900px;position: relative;" >
                     <div class="layui-inline layui-show-xs-block" style="float: left;width: 500px;margin-bottom: 30px">
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>角色名</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="roleName" name="roleName" required="required" lay-verify="required" class="layui-input" >
+                            <input type="text" id="roleName" name="roleName" required="required" class="layui-input" >
                         </div>
                     </div>
                     
@@ -88,7 +88,13 @@
 							roleName:roleName,
 							perId:perId
 					};
-					console.log(role);
+					if(roleName == '')
+					{
+						alert('角色名不能为空');return;
+					};
+					if (perId.length==0) {
+						alert('请选择权限');return;
+					};
 					$.ajax({
 	                    type: "POST",
 	                    url: "addRolePerList",
@@ -107,57 +113,11 @@
 							}
 	                    }
 	                });
-					
-					//js
 	            });
         	});
         	
         </script>
-        <script>
-        
-         /* layui.use(['form', 'layer'],
-            function() {
-        		
-                $ = layui.jquery;
-                var form = layui.form,
-                layer = layui.layer;
-
-                //监听提交
-                form.on('submit(add)',
-                function(data) {
-
-                	var perId=new Array();
-                	$('input[type="checkbox"]:checked').each(function(){  
-                		perId.push($(this).val());//向数组中添加元素  
-                	}); 
-					var role= {
-							roleName:$('#roleName'),
-							perId:perId
-					}
-					console.log(role);
-                  $.ajax({
-                        type: "POST",
-                        url: "addRolePer",
-                        data: role,
-                        dataType: "json",
-                        success: function (response) {
-                        	layer.alert("添加成功", {
-                                icon: 6
-                            },
-                            function() {
-                                //关闭当前frame
-                                xadmin.close();
-
-                                // 可以对父窗口进行刷新 
-                                xadmin.father_reload();
-                            }); 
-                        }
-                    }); 
-                    return false;
-                });
-            });  */
          
-         </script>
         <script>var _hmt = _hmt || []; (function() {
                 var hm = document.createElement("script");
                 hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
