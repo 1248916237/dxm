@@ -24,29 +24,28 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form action="getRoleList" class="layui-form layui-col-space5" style="display: inline;">
+                            <form action="getPermissionList" class="layui-form layui-col-space5" style="display: inline;">
                                 <div class="layui-inline layui-show-xs-block">
                                     <select id="select" name="roleId" class="layui-input" style="display: inline;width: 200px">
-                                    	<option value="1" selected="selected" style="color: #80868B">请点击选择角色</option>
-                                    	<c:forEach items="${allRole }" var="all">
+                                    	<option value="1" selected="selected" style="color: #80868B">功能开发中敬请期待</option>
+                                    	<%-- <c:forEach items="${allRole }" var="all">
                                     		<option value="${all.roleId }">${all.roleName }</option>
-                                    	</c:forEach>
+                                    	</c:forEach> --%>
                                     </select>
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <button type="submit" class="layui-btn" id="cha"><i class="layui-icon">&#xe615;</i></button>
+                                    <button type="button" class="layui-btn" disabled="disabled"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
                             </form>
-                            <button class="layui-btn" onclick="xadmin.open('添加角色','/dxm/addRole')"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加角色','/dxm/addPermission')"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
-                        	<div style="text-align: center;font-size: 18px;font-weight: 600">${roleById.roleName }权限列表</div>
                             <table class="layui-table layui-form">
                                 <thead>
                                   <tr><th>选择</th><th>权限ID</th><th>权限名称</th><th>URL</th><th>操作</th></tr>
                                 </thead>
                                 <tbody>
-									<c:forEach items="${roleById.permissionList }" var="rpe" varStatus="status">
+									<c:forEach items="${permissionList }" var="rpe" varStatus="status">
 										<tr ${rpe.permissionType =='menu1'?'style="background-color: #C6F7F5"':'' }>
 											<td>${status.count }</td>
 											<td>
@@ -54,8 +53,39 @@
 											</td>
 											<td>${rpe.permissionName }</td>
 											<td>${rpe.permissionUrl }</td>
-											<td>操作</td>
+											<td>
+												<a title="编辑"  onclick="xadmin.open('编辑','updatePermission?permissionId=${rpe.permissionId }')" href="javascript:;">
+                                      				<i class="layui-icon">&#xe642;</i>
+                                    			</a>
+                                    			<c:if test="${rpe.permissionUrl==null }">
+                                    				<a title="删除" onclick="member_del(this,${rpe.permissionId })" href="javascript:;">
+			                                    		<i class="layui-icon">&#xe640;</i>
+			                                    	</a>
+                                    			</c:if>
+			                                    
+											</td>
 										</tr>
+										<c:forEach items="${rpe.perList }" var="pee">
+											<tr>
+												<td>${status.count }</td>
+												<td>
+													${pee.perId }
+												</td>
+												<td>${pee.perName }</td>
+												<td>${pee.perUrl }</td>
+												<td>
+													<a title="编辑"  onclick="xadmin.open('编辑','updatePermission?permissionId=${pee.perId }')" href="javascript:;">
+	                                      				<i class="layui-icon">&#xe642;</i>
+	                                    			</a>
+	                                    			<c:if test="${pee.perUrl==null }">
+	                                    				<a title="删除" onclick="member_del(this,${pee.perId })" href="javascript:;">
+				                                    		<i class="layui-icon">&#xe640;</i>
+				                                    	</a>
+	                                    			</c:if>
+				                                    
+												</td>
+											</tr>
+										</c:forEach>
 									</c:forEach>
 								</tbody>
                				</table>
@@ -91,20 +121,20 @@
 
       /*用户-删除*/
       function member_del(obj,id){
-           layer.confirm('确认要发货吗？',function(index){
+           layer.confirm('确认删除吗？',function(index){
               //发异步删除数据
               $.ajax({
-                type: "get",
-                url: "order_state",
-                data: "orderId="+id,
+                type: "POST",
+                url: "delPermission",
+                data: {"permissionId":id},
                 dataType: "json",
                 success: function (response) {
                 	
                 }
               });
-              
+              xadmin.father_reload();
               $(obj).parents("tr").remove();
-              layer.msg('已发货!',{icon:1,time:1000});
+              layer.msg('已删除!',{icon:1,time:1000});
           });
       }
       

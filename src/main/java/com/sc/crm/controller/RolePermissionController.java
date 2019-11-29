@@ -54,19 +54,91 @@ public class RolePermissionController {
 		rolePermissionService.addRole(role);
 		Integer roleId = role.getRoleId();
 		String[] perId = role.getPerId();
-		
-		for (int j = 0; j < perId.length; j++) {
-			RolePermission rolePermission = new RolePermission();
-			rolePermission.setRoleId(roleId);
-			rolePermission.setPermissionId(Integer.valueOf(perId[j]));
-			rolePermissionService.addRolePermission(rolePermission);
-		}
-		
 		ResultBean resultBean = new ResultBean();
-		resultBean.setResultState(11);
-		resultBean.setResultMsg("成功了");
-		return resultBean;
+		if (role.getRoleName()==null || role.getRoleName().length()==0 || role.getRoleName()==" ") 
+		{
+			resultBean.setResultMsg("角色名不能为空");
+			resultBean.setResultState(0);
+			return resultBean;
+		} else {
+			for (int j = 0; j < perId.length; j++) {
+				RolePermission rolePermission = new RolePermission();
+				rolePermission.setRoleId(roleId);
+				rolePermission.setPermissionId(Integer.valueOf(perId[j]));
+				rolePermissionService.addRolePermission(rolePermission);
+			}
+			resultBean.setResultState(1);
+			resultBean.setResultMsg("成功了");
+			return resultBean;
+		}
 	}
 	
+	@RequestMapping("/getPermissionList")
+	public String getPermissionList(HashMap<String, Object> data) 
+	{
+		
+		List<Role> allRole = rolePermissionService.getAllRole();
+		data.put("allRole", allRole);
+		
+		List<Permission> permissionList = rolePermissionService.getPermissionList();
+		data.put("permissionList", permissionList);
+		
+		return "forward:/permissionList.jsp";
+	}
 	
+	@RequestMapping("/updatePermission")
+	public String updatePermission(Permission permission,HashMap<String, Object> data)
+	{
+		Permission permissionById = rolePermissionService.getPermissionById(permission.getPermissionId());
+		data.put("permissionById", permissionById);
+		
+		List<Permission> permissionList = rolePermissionService.getPermissionList();
+		data.put("permissionList", permissionList);
+		return "forward:/updatPermission.jsp";
+	}
+	
+	@RequestMapping("/update_permission_agin")
+	@ResponseBody
+	public ResultBean updatePermissionAgin(Permission permission)
+	{
+		System.out.println(permission);
+		int i = rolePermissionService.updatePermission(permission);
+		
+		ResultBean bean = new ResultBean();
+		bean.setResultState(i);
+		return bean;
+	}
+	
+	@RequestMapping("/addPermission")
+	public String addPermission(HashMap<String, Object> data)
+	{
+		List<Permission> permissionList = rolePermissionService.getAllPermissionList();
+		data.put("permissionList", permissionList);
+		return "forward:/addPermission.jsp";
+	}
+	
+	@RequestMapping("/addPermissionAgin")
+	@ResponseBody
+	public ResultBean addPermissionAgin(Permission permission)
+	{
+		int i = rolePermissionService.addPermission(permission);
+		ResultBean bean = new ResultBean();
+		bean.setResultState(i);
+		return bean;
+	}
+	
+	@RequestMapping("/delPermission")
+	@ResponseBody
+	public ResultBean delPermission(Permission permission)
+	{
+		int i = rolePermissionService.delPermission(permission);
+		Integer permissionId = permission.getPermissionId();
+		List<Permission> list = rolePermissionService.getPermissionListByParentid(permissionId);
+		for (Permission per : list) {
+			rolePermissionService.delPermission(per);
+		}
+		ResultBean bean = new ResultBean();
+		bean.setResultState(i);
+		return bean;
+	}
 }

@@ -39,12 +39,12 @@
     <body>
         <div class="layui-fluid">
             <div class="layui-row">
-                <form style="width: 900px;position: relative;" action="addRolePer">
+                <form style="width: 900px;position: relative;" action="addRolePer" >
                     <div class="layui-inline layui-show-xs-block" style="float: left;width: 500px">
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>角色名</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="roleName" name="roleName" required="" lay-verify="required" class="layui-input" >
+                            <input type="text" id="roleName" name="roleName" required="required" lay-verify="required" class="layui-input" >
                         </div>
                         <div class="layui-form-mid layui-word-aux">4到10个字母</div>
                     </div>
@@ -80,11 +80,12 @@
             	
 				$('#add').click(function (e) { 
 					var perId=new Array();
-                	$('input[type="checkbox"]:checked').each(function(){  
-                		perId.push($(this).val());//向数组中添加元素  
-                	}); 
+	                	$('input[type="checkbox"]:checked').each(function(){  
+	                		perId.push($(this).val());//向数组中添加元素  
+	                	});
+                	var roleName = $('#roleName').val();
 					var role= {
-							roleName:$('#roleName').val(),
+							roleName:roleName,
 							perId:perId
 					};
 					console.log(role);
@@ -95,14 +96,15 @@
 	                    contentType:'application/json',
 	                    dataType: "json",
 	                    success: function (response) {
-	                    	
-	                    	alert("添加成功");
-	                    	
-	                    	//关闭当前frame
-                            xadmin.close();
-
-                            // 可以对父窗口进行刷新 
-                            xadmin.father_reload();
+	                    	if (response.resultState==0) {
+	                    		alert(response.resultMsg);
+							} else {
+								alert(response.resultMsg);
+		                    	//关闭当前frame
+	                            xadmin.close();
+	                            // 可以对父窗口进行刷新 
+	                            xadmin.father_reload();
+							}
 	                    }
 	                });
 					

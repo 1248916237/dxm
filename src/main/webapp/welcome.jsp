@@ -27,12 +27,6 @@
                        <div class="layui-card-body ">
                            <blockquote class="layui-elem-quote">欢迎管理员：
                                <span class="x-red"><shiro:principal property="userId"></shiro:principal></span>
-<%--                                 <%
-									Date d = new Date();
-									SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-									String now = df.format(d);
-								%>
-								当前时间：<%=now %> --%>
 							<span id="time"></span>
                            </blockquote>
                        </div>
@@ -104,7 +98,7 @@
                    </div>
                </div>
  
-               <div class="layui-col-md12">
+               <!-- <div class="layui-col-md12">
                    <div class="layui-card">
                        <div class="layui-card-header">系统信息</div>
                        <div class="layui-card-body ">
@@ -114,7 +108,7 @@
                                        <th>CRM系统版本</th>
                                        <td>1.0.180420</td>
                                    </tr>
-                                       <!-- <tr>
+                                       <tr>
                                         <th>服务器</th>
                                         <td>Tomcat</td></tr>
                                         <tr>
@@ -125,12 +119,12 @@
                                         <td>Eclipse</td></tr>
                                         <tr>
                                         <th>数据库</th>
-                                        <td>Mysql</td></tr> -->
+                                        <td>Mysql</td></tr>
                                </tbody>
                            </table>
                        </div>
                    </div>
-               </div>
+               </div> -->
                <div class="layui-col-md12">
                    <div class="layui-card">
                        <div class="layui-card-header">开发团队</div>

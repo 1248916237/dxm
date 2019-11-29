@@ -21,5 +21,8 @@ public interface PermissionMapper {
     int updateByPrimaryKey(Permission record);
     
     List<Permission> getPermissionList();
-
+    
+    List<Permission> getAllPermissionList();
+    
+    List<Permission> getPermissionListByParentid(@Param("parentid")Integer parentid);
 }
