@@ -94,7 +94,7 @@
 		                    $.ajax
 		                    ({
 		                        type: "POST",
-		                        url: "addProductMaterial",
+		                        url: "addProduct",
 		                        data: data.field,
 		                        dataType: "json",
 		                        success: function (response)
