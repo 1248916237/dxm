@@ -52,7 +52,7 @@
                     <h3 class="media-heading">${selByUserId.empName }</h3>
                     <p>工号：${selByUserId.userId } &emsp;${selByUserId.empSex }</p>
                     <p>电话：${selByUserId.empPhone }</p>
-                     <button class="btn btn-default" type="submit" style="height: 20px;line-height: 10px;" onclick="update()">点击更改图片</button>
+                     <button class="btn btn-default" type="submit" style="height: 20px;line-height: 10px;" onclick="update()">点击更改头像</button>
                 </div>
                 </form>
             </div>
@@ -69,7 +69,7 @@
                 <li class="list-group-item">
                                                 开始工作时间：<span><fmt:formatDate value="${selByUserId.empStartwork }" pattern="yyyy-MM-dd HH:mm:ss"/></span></li>
                 <li class="list-group-item">所属部门：${selByUserId.dept.deptName }</li>
-                <li class="list-group-item">部门薪水：${selByUserId.dept.deptSalary }(/秒)</li>
+                <li class="list-group-item">部门薪水：${selByUserId.dept.deptSalary }(/天)</li>
             </ul>
             
         </div>

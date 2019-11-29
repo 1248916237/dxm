@@ -5,8 +5,9 @@
 <generatorConfiguration>
 	<!-- 制度MySQL驱动包的路径，别放在中文路径 -->
 	<classPathEntry
-		location="D:\local\repo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar"/>
+		location="E:\mavenRepo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar"/>
 		<!-- E:\local\repo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar -->
+		<!-- E:\mavenRepo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar -->
 		<!-- location="D:\local\repo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar"/> -->
 	<context id="context1">
 		<commentGenerator>
@@ -48,15 +49,15 @@
  
  
 		<!-- 配置表信息 -->
-		<table schema="crm" tableName="material"
-			domainObjectName="Material" enableCountByExample="false"
+		<table schema="crm" tableName="sys_role_permission"
+			domainObjectName="RolePermission" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="useActualColumnNames" value="false" />
 		</table>
 		
-		<table schema="crm" tableName="product_material"
-			domainObjectName="ProductMaterial" enableCountByExample="false"
+		<table schema="crm" tableName="sys_user_role"
+			domainObjectName="UserRole" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="useActualColumnNames" value="false" />

@@ -13,8 +13,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.crm.bean.Material;
 import com.sc.crm.bean.Purchase;
+import com.sc.crm.bean.PurchaseInfo;
+import com.sc.crm.bean.PurchaseMaterial;
 import com.sc.crm.bean.User;
+import com.sc.crm.dao.MaterialMapper;
 import com.sc.crm.dao.PurchaseMapper;
+import com.sc.crm.dao.PurchaseMaterialMapper;
+import com.sc.crm.dao.UserMapper;
 import com.sc.crm.service.PurchaseService;
 
 @Service("purchaseService")
@@ -56,10 +61,10 @@ public class PurchaseServiceImpl implements PurchaseService{
 	}
 
 	@Override
-	public PageInfo<Purchase> waitPurchase(int pn, int size) {
+	public PageInfo<Purchase> waitPurchase(Integer userId,int pn, int size) {
 		PurchaseMapper mapper = st.getMapper(PurchaseMapper.class);
 		PageHelper.startPage(pn, size);
-		List<Purchase> waitPurchase = mapper.waitPurchase();
+		List<Purchase> waitPurchase = mapper.waitPurchase(userId);
 	    for (Purchase p : waitPurchase) {
 	    	List<Material> selectMaterial= mapper.selectMaterialById(p.getPurchaseId());
 	    	p.setMaterialList(selectMaterial);
@@ -85,5 +90,54 @@ public class PurchaseServiceImpl implements PurchaseService{
 		}
 		
 	}
+
+	@Override
+	public void addPurMatList(PurchaseMaterial purMaterial) {
+		PurchaseMaterialMapper mapper = st.getMapper(PurchaseMaterialMapper.class);
+		 mapper.insertSelective(purMaterial);
+	}
+
+	@Override
+	public void addPurchase(PurchaseInfo purchaseInfo) {
+		PurchaseMapper mapper = st.getMapper(PurchaseMapper.class);
+		PurchaseMaterialMapper mapper1 = st.getMapper(PurchaseMaterialMapper.class);
+		
+		Purchase purchase = new Purchase();
+		purchase.setUserId(purchaseInfo.getUserId());
+		Date date = new Date();
+		purchase.setPurchaseDate(date);
+        purchase.setPurchaseState(0);
+		mapper.insertSelective(purchase);
+		
+		List<PurchaseMaterial> purMaterialList = purchaseInfo.getPurMaterialList();
+        for(PurchaseMaterial purMaterial : purMaterialList)
+        {
+           purMaterial.setPurchaseId(purchase.getPurchaseId());
+           mapper1.insertSelective(purMaterial);
+        }
+		
+	}
+
+	@Override
+	public List<Material> selMaterial() {
+		MaterialMapper mapper = st.getMapper(MaterialMapper.class);
+		List<Material> selMaterial = mapper.selMaterial();
+		return selMaterial;
+	}
+
+	@Override
+	public List<User> selUserId() {
+		UserMapper mapper = st.getMapper(UserMapper.class);
+		List<User> selUserId = mapper.selUserId();
+		return selUserId;
+	}
+
+	@Override
+	public void delWaitPurchase(Integer purchaseId) {
+		PurchaseMapper mapper = st.getMapper(PurchaseMapper.class);
+		mapper.deleteByPrimaryKey(purchaseId);
+		
+	}
+
 
 }

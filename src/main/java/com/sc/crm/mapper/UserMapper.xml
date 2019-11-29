@@ -172,8 +172,16 @@
     </collection>
   </resultMap>
   
+  <select id="selUserId" resultMap="BaseResultMap">
+  select * from users
+  </select>
+
   <update id="delUser">
   	update users set user_state=0 where user_id=#{userId}
   </update>
+
+  <select id="selUserNum" resultType="java.lang.Integer">
+  SELECT COUNT(*) FROM users
+  </select>
   
 </mapper>

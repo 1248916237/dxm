@@ -26,4 +26,5 @@ public interface ProductMapper {
     
     List<ProductMaterial> selProductMaterial(String productId);
     
+    Integer selProductNum();
 }

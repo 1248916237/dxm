@@ -25,4 +25,7 @@ public interface ClientMapper {
     
     List<Client> getClientLossList(@Param("clientName")String cilentName);
     
+    int selCliNum();
+    
+    int selCliLossNum();
 }

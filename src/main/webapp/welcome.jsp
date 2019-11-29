@@ -27,12 +27,6 @@
                        <div class="layui-card-body ">
                            <blockquote class="layui-elem-quote">欢迎管理员：
                                <span class="x-red"><shiro:principal property="userId"></shiro:principal></span>
-<%--                                 <%
-									Date d = new Date();
-									SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-									String now = df.format(d);
-								%>
-								当前时间：<%=now %> --%>
 							<span id="time"></span>
                            </blockquote>
                        </div>
@@ -45,103 +39,66 @@
                            <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
                                <li class="layui-col-md2 layui-col-xs6">
                                    <a href="javascript:;" class="x-admin-backlog-body">
-                                       <h3>文章数</h3>
-                                       <p>
-                                           <cite>66</cite></p>
-                                   </a>
-                               </li>
-                               <li class="layui-col-md2 layui-col-xs6">
-                                   <a href="javascript:;" class="x-admin-backlog-body">
                                        <h3>会员数</h3>
                                        <p>
-                                           <cite>12</cite></p>
+                                           <cite>${selCliNum }</cite></p>
                                    </a>
                                </li>
                                <li class="layui-col-md2 layui-col-xs6">
                                    <a href="javascript:;" class="x-admin-backlog-body">
-                                       <h3>回复数</h3>
+                                       <h3>订单数</h3>
                                        <p>
-                                           <cite>99</cite></p>
+                                           <cite>${selOrderNum }</cite></p>
                                    </a>
                                </li>
                                <li class="layui-col-md2 layui-col-xs6">
                                    <a href="javascript:;" class="x-admin-backlog-body">
-                                       <h3>商品数</h3>
+                                       <h3>待采购订单数</h3>
                                        <p>
-                                           <cite>67</cite></p>
+                                           <cite>${selWaitPurNum }</cite></p>
                                    </a>
                                </li>
                                <li class="layui-col-md2 layui-col-xs6">
                                    <a href="javascript:;" class="x-admin-backlog-body">
-                                       <h3>文章数</h3>
+                                       <h3>供应商数</h3>
                                        <p>
-                                           <cite>67</cite></p>
+                                           <cite>${selSupplierNum }</cite></p>
+                                   </a>
+                               </li>
+                               <li class="layui-col-md2 layui-col-xs6">
+                                   <a href="javascript:;" class="x-admin-backlog-body">
+                                       <h3>仓库数</h3>
+                                       <p>
+                                           <cite>${selHouseNum }</cite></p>
+                                   </a>
+                               </li>
+                               <li class="layui-col-md2 layui-col-xs6">
+                                   <a href="javascript:;" class="x-admin-backlog-body">
+                                       <h3>管理员数</h3>
+                                       <p>
+                                           <cite>${selUserNum }</cite></p>
                                    </a>
                                </li>
                                <li class="layui-col-md2 layui-col-xs6 ">
                                    <a href="javascript:;" class="x-admin-backlog-body">
-                                       <h3>文章数</h3>
+                                       <h3>产品数</h3>
                                        <p>
-                                           <cite>6766</cite></p>
+                                           <cite>${selProductNum }</cite></p>
+                                   </a>
+                               </li>
+                               <li class="layui-col-md2 layui-col-xs6 ">
+                                   <a href="javascript:;" class="x-admin-backlog-body">
+                                       <h3>流失会员数</h3>
+                                       <p>
+                                           <cite>${selCliLossNum }</cite></p>
                                    </a>
                                </li>
                            </ul>
                        </div>
                    </div>
                </div>
- <!--               <div class="layui-col-sm6 layui-col-md3">
-                   <div class="layui-card">
-                       <div class="layui-card-header">下载
-                           <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
-                       <div class="layui-card-body  ">
-                           <p class="layuiadmin-big-font">33,555</p>
-                           <p>新下载
-                               <span class="layuiadmin-span-color">10%
-                                   <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
-                           </p>
-                       </div>
-                   </div>
-               </div>
-               <div class="layui-col-sm6 layui-col-md3">
-                   <div class="layui-card">
-                       <div class="layui-card-header">下载
-                           <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
-                       <div class="layui-card-body ">
-                           <p class="layuiadmin-big-font">33,555</p>
-                           <p>新下载
-                               <span class="layuiadmin-span-color">10%
-                                   <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
-                           </p>
-                       </div>
-                   </div>
-               </div> 
-               <div class="layui-col-sm6 layui-col-md3">
-                   <div class="layui-card">
-                       <div class="layui-card-header">下载
-                           <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
-                       <div class="layui-card-body ">
-                           <p class="layuiadmin-big-font">33,555</p>
-                           <p>新下载
-                               <span class="layuiadmin-span-color">10%
-                                   <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
-                           </p>
-                       </div>
-                   </div>
-               </div>
-               <div class="layui-col-sm6 layui-col-md3">
-                   <div class="layui-card">
-                       <div class="layui-card-header">下载
-                           <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
-                       <div class="layui-card-body ">
-                           <p class="layuiadmin-big-font">33,555</p>
-                           <p>新下载
-                               <span class="layuiadmin-span-color">10%
-                                   <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
-                           </p>
-                       </div>
-                   </div>
-               </div>-->
-               <div class="layui-col-md12">
+ 
+               <!-- <div class="layui-col-md12">
                    <div class="layui-card">
                        <div class="layui-card-header">系统信息</div>
                        <div class="layui-card-body ">
@@ -149,12 +106,25 @@
                                <tbody>
                                    <tr>
                                        <th>CRM系统版本</th>
-                                       <td>1.0.180420</td></tr>
+                                       <td>1.0.180420</td>
+                                   </tr>
+                                       <tr>
+                                        <th>服务器</th>
+                                        <td>Tomcat</td></tr>
+                                        <tr>
+                                        <th>操作系统</th>
+                                        <td>Windows 10</td></tr>
+                                        <tr>
+                                        <th>开发软件</th>
+                                        <td>Eclipse</td></tr>
+                                        <tr>
+                                        <th>数据库</th>
+                                        <td>Mysql</td></tr>
                                </tbody>
                            </table>
                        </div>
                    </div>
-               </div>
+               </div> -->
                <div class="layui-col-md12">
                    <div class="layui-card">
                        <div class="layui-card-header">开发团队</div>

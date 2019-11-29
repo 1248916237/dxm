@@ -133,7 +133,7 @@ public class OrderController {
 			order.setOrderState(2);
 			order.setPayDate(sdf.parse(payDate));
 			int i = orderService.setPayDate(order);
-			bean.setResultState(0);
+			bean.setResultState(i);
 			return bean;
 		}
 	}

@@ -22,7 +22,7 @@
     insert into sys_role (role_id, role_name)
     values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sc.crm.bean.Role" >
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.Role" keyProperty="roleId" useGeneratedKeys="true">
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >
@@ -55,4 +55,34 @@
     set role_name = #{roleName,jdbcType=VARCHAR}
     where role_id = #{roleId,jdbcType=INTEGER}
   </update>
+  
+    <select id="getRoleById" resultMap="roleMap">
+	SELECT sr.*,sp.* FROM sys_permission sp
+	INNER JOIN sys_role_permission srp
+	ON srp.permission_id = sp.permission_id
+	INNER JOIN sys_role sr
+	ON srp.role_id = sr.role_id
+    where srp.role_id=#{roleId}
+  </select>
+  
+  <resultMap type="com.sc.crm.bean.Role" id="roleMap">
+  	<id column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+  	<collection property="permissionList" column="permission_id" ofType="com.sc.crm.bean.Permission">
+    	<id column="permission_id" property="permissionId" jdbcType="INTEGER" />
+	   	<result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
+	   	<result column="permission_type" property="permissionType" jdbcType="VARCHAR" />
+	   	<result column="permission_url" property="permissionUrl" jdbcType="VARCHAR" />
+	   	<result column="permission_code" property="permissionCode" jdbcType="VARCHAR" />
+	   	<result column="permission_parentid" property="permissionParentid" jdbcType="INTEGER" />
+	   	<result column="permission_parentids" property="permissionParentids" jdbcType="VARCHAR" />
+	   	<result column="permission_sotr" property="permissionSotr" jdbcType="VARCHAR" />
+  	</collection>
+  </resultMap>
+  
+  <select id="getAllRole" resultMap="BaseResultMap">
+  	select * from sys_role
+  </select>
+  
+  
 </mapper>

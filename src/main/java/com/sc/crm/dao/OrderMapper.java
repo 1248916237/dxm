@@ -24,5 +24,5 @@ public interface OrderMapper {
     
     List<Order> getOrderList(@Param("clientId")String clientId);
     
-    
+    Integer selOrderNum();
 }

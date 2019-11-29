@@ -1,5 +1,6 @@
 package com.sc.crm.bean;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Role {
@@ -7,7 +8,23 @@ public class Role {
 
     private String roleName;
     
-    private List<Permission> permissionList;
+    private String[] perId;
+    
+    @Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", perId=" + Arrays.toString(perId)
+				+ ", permissionList=" + permissionList + "]";
+	}
+
+	public String[] getPerId() {
+		return perId;
+	}
+
+	public void setPerId(String[] perId) {
+		this.perId = perId;
+	}
+
+	private List<Permission> permissionList;
 
     public List<Permission> getPermissionList() {
 		return permissionList;

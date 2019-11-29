@@ -23,4 +23,20 @@ public interface EmpsService {
 	int delUser(User user);
 	
 	int updatePass(User user);
+	
+	int selCliNum();
+	    
+	int selCliLossNum();
+	
+	Integer selOrderNum();
+	
+	Integer selWaitPurNum();
+	
+	Integer selSupplierNum();
+	
+	Integer selHouseNum();
+	
+	Integer selUserNum();
+	
+	Integer selProductNum();
 }

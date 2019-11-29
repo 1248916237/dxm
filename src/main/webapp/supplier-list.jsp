@@ -18,47 +18,29 @@
         <link rel="stylesheet" href="./css/bootstrap.min.css">
     </head>
     <body>
-        <div class="x-nav">
-          <span class="layui-breadcrumb">
-            <a href="">首页</a>
-            <a href="">演示</a>
-            <a>
-              <cite>导航元素</cite></a>
-          </span>
-          <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-            <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
-        </div>
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                               <!--  <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
-                                </div> -->
-                                <form class="layui-form layui-col-space5" action="selSupplier" method="post">
+                               
+                                <form class="layui-form layui-col-space5" action="selSupplier" method="post" style="display: inline;">
                                 <div class="layui-inline layui-show-xs-block">
                                     <input type="text" name="supplierName"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" type="submit" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
+                                <button class="layui-btn" onclick="xadmin.open('添加用户','add-supplier.jsp',800,500)"><i class="layui-icon"></i>添加</button>
                             </form>
-                        </div>
-                        <div class="layui-card-header">
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','add-supplier.jsp',800,500)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                               <thead>
                                 <tr>
-                                  <th>
+                                  <!-- <th>
                                     <input type="checkbox" name=""  lay-skin="primary">
-                                  </th>
+                                  </th> -->
                                   <th>ID</th>
                                   <th>供应商名称</th>
                                   <th>供应商地址</th>
@@ -71,9 +53,9 @@
                               <tbody>
                               <c:forEach items="${selSupplier.list }" var="ss">
                                 <tr>
-                                  <td>
+                                 <!--  <td>
                                     <input type="checkbox" name=""  lay-skin="primary">
-                                  </td>
+                                  </td> -->
                                   <td>${ss.supplierId }</td>
                                   <td>${ss.supplierName }</td>
                                   <td>${ss.supplierAddress }</td>

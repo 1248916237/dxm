@@ -29,16 +29,6 @@
     </style>
 </head>
 <body>
-  <div class="x-nav">
-          <span class="layui-breadcrumb">
-            <a href="">首页</a>
-            <a href="">演示</a>
-            <a>
-              <cite>导航元素</cite></a>
-          </span>
-          <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-            <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
-        </div>
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
@@ -59,33 +49,33 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="layui-card-header">
+                        <!-- <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>
-                        </div>
+                        </div> -->
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
                                 <thead>
                                   <tr>
-                                    <th>
+                                    <!-- <th>
                                       <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
-                                    </th>
+                                    </th> -->
                                     <th>采购单编号</th>
-                                    <th>采购负责人编号</th>
+                                    <th>采购负责人工号</th>
                                     <th>时间</th> 
                                     <th>采购单的详情</th>          
-                                    <!-- <th>状态</th> -->
+                                    <th>状态</th> 
                                     <th>操作</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${selMaterial.list  }" var="sm" varStatus="sta">
                                 <tr>
-                                        <td>
+                                   <!--  <td>
                                       <input type="checkbox" name="id" value="1"   lay-skin="primary"> 
-                                    </td>
+                                    </td> -->
                                     <td id="pur">${sm.purchaseId }</td>
-                                    <td>${sm.userId }</td>
+                                    <td><a onclick="xadmin.open('采购员详情','selUser?userId=${sm.userId }',1025,595)" style="cursor:pointer">${sm.userId }</a></td>
                                                                               
                                    <td><span><fmt:formatDate value="${sm.purchaseDate }" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
                                    
@@ -126,15 +116,15 @@
                                   </div>
 
                                     </td>
-                                   <!--  <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini ">已启用</span></td> -->
+                                      <td class="td-status">
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini ">已采购</span></td> 
                                     <td class="td-manage">
                                      <!--  <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
                                         <i class="layui-icon">&#xe601;</i>
                                       </a> -->
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
+                                      <!-- <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
-                                      </a>
+                                      </a> -->
                                       <!-- <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
                                         <i class="layui-icon">&#xe631;</i>
                                       </a> -->
@@ -258,7 +248,7 @@
               //发异步删除数据
               $.ajax({
                 type: "get",
-                url: "delPurchase",
+                url: "waitDelPurchase",
                 data: "purchaseId="+id,
                 dataType: "json",
                 success: function (response) {

@@ -26,7 +26,7 @@
     values (#{purchaseId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{purchaseDate,jdbcType=TIMESTAMP}, 
       #{purchaseState,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.sc.crm.bean.Purchase" >
+  <insert id="insertSelective" parameterType="com.sc.crm.bean.Purchase" useGeneratedKeys="true" keyProperty="purchaseId" >
     insert into purchase
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="purchaseId != null" >
@@ -108,8 +108,10 @@
   </select>  
   
   <select id="waitPurchase" resultMap="BaseResultMap">
-   SELECT * FROM purchase
-   	WHERE purchase_state =0
+   SELECT * FROM purchase WHERE purchase_state =0
+   <if test="userId != null and userId != ''">
+   AND user_id = #{userId,jdbcType=INTEGER}
+   </if>
   </select>
   
   
@@ -122,6 +124,10 @@
 	    <result column="house_id" property="houseId" jdbcType="INTEGER" />
   </resultMap>
      
+     
+     <select id="selWaitPurNum" resultType="java.lang.Integer">
+     SELECT COUNT(*) FROM purchase WHERE purchase_state = 0
+     </select>
   
    <!-- <resultMap type="com.sc.crm.bean.Purchase" id="WaitPurchaseMap">
     <id column="purchase_id" property="purchaseId" jdbcType="INTEGER" />
